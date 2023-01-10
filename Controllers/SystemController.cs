@@ -16,65 +16,159 @@ namespace LFEnergy.Controllers
         }
 
         [HttpGet]
-        [Route("/generation")]
-        public IEnumerable<Generation> GetGeneration()
+        [Route("/gridNode/list")]
+        public IEnumerable<GridNode> ListGridNodes()
         {
-            Generation entry= new Generation()
+            // TODO add filtering by type
+            GridNode sampleGridNode1 = new GridNode()
             {
-                PowerPerFuelType = new Dictionary<FuelType, uint>()
+                ID = "nwjefnwm:@",
+                name = "ES",
+                type = GridNodeType.System,
+            };
+            GridNode sampleGridNode2 = new GridNode()
+            {
+                ID = "wpfm[",
+                name = "production_unit_coal",
+                type = GridNodeType.ProductionUnit,
+            };
+
+            // TODO would need to filter only relevant information
+            return new List<GridNode>() { sampleGridNode1, sampleGridNode2 };
+        }
+
+        [HttpGet]
+        [Route("/gridNode/describe/{id}")]
+        public GridNode DescribeGridNode()
+        {
+            // TODO find matching node
+            GridNode sampleGridNode = new GridNode()
+            {
+                ID = "nwjefnwm:@",
+                name = "ES",
+                type = GridNodeType.System,
+                generation = new Generation()
                 {
-                    { FuelType.Solar, 3457 },
-                    { FuelType.Wind, 1650 },
-                    { FuelType.BrownCoal, 432 }
+                    PowerPerFuelType = new Dictionary<FuelType, uint>()
+                    {
+                        { FuelType.Solar, 3457 },
+                        { FuelType.Wind, 1650 },
+                        { FuelType.BrownCoal, 432 }
+                    },
+                    Region = "ES",
+                    TimeStamp = DateTime.UtcNow,
+                    TotalPower = 5107
                 },
-                Region = "ES",
-                TimeStamp = DateTime.UtcNow,
-                TotalPower = 5107
-            };
-
-            return new List<Generation>() { entry };
-        }
-
-        [HttpGet]
-        [Route("/imports")]
-        public ImportExport GetImports()
-        {
-            return new ImportExport()
-            {
-                Region = "ES",
-                TimeStamp = DateTime.UtcNow,
-                TotalPower = 534,
-                PowerPerImport = new Dictionary<string, uint>()
+                importExport = new ImportExport()
                 {
-                    { "FR", 534 }
+                    Region = "ES",
+                    TimeStamp = DateTime.UtcNow,
+                    TotalPower = 534,
+                    PowerPerImport = new Dictionary<string, uint>()
+                    {
+                        { "FR", 534 }
+                    }
                 }
             };
+
+            return sampleGridNode;
         }
 
         [HttpGet]
-        [Route("/exports")]
-        public ImportExport GetExports()
+        [Route("/gridNode/{id}/generation")]
+        public Generation GetGridNodeGeneration()
         {
-            return new ImportExport()
+            // TODO find matching node
+            GridNode sampleGridNode = new GridNode()
             {
-                Region = "ES",
-                TimeStamp = DateTime.UtcNow,
-                TotalPower = 134,
-                PowerPerImport = new Dictionary<string, uint>()
+                ID = "nwjefnwm:@",
+                name = "ES",
+                type = GridNodeType.System,
+                generation = new Generation()
                 {
-                    { "FR", 134 }
+                    PowerPerFuelType = new Dictionary<FuelType, uint>()
+                    {
+                        { FuelType.Solar, 3457 },
+                        { FuelType.Wind, 1650 },
+                        { FuelType.BrownCoal, 432 }
+                    },
+                    Region = "ES",
+                    TimeStamp = DateTime.UtcNow,
+                    TotalPower = 5107
+                },
+            };
+
+            return sampleGridNode.generation;
+        }
+
+        [HttpGet]
+        [Route("/gridNode/{id}/imports")]
+        public ImportExport GetGridNodeImports()
+        {
+            // TODO find matching node
+            GridNode sampleGridNode = new GridNode()
+            {
+                ID = "nwjefnwm:@",
+                name = "ES",
+                type = GridNodeType.System,
+                importExport = new ImportExport()
+                {
+                    Region = "ES",
+                    TimeStamp = DateTime.UtcNow,
+                    TotalPower = 534,
+                    PowerPerImport = new Dictionary<string, uint>()
+                    {
+                        { "FR", 534 }
+                    }
                 }
             };
+            return sampleGridNode.importExport;
         }
 
         [HttpGet]
-        [Route("/emissions")]
-        public Dictionary<Pollutant, uint> GetEmissions()
+        [Route("/gridNode/{id}/exports")]
+        public ImportExport GetGridNodeExports()
         {
-            return new Dictionary<Pollutant, uint>()
+            // TODO find matching node
+            GridNode sampleGridNode = new GridNode()
             {
-                { Pollutant.CO2, 432 }
+                ID = "nwjefnwm:@",
+                name = "ES",
+                type = GridNodeType.System,
+                importExport = new ImportExport()
+                {
+                    Region = "ES",
+                    TimeStamp = DateTime.UtcNow,
+                    TotalPower = 134,
+                    PowerPerImport = new Dictionary<string, uint>()
+                    {
+                        { "FR", 134 }
+                    }
+                }
             };
+            return sampleGridNode.importExport;
+        }
+
+        [HttpGet]
+        [Route("/gridNode/{id}/emissions")]
+        public Emissions GetGridNodeEmissions()
+        {
+            // TODO find matching node
+            GridNode sampleGridNode = new GridNode()
+            {
+                ID = "nwjefnwm:@",
+                name = "ES",
+                type = GridNodeType.System,
+                emissions = new Emissions()
+                {
+                    EmissionsPerPolutant = new Dictionary<Pollutant, uint>()
+                    {
+                        { Pollutant.CO2, 432 }
+                    }
+                }
+            };
+
+            return sampleGridNode.emissions; 
         }
     }
 }
