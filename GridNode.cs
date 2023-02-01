@@ -20,13 +20,12 @@
 
         // We would also need GET all nodes, with possibility to filter per type, name, parent, location etc
 
-        public Generation generation { get; set; } = new Generation();
+        public List<Generation> generation { get; set; } = new List<Generation>();
         // IF GridNodeType is not at system level should return that it can't be queried
         public Demand demand { get; set; } = new Demand();
         // IF GridNodeType is not at system level should return that it can't be queried
-        public ImportExport importExport { get; set; } = new ImportExport();
-        public Emissions emissions { get; set; } = new Emissions();
-
-    
+        public List<ImportExport> importExport { get; set; } = new List<ImportExport>();
+        public List<Emissions> emissions { get; set; } = new List<Emissions>();
+ 
     }
 }

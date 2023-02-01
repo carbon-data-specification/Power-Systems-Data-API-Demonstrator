@@ -1,14 +1,14 @@
-﻿namespace LFEnergy
+﻿using System.ComponentModel;
+
+namespace LFEnergy
 {
 	public enum GridNodeType
-	{
-		// Single electricity generator
-		GenerationUnit,
-		// Single electricity generation facility
-		ProductionUnit,
-		Substation,
-		Market,
-		System
+    {
+        GenerationUnit,
+        ProductionUnit,
+        Substation,
+        Market,
+        System
 	}
 }
 
