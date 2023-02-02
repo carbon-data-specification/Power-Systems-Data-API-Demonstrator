@@ -1,0 +1,193 @@
+period,respondent,respondent-name,fueltype,type-name,value,value-units
+2021-06-01T00,CISO,California Independent System Operator,WAT,Hydro,1818,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,OIL,Petroleum,81,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,COL,Coal,19,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,NG,Natural gas,10055,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,WND,Wind,1392,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,OTH,Other,-49,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,NUC,Nuclear,2278,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,SUN,Solar,8844,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,COL,Coal,19,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,NG,Natural gas,10982,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,SUN,Solar,6288,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,WND,Wind,1892,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,WAT,Hydro,2487,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,NUC,Nuclear,2279,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,OTH,Other,193,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,OIL,Petroleum,81,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,SUN,Solar,2132,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,OTH,Other,227,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,COL,Coal,20,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,NG,Natural gas,13499,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,WND,Wind,1914,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,OIL,Petroleum,81,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,NUC,Nuclear,2278,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,WAT,Hydro,3099,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,OTH,Other,136,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,WND,Wind,2408,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,WAT,Hydro,2999,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,NUC,Nuclear,2278,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,NG,Natural gas,14074,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,OIL,Petroleum,81,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,SUN,Solar,-8,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,WND,Wind,2556,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,SUN,Solar,-10,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,OTH,Other,84,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,NUC,Nuclear,2278,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,OIL,Petroleum,81,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,COL,Coal,17,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,WAT,Hydro,2980,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,NG,Natural gas,12587,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,OTH,Other,269,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,NUC,Nuclear,2276,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,SUN,Solar,-7,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,OIL,Petroleum,83,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,WAT,Hydro,2433,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,NG,Natural gas,11156,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,WND,Wind,2894,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,NUC,Nuclear,2278,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,OIL,Petroleum,85,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,WAT,Hydro,2054,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,OTH,Other,78,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,WND,Wind,2976,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,NG,Natural gas,9933,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,SUN,Solar,-6,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,WAT,Hydro,1445,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,OTH,Other,254,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,WND,Wind,3231,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,COL,Coal,19,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,NG,Natural gas,8625,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,NUC,Nuclear,2276,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,SUN,Solar,-6,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,NUC,Nuclear,2277,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,SUN,Solar,-7,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,WND,Wind,3109,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,OTH,Other,-48,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,WAT,Hydro,1027,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,NG,Natural gas,8733,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,SUN,Solar,-7,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,OTH,Other,-21,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,WND,Wind,2893,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,WAT,Hydro,1004,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,NG,Natural gas,7713,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,NUC,Nuclear,2277,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,SUN,Solar,-8,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,WND,Wind,2454,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,NUC,Nuclear,2277,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,NG,Natural gas,7898,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,OTH,Other,-230,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,WAT,Hydro,1000,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,NG,Natural gas,7780,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,NUC,Nuclear,2278,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,WAT,Hydro,1038,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,OTH,Other,-119,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,SUN,Solar,-8,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,WND,Wind,2020,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,SUN,Solar,-9,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,WAT,Hydro,1173,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,COL,Coal,19,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,WND,Wind,1806,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,OTH,Other,68,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,NUC,Nuclear,2279,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,NG,Natural gas,8162,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,WAT,Hydro,1364,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,NUC,Nuclear,2275,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,WND,Wind,1712,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,SUN,Solar,556,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,NG,Natural gas,8731,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,OTH,Other,153,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,OTH,Other,-77,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,SUN,Solar,5279,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,WND,Wind,1446,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,NG,Natural gas,7633,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,NUC,Nuclear,2275,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,WAT,Hydro,1191,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,OIL,Petroleum,87,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,OIL,Petroleum,62,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,WND,Wind,1051,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,OTH,Other,-346,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,SUN,Solar,9483,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,NG,Natural gas,7089,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,WAT,Hydro,989,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,NUC,Nuclear,2275,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,SUN,Solar,11002,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,NUC,Nuclear,2276,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,OIL,Petroleum,53,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,COL,Coal,19,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,WAT,Hydro,637,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,NG,Natural gas,7885,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,OTH,Other,-390,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,WND,Wind,675,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,NG,Natural gas,7682,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,COL,Coal,22,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,NUC,Nuclear,2274,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,WAT,Hydro,413,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,OTH,Other,-45,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,SUN,Solar,11669,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,OIL,Petroleum,54,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,WND,Wind,501,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,NG,Natural gas,8219,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,WND,Wind,541,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,OIL,Petroleum,54,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,OTH,Other,-193,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,SUN,Solar,12209,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,WAT,Hydro,372,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,NUC,Nuclear,2274,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,WND,Wind,840,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,WAT,Hydro,760,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,OTH,Other,-141,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,SUN,Solar,12087,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,NUC,Nuclear,2275,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,COL,Coal,17,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,OIL,Petroleum,55,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,NG,Natural gas,8502,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,NG,Natural gas,9324,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,SUN,Solar,12271,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,WND,Wind,959,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,OIL,Petroleum,54,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,NUC,Nuclear,2275,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,OTH,Other,-27,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,WAT,Hydro,1117,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,OTH,Other,38,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,OIL,Petroleum,53,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,WND,Wind,1235,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,SUN,Solar,11983,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,NUC,Nuclear,2275,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,COL,Coal,18,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,NG,Natural gas,10330,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,WAT,Hydro,1134,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,WND,Wind,1434,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,NG,Natural gas,12473,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,NUC,Nuclear,2276,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,COL,Coal,17,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,WAT,Hydro,1491,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,OIL,Petroleum,55,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,OTH,Other,-42,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,SUN,Solar,10600,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,NUC,Nuclear,2277,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,WND,Wind,1799,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,COL,Coal,17,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,NG,Natural gas,13251,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,SUN,Solar,10626,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,OTH,Other,-202,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,WAT,Hydro,1645,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,OIL,Petroleum,55,megawatthours

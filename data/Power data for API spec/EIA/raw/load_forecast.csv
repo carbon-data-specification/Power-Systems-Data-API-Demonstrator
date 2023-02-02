@@ -1,0 +1,97 @@
+period,respondent,respondent-name,type,type-name,value,value-units
+2022-06-01T00,CISO,California Independent System Operator,TI,Total interchange,-3372,megawatthours
+2022-06-01T00,CISO,California Independent System Operator,NG,Net generation,22846,megawatthours
+2022-06-01T00,CISO,California Independent System Operator,D,Demand,26189,megawatthours
+2022-06-01T00,CISO,California Independent System Operator,DF,Day-ahead demand forecast,24300,megawatthours
+2022-06-01T01,CISO,California Independent System Operator,D,Demand,27867,megawatthours
+2022-06-01T01,CISO,California Independent System Operator,TI,Total interchange,-4455,megawatthours
+2022-06-01T01,CISO,California Independent System Operator,NG,Net generation,23214,megawatthours
+2022-06-01T01,CISO,California Independent System Operator,DF,Day-ahead demand forecast,25782,megawatthours
+2022-06-01T02,CISO,California Independent System Operator,D,Demand,28964,megawatthours
+2022-06-01T02,CISO,California Independent System Operator,TI,Total interchange,-5637,megawatthours
+2022-06-01T02,CISO,California Independent System Operator,DF,Day-ahead demand forecast,27311,megawatthours
+2022-06-01T02,CISO,California Independent System Operator,NG,Net generation,21401,megawatthours
+2022-06-01T03,CISO,California Independent System Operator,D,Demand,29393,megawatthours
+2022-06-01T03,CISO,California Independent System Operator,TI,Total interchange,-7485,megawatthours
+2022-06-01T03,CISO,California Independent System Operator,NG,Net generation,20535,megawatthours
+2022-06-01T03,CISO,California Independent System Operator,DF,Day-ahead demand forecast,28030,megawatthours
+2022-06-01T04,CISO,California Independent System Operator,D,Demand,29505,megawatthours
+2022-06-01T04,CISO,California Independent System Operator,NG,Net generation,20566,megawatthours
+2022-06-01T04,CISO,California Independent System Operator,TI,Total interchange,-8069,megawatthours
+2022-06-01T04,CISO,California Independent System Operator,DF,Day-ahead demand forecast,28268,megawatthours
+2022-06-01T05,CISO,California Independent System Operator,TI,Total interchange,-8238,megawatthours
+2022-06-01T05,CISO,California Independent System Operator,NG,Net generation,17726,megawatthours
+2022-06-01T05,CISO,California Independent System Operator,D,Demand,28835,megawatthours
+2022-06-01T05,CISO,California Independent System Operator,DF,Day-ahead demand forecast,27495,megawatthours
+2022-06-01T06,CISO,California Independent System Operator,TI,Total interchange,-9162,megawatthours
+2022-06-01T06,CISO,California Independent System Operator,NG,Net generation,15741,megawatthours
+2022-06-01T06,CISO,California Independent System Operator,D,Demand,26978,megawatthours
+2022-06-01T06,CISO,California Independent System Operator,DF,Day-ahead demand forecast,25657,megawatthours
+2022-06-01T07,CISO,California Independent System Operator,D,Demand,24947,megawatthours
+2022-06-01T07,CISO,California Independent System Operator,TI,Total interchange,-9006,megawatthours
+2022-06-01T07,CISO,California Independent System Operator,NG,Net generation,14401,megawatthours
+2022-06-01T07,CISO,California Independent System Operator,DF,Day-ahead demand forecast,23718,megawatthours
+2022-06-01T08,CISO,California Independent System Operator,TI,Total interchange,-8753,megawatthours
+2022-06-01T08,CISO,California Independent System Operator,DF,Day-ahead demand forecast,22552,megawatthours
+2022-06-01T08,CISO,California Independent System Operator,D,Demand,23711,megawatthours
+2022-06-01T08,CISO,California Independent System Operator,NG,Net generation,13326,megawatthours
+2022-06-01T09,CISO,California Independent System Operator,D,Demand,22755,megawatthours
+2022-06-01T09,CISO,California Independent System Operator,NG,Net generation,12326,megawatthours
+2022-06-01T09,CISO,California Independent System Operator,TI,Total interchange,-8819,megawatthours
+2022-06-01T09,CISO,California Independent System Operator,DF,Day-ahead demand forecast,21620,megawatthours
+2022-06-01T10,CISO,California Independent System Operator,D,Demand,21895,megawatthours
+2022-06-01T10,CISO,California Independent System Operator,TI,Total interchange,-8857,megawatthours
+2022-06-01T10,CISO,California Independent System Operator,DF,Day-ahead demand forecast,20932,megawatthours
+2022-06-01T10,CISO,California Independent System Operator,NG,Net generation,11530,megawatthours
+2022-06-01T11,CISO,California Independent System Operator,D,Demand,21352,megawatthours
+2022-06-01T11,CISO,California Independent System Operator,DF,Day-ahead demand forecast,20526,megawatthours
+2022-06-01T11,CISO,California Independent System Operator,TI,Total interchange,-8903,megawatthours
+2022-06-01T11,CISO,California Independent System Operator,NG,Net generation,11554,megawatthours
+2022-06-01T12,CISO,California Independent System Operator,D,Demand,21484,megawatthours
+2022-06-01T12,CISO,California Independent System Operator,TI,Total interchange,-8910,megawatthours
+2022-06-01T12,CISO,California Independent System Operator,NG,Net generation,11847,megawatthours
+2022-06-01T12,CISO,California Independent System Operator,DF,Day-ahead demand forecast,20737,megawatthours
+2022-06-01T13,CISO,California Independent System Operator,D,Demand,22314,megawatthours
+2022-06-01T13,CISO,California Independent System Operator,DF,Day-ahead demand forecast,21644,megawatthours
+2022-06-01T13,CISO,California Independent System Operator,TI,Total interchange,-9284,megawatthours
+2022-06-01T13,CISO,California Independent System Operator,NG,Net generation,12917,megawatthours
+2022-06-01T14,CISO,California Independent System Operator,D,Demand,23407,megawatthours
+2022-06-01T14,CISO,California Independent System Operator,DF,Day-ahead demand forecast,22488,megawatthours
+2022-06-01T14,CISO,California Independent System Operator,TI,Total interchange,-8848,megawatthours
+2022-06-01T14,CISO,California Independent System Operator,NG,Net generation,16270,megawatthours
+2022-06-01T15,CISO,California Independent System Operator,D,Demand,24975,megawatthours
+2022-06-01T15,CISO,California Independent System Operator,DF,Day-ahead demand forecast,22887,megawatthours
+2022-06-01T15,CISO,California Independent System Operator,NG,Net generation,18544,megawatthours
+2022-06-01T15,CISO,California Independent System Operator,TI,Total interchange,-7656,megawatthours
+2022-06-01T16,CISO,California Independent System Operator,D,Demand,25272,megawatthours
+2022-06-01T16,CISO,California Independent System Operator,TI,Total interchange,-6381,megawatthours
+2022-06-01T16,CISO,California Independent System Operator,NG,Net generation,19537,megawatthours
+2022-06-01T16,CISO,California Independent System Operator,DF,Day-ahead demand forecast,22730,megawatthours
+2022-06-01T17,CISO,California Independent System Operator,D,Demand,24586,megawatthours
+2022-06-01T17,CISO,California Independent System Operator,TI,Total interchange,-4905,megawatthours
+2022-06-01T17,CISO,California Independent System Operator,DF,Day-ahead demand forecast,22198,megawatthours
+2022-06-01T17,CISO,California Independent System Operator,NG,Net generation,20282,megawatthours
+2022-06-01T18,CISO,California Independent System Operator,D,Demand,24425,megawatthours
+2022-06-01T18,CISO,California Independent System Operator,TI,Total interchange,-4088,megawatthours
+2022-06-01T18,CISO,California Independent System Operator,DF,Day-ahead demand forecast,21856,megawatthours
+2022-06-01T18,CISO,California Independent System Operator,NG,Net generation,20701,megawatthours
+2022-06-01T19,CISO,California Independent System Operator,D,Demand,24509,megawatthours
+2022-06-01T19,CISO,California Independent System Operator,NG,Net generation,21587,megawatthours
+2022-06-01T19,CISO,California Independent System Operator,TI,Total interchange,-3675,megawatthours
+2022-06-01T19,CISO,California Independent System Operator,DF,Day-ahead demand forecast,21817,megawatthours
+2022-06-01T20,CISO,California Independent System Operator,D,Demand,25251,megawatthours
+2022-06-01T20,CISO,California Independent System Operator,TI,Total interchange,-3553,megawatthours
+2022-06-01T20,CISO,California Independent System Operator,NG,Net generation,21686,megawatthours
+2022-06-01T20,CISO,California Independent System Operator,DF,Day-ahead demand forecast,22322,megawatthours
+2022-06-01T21,CISO,California Independent System Operator,D,Demand,26105,megawatthours
+2022-06-01T21,CISO,California Independent System Operator,NG,Net generation,22503,megawatthours
+2022-06-01T21,CISO,California Independent System Operator,TI,Total interchange,-4113,megawatthours
+2022-06-01T21,CISO,California Independent System Operator,DF,Day-ahead demand forecast,23504,megawatthours
+2022-06-01T22,CISO,California Independent System Operator,D,Demand,27322,megawatthours
+2022-06-01T22,CISO,California Independent System Operator,TI,Total interchange,-4322,megawatthours
+2022-06-01T22,CISO,California Independent System Operator,NG,Net generation,23891,megawatthours
+2022-06-01T22,CISO,California Independent System Operator,DF,Day-ahead demand forecast,24962,megawatthours
+2022-06-01T23,CISO,California Independent System Operator,D,Demand,28421,megawatthours
+2022-06-01T23,CISO,California Independent System Operator,NG,Net generation,25128,megawatthours
+2022-06-01T23,CISO,California Independent System Operator,TI,Total interchange,-4056,megawatthours
+2022-06-01T23,CISO,California Independent System Operator,DF,Day-ahead demand forecast,26747,megawatthours

@@ -1,0 +1,35 @@
+datetime,Fuel Type,Capacity
+2021-01-01,Wind Onshore,12937
+2021-01-01,Wind Offshore,12160
+2021-01-01,Solar,13378
+2021-01-01,Other renewable,1900
+2021-01-01,Other,2808
+2021-01-01,Nuclear,8256
+2021-01-01,Hydro Run-of-river and poundage,1919
+2021-01-01,Hydro Pumped Storage,4309
+2021-01-01,Fossil Oil,0
+2021-01-01,Fossil Hard coal,5241
+2021-01-01,Fossil Gas,39822
+2021-01-01,Biomass,4528
+2022-01-01,Wind Onshore,13219
+2022-01-01,Wind Offshore,14111
+2022-01-01,Solar,13324
+2022-01-01,Other renewable,1549
+2022-01-01,Other,3357
+2022-01-01,Nuclear,9256
+2022-01-01,Hydro Run-of-river and poundage,4190
+2022-01-01,Fossil Hard coal,1491
+2022-01-01,Fossil Gas,38985
+2022-01-01,Biomass,4572
+2022-01-01,Hydro Pumped Storage,1928
+2023-01-01,Wind Onshore,13907
+2023-01-01,Wind Offshore,13038
+2023-01-01,Solar,14518
+2023-01-01,Other renewable,1462
+2023-01-01,Other,3313
+2023-01-01,Nuclear,4950
+2023-01-01,Hydro Run-of-river and poundage,2063
+2023-01-01,Hydro Pumped Storage,5603
+2023-01-01,Fossil Hard coal,1491
+2023-01-01,Fossil Gas,37047
+2023-01-01,Biomass,4438
