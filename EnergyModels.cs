@@ -26,9 +26,9 @@ namespace LFEnergy
 
         public string Region { get; set; } = string.Empty;
 
-        public int TotalPowerImported { get; set; } // in MW
+        public uint TotalPowerImported { get; set; } // in MW
 
-        public int TotalPowerExported { get; set; } // in MW
+        public uint TotalPowerExported { get; set; } // in MW
 
         public Dictionary<string, uint> PowerPerImport { get; set; } = new Dictionary<string, uint>(); // in MW
 
