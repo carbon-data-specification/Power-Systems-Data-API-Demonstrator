@@ -11,46 +11,46 @@ namespace LFEnergy.Services
         public List<GridNode> gridNodes;
 		public EiaCsvService()
 		{
-            gridNodes = getGridNodesFromCsv();
-
+            gridNodes = GetGridNodesFromCsv();
         }
-        public List<GridNode> getGridNodesFromCsv()
+        public List<GridNode> GetGridNodesFromCsv()
         {
             // It currently gets the list of grid nodes to generate based on unique regions in the generation file
             List<Generation> generation;
             using (var reader = new StreamReader("data/Power data for API spec/EIA/generation.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                csv.Context.RegisterClassMap<EiaGenerationMap>();
-                generation = csv.GetRecords<Generation>().ToList();
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    csv.Context.RegisterClassMap<EiaGenerationMap>();
+                    generation = csv.GetRecords<Generation>().ToList();
+                }
             }
 
             // TODO (decide on import export signs and related logic)
             List<ImportExport> importExport;
             using (var reader = new StreamReader("data/Power data for API spec/EIA/imports_exports.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                csv.Context.RegisterClassMap<EiaImportExportMap>();
-                importExport = csv.GetRecords<ImportExport>().ToList();
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    csv.Context.RegisterClassMap<EiaImportExportMap>();
+                    importExport = csv.GetRecords<ImportExport>().ToList();
+                }
             }
 
-            List<string> uniqueRegions = generation.Select(o => o.Region).Distinct().ToList();
-            List<GridNode> gridNodes = new List<GridNode> { };
-            for (int i = 0; i < uniqueRegions.Count; i++) {
-                GridNode gridNode = new GridNode()
+            return generation.Select(o => o.Region).Distinct().Select(r =>
+            {
+                return new GridNode()
                 {
-                    ID = "EIA." + uniqueRegions[i],
-                    name = "EIA." + uniqueRegions[i],
+                    ID = "EIA." + r,
+                    name = "EIA." + r,
                     type = GridNodeType.System,
-                    generation = generation.Where(x => x.Region == uniqueRegions[i]).ToList(),
+                    generation = generation.Where(x => x.Region == r).ToList(),
                     importExport = importExport,
-                    emissions = new List<Emissions>(){ },
+                    emissions = new List<Emissions>() { },
                     // TODO (set all power plants as grid node children)
                     gridNodeChildren = new List<GridNode>() { }
                 };
-                gridNodes.Add(gridNode);
-            }
-            return gridNodes;
+            }).ToList();
         }
 	}
 
