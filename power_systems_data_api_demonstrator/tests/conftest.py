@@ -13,11 +13,13 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from power_systems_data_api_demonstrator.db.dependencies import get_db_session
-from power_systems_data_api_demonstrator.db.utils import create_database, drop_database
-from power_systems_data_api_demonstrator.services.redis.dependency import get_redis_pool
 from power_systems_data_api_demonstrator.settings import settings
-from power_systems_data_api_demonstrator.web.application import get_app
+from power_systems_data_api_demonstrator.src.application import get_app
+from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.utils import (
+    create_database,
+    drop_database,
+)
 
 
 @pytest.fixture(scope="session")
@@ -37,8 +39,8 @@ async def _engine() -> AsyncGenerator[AsyncEngine, None]:
 
     :yield: new engine.
     """
-    from power_systems_data_api_demonstrator.db.meta import meta  # noqa: WPS433
-    from power_systems_data_api_demonstrator.db.models import (  # noqa: WPS433
+    from power_systems_data_api_demonstrator.src.lib.db.meta import meta  # noqa: WPS433
+    from power_systems_data_api_demonstrator.src.lib.db.models import (  # noqa: WPS433
         load_all_models,
     )
 
@@ -115,7 +117,6 @@ def fastapi_app(
     """
     application = get_app()
     application.dependency_overrides[get_db_session] = lambda: dbsession
-    application.dependency_overrides[get_redis_pool] = lambda: fake_redis_pool
     return application  # noqa: WPS331
 
 

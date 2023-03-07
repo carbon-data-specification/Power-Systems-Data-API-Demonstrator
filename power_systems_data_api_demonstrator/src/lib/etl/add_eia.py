@@ -1,10 +1,13 @@
 import asyncio
-from power_systems_data_api_demonstrator.db.dao.grid_node_dao import GridNodeDAO
-from power_systems_data_api_demonstrator.db.models.grid_node_model import GridNodeModel
-from sqlalchemy.ext.asyncio import create_async_engine
 
-from power_systems_data_api_demonstrator.db.base import Base
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+
 from power_systems_data_api_demonstrator.settings import Settings
+from power_systems_data_api_demonstrator.src.lib.db.base import Base
+from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import GridNodeDAO
+from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
+    GridNodeModel,
+)
 
 
 async def async_main() -> None:

@@ -1,13 +1,13 @@
-from typing import List, Optional
+from typing import List
 
 from fastapi import Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from power_systems_data_api_demonstrator.db.dependencies import get_db_session
-from power_systems_data_api_demonstrator.db.models.grid_node_model import (
-    GridNodeModel,
+from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
     GenerationModel,
+    GridNodeModel,
 )
 
 

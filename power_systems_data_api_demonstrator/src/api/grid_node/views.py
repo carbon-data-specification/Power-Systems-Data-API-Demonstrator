@@ -3,17 +3,19 @@ from typing import List
 from fastapi import APIRouter
 from fastapi.param_functions import Depends
 
-from power_systems_data_api_demonstrator.db.dao.grid_node_dao import GridNodeDAO
-from power_systems_data_api_demonstrator.db.models.grid_node_model import GridNodeModel
-from power_systems_data_api_demonstrator.web.api.grid_node.schema import (
+from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
     GridNodeModelDTO,
+)
+from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import GridNodeDAO
+from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
+    GridNodeModel,
 )
 
 router = APIRouter()
 
 
 @router.get("/list", response_model=List[GridNodeModelDTO])
-async def get_grid_nodes(
+async def list_grid_nodes(
     limit: int = 10,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> List[GridNodeModel]:
@@ -28,8 +30,8 @@ async def get_grid_nodes(
 
 
 @router.get("/describe/{gride_node_id}", response_model=GridNodeModelDTO)
-async def get_grid_nodes(
-    id: int,
+async def describe_grid_nodes(
+    gride_node_id: int,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> GridNodeModel:
     """
@@ -43,8 +45,8 @@ async def get_grid_nodes(
 
 
 @router.get("/generation/{gride_node_id}", response_model=GridNodeModelDTO)
-async def get_grid_nodes(
-    id: int,
+async def get_generation_grid_node(
+    gride_node_id: int,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> GridNodeModel:
     """

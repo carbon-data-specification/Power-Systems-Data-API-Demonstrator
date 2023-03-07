@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from power_systems_data_api_demonstrator.web.api.router import api_router
-from power_systems_data_api_demonstrator.web.lifetime import (
+from power_systems_data_api_demonstrator.src.api.router import api_router
+from power_systems_data_api_demonstrator.src.lifetime import (
     register_shutdown_event,
     register_startup_event,
 )
