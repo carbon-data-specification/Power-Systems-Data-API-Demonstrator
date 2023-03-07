@@ -1,0 +1,22 @@
+Fuel Type,Capacity (MW),Balancing Region,datetime
+Biomass,0,ES,2022-01-01
+Fossil Brown coal/Lignite,0,ES,2022-01-01
+Fossil Coal-derived gas,0,ES,2022-01-01
+Fossil Gas,0,ES,2022-01-01
+Fossil Hard coal,0,ES,2022-01-01
+Fossil Oil,97,ES,2022-01-01
+Fossil Oil shale,0,ES,2022-01-01
+Fossil Peat,0,ES,2022-01-01
+Geothermal,0,ES,2022-01-01
+Hydro Pumped Storage,0,ES,2022-01-01
+Hydro Run-of-river and poundage,527,ES,2022-01-01
+Hydro Water Reservoir,1676,ES,2022-01-01
+Marine,0,ES,2022-01-01
+Nuclear,0,ES,2022-01-01
+Other,0,ES,2022-01-01
+Other renewable,0,ES,2022-01-01
+Solar,0,ES,2022-01-01
+Waste,0,ES,2022-01-01
+Wind Offshore,0,ES,2022-01-01
+Wind Onshore,0,ES,2022-01-01
+Total Grand capacity,2300,ES,2022-01-01

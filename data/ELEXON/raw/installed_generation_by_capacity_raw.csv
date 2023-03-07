@@ -1,0 +1,35 @@
+DocumentType,BusinessType,ProcessType,TimeSeriesID,Quantity,Resolution,Year,PowerSystemResourceType,ActiveFlag,DocumentID,DocumentRevNum
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000012,12937,P1Y,2021,Wind Onshore,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000011,12160,P1Y,2021,Wind Offshore,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000010,13378,P1Y,2021,Solar,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000009,1900,P1Y,2021,Other renewable,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000008,2808,P1Y,2021,Other,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000007,8256,P1Y,2021,Nuclear,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000006,1919,P1Y,2021,Hydro Run-of-river and poundage,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000005,4309,P1Y,2021,Hydro Pumped Storage,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000004,0,P1Y,2021,Fossil Oil,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000003,5241,P1Y,2021,Fossil Hard coal,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000002,39822,P1Y,2021,Fossil Gas,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000001,4528,P1Y,2021,Biomass,Y,NGET-EMFIP-IGCA-00686934,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000011,13219,P1Y,2022,Wind Onshore,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000010,14111,P1Y,2022,Wind Offshore,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000009,13324,P1Y,2022,Solar,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000008,1549,P1Y,2022,Other renewable,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000007,3357,P1Y,2022,Other,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000006,9256,P1Y,2022,Nuclear,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000005,4190,P1Y,2022,Hydro Run-of-river and poundage,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000003,1491,P1Y,2022,Fossil Hard coal,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000002,38985,P1Y,2022,Fossil Gas,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000001,4572,P1Y,2022,Biomass,Y,NGET-EMFIP-IGCA-00686949,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000001,1928,P1Y,2022,Hydro Pumped Storage,Y,NGET-EMFIP-IGCA-00687002,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000011,13907,P1Y,2023,Wind Onshore,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000010,13038,P1Y,2023,Wind Offshore,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000009,14518,P1Y,2023,Solar,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000008,1462,P1Y,2023,Other renewable,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000007,3313,P1Y,2023,Other,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000006,4950,P1Y,2023,Nuclear,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000005,2063,P1Y,2023,Hydro Run-of-river and poundage,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000004,5603,P1Y,2023,Hydro Pumped Storage,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000003,1491,P1Y,2023,Fossil Hard coal,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000002,37047,P1Y,2023,Fossil Gas,Y,NGET-EMFIP-IGCA-00687083,1
+Installed generation per type,Installed generation,Year ahead,NGET-EMFIP-IGCA-TS-00000001,4438,P1Y,2023,Biomass,Y,NGET-EMFIP-IGCA-00687083,1
