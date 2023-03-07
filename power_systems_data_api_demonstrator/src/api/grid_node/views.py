@@ -29,9 +29,9 @@ async def list_grid_nodes(
     return await grid_node_dao.get_all_grid_nodes(limit=limit)
 
 
-@router.get("/describe/{gride_node_id}", response_model=GridNodeModelDTO)
+@router.get("/describe/{grid_node_id}", response_model=GridNodeModelDTO)
 async def describe_grid_nodes(
-    gride_node_id: int,
+    grid_node_id: int,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> GridNodeModel:
     """
@@ -44,9 +44,9 @@ async def describe_grid_nodes(
     return await grid_node_dao.get_by_id(grid_node_id)
 
 
-@router.get("/generation/{gride_node_id}", response_model=GridNodeModelDTO)
+@router.get("/generation/{grid_node_id}", response_model=GridNodeModelDTO)
 async def get_generation_grid_node(
-    gride_node_id: int,
+    grid_node_id: int,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> GridNodeModel:
     """
