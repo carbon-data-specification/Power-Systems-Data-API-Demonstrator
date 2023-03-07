@@ -1,6 +1,6 @@
+from enum import Enum, auto
+
 from pydantic import BaseModel
-from enum import auto
-from enum import Enum
 
 
 class GridNodeType(Enum):

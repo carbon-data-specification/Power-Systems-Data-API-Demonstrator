@@ -48,20 +48,22 @@ docker-compose -f deploy/docker-compose.yml --project-directory . build
 ```bash
 $ tree "power_systems_data_api_demonstrator"
 power_systems_data_api_demonstrator
-├── conftest.py  # Fixtures for all tests.
-├── db  # module contains db configurations
-│   ├── dao  # Data Access Objects. Contains different classes to interact with database.
-│   └── models  # Package contains different models for ORMs.
-├── __main__.py  # Startup script. Starts uvicorn.
-├── services  # Package for different external services such as rabbit or redis etc.
-├── settings.py  # Main configuration settings for project.
-├── static  # Static content.
-├── tests  # Tests for project.
-└── web  # Package contains web server. Handlers, startup config.
-    ├── api  # Package with all handlers.
-    │   └── router.py  # Main router.
-    ├── application.py  # FastAPI application configuration.
-    └── lifetime.py  # Contains actions to perform on startup and shutdown.
+├── __main__.py
+├── settings.py
+├── src
+│   ├── api
+│   │   ├── docs
+│   │   ├── grid_node
+│   │   ├── monitoring
+│   │   └── router.py
+│   ├── application.py
+│   ├── lib
+│   │   ├── db
+│   │   └── etl
+│   └── lifetime.py
+└── tests
+    ├── conftest.py
+    └── test_****.py
 ```
 
 ## Configuration
@@ -71,14 +73,15 @@ This application can be configured with environment variables.
 You can create `.env` file in the root directory and place all
 environment variables here.
 
-All environment variabels should start with "POWER_SYSTEMS_DATA_API_DEMONSTRATOR_" prefix.
+All environment variabels should start with "POWER*SYSTEMS_DATA_API_DEMONSTRATOR*" prefix.
 
 For example if you see in your "power_systems_data_api_demonstrator/settings.py" a variable named like
 `random_parameter`, you should provide the "POWER_SYSTEMS_DATA_API_DEMONSTRATOR_RANDOM_PARAMETER"
 variable to configure the value. This behaviour can be changed by overriding `env_prefix` property
 in `power_systems_data_api_demonstrator.settings.Settings.Config`.
 
-An exmaple of .env file:
+An example of .env file:
+
 ```bash
 POWER_SYSTEMS_DATA_API_DEMONSTRATOR_RELOAD="True"
 POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT="8000"
@@ -90,6 +93,7 @@ You can read more about BaseSettings class here: https://pydantic-docs.helpmanua
 ## Pre-commit
 
 To install pre-commit simply run inside the shell:
+
 ```bash
 pre-commit install
 ```
@@ -98,14 +102,13 @@ pre-commit is very useful to check your code before publishing it.
 It's configured using .pre-commit-config.yaml file.
 
 By default it runs:
-* black (formats your code);
-* mypy (validates types);
-* isort (sorts imports in all files);
-* flake8 (spots possibe bugs);
 
+- black (formats your code);
+- mypy (validates types);
+- isort (sorts imports in all files);
+- flake8 (spots possibe bugs);
 
 You can read more about pre-commit here: https://pre-commit.com/
-
 
 ## Running tests
 
@@ -118,8 +121,8 @@ docker-compose -f deploy/docker-compose.yml --project-directory . down
 
 For running tests on your local machine.
 
-
 2. Run the pytest.
+
 ```bash
 pytest -vv .
 ```

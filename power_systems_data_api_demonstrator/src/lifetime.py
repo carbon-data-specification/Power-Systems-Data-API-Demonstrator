@@ -8,9 +8,9 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from power_systems_data_api_demonstrator.db.meta import meta
-from power_systems_data_api_demonstrator.db.models import load_all_models
 from power_systems_data_api_demonstrator.settings import settings
+from power_systems_data_api_demonstrator.src.lib.db.meta import meta
+from power_systems_data_api_demonstrator.src.lib.db.models import load_all_models
 
 
 def _setup_db(app: FastAPI) -> None:  # pragma: no cover

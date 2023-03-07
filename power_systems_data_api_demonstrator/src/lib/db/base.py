@@ -1,6 +1,6 @@
 from sqlalchemy.orm import DeclarativeBase
 
-from power_systems_data_api_demonstrator.db.meta import meta
+from power_systems_data_api_demonstrator.src.lib.db.meta import meta
 
 
 class Base(DeclarativeBase):

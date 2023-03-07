@@ -8,7 +8,7 @@ def load_all_models() -> None:
     package_dir = Path(__file__).resolve().parent
     modules = pkgutil.walk_packages(
         path=[str(package_dir)],
-        prefix="power_systems_data_api_demonstrator.db.models.",
+        prefix="power_systems_data_api_demonstrator.src.lib.db.models.",
     )
     for module in modules:
         __import__(module.name)  # noqa: WPS421

@@ -1,9 +1,9 @@
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.sql.sqltypes import String
-from sqlalchemy import ForeignKey
 from datetime import datetime
 
-from power_systems_data_api_demonstrator.db.base import Base
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+
+from power_systems_data_api_demonstrator.src.lib.db.base import Base
 
 
 class GridNodeModel(Base):
