@@ -6,7 +6,7 @@ from typing import Optional
 from pydantic import BaseSettings
 from yarl import URL
 
-TEMP_DIR = Path(gettempdir())
+DB_PATH = "."
 
 
 class LogLevel(str, enum.Enum):  # noqa: WPS600
@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     log_level: LogLevel = LogLevel.INFO
 
     # Variables for the database
-    db_file: Path = TEMP_DIR / "db.sqlite3"
+    db_file: Path = f"{DB_PATH}/db.sqlite3"
     db_echo: bool = False
 
     @property
