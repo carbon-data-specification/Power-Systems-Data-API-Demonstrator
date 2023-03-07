@@ -3,46 +3,46 @@ from enum import auto
 from enum import Enum
 
 
-class GridNodeType(Enum):
-    GENERATION_UNIT = auto()
-    PRODUCTION_UNIT = auto()
-    SUBSTATION = auto()
-    MARKET = auto()
-    SYSTEM = auto()
+class GridNodeType(str, Enum):
+    GENERATION_UNIT = "GENERATION_UNIT"
+    PRODUCTION_UNIT = "PRODUCTION_UNIT"
+    SUBSTATION = "SUBSTATION"
+    MARKET = "MARKET"
+    SYSTEM = "SYSTEM"
 
 
 class FuelTypes(str, Enum):
-    BROWN_COAL = auto()
-    HARD_COAL = auto()
-    COAL_DERIVED_GAS = auto()
-    OTHER_COAL = auto()
-    NATURAL_GAS = auto()
-    LANDFILL_GAS = auto()
-    OTHER_GAS = auto()
-    WOOD = auto()
-    MUNICIPAL_WASTE = auto()
-    PROPANE_OIL = auto()
-    SHALE_OIL = auto()
-    DISTILLATE_OIL = auto()
-    OTHER_OIL = auto()
-    PEAT = auto()
-    URANIUM = auto()
-    THORIUM = auto()
-    PLUTONIUM = auto()
-    SOLAR = auto()
-    WIND = auto()
-    GEOTHERMAL = auto()
-    WATER = auto()
+    BROWN_COAL = "BROWN_COAL"
+    HARD_COAL = "HARD_COAL"
+    COAL_DERIVED_GAS = "COAL_DERIVED_GAS"
+    OTHER_COAL = "OTHER_COAL"
+    NATURAL_GAS = "NATURAL_GAS"
+    LANDFILL_GAS = "LANDFILL_GAS"
+    OTHER_GAS = "OTHER_GAS"
+    WOOD = "WOOD"
+    MUNICIPAL_WASTE = "MUNICIPAL_WASTE"
+    PROPANE_OIL = "PROPANE_OIL"
+    SHALE_OIL = "SHALE_OIL"
+    DISTILLATE_OIL = "DISTILLATE_OIL"
+    OTHER_OIL = "OTHER_OIL"
+    PEAT = "PEAT"
+    URANIUM = "URANIUM"
+    THORIUM = "THORIUM"
+    PLUTONIUM = "PLUTONIUM"
+    SOLAR = "SOLAR"
+    WIND = "WIND"
+    GEOTHERMAL = "GEOTHERMAL"
+    WATER = "WATER"
 
 
 class GridNodeModelDTO(BaseModel):
     """
-    DTO for dummy models.
+    DTO for grid node models.
 
     It returned when accessing dummy models from the API.
     """
 
-    id: int
+    id: str
     name: str
     type: GridNodeType
 
