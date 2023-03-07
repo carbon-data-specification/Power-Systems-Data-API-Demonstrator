@@ -54,12 +54,10 @@ power_systems_data_api_demonstrator
 │   ├── api
 │   │   ├── docs
 │   │   ├── grid_node
-│   │   ├── monitoring
 │   │   └── router.py
 │   ├── application.py
 │   ├── lib
 │   │   ├── db
-│   │   └── etl
 │   └── lifetime.py
 └── tests
     ├── conftest.py
