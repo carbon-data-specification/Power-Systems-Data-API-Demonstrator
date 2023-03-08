@@ -9,28 +9,11 @@ services:
     restart: always
     env_file:
     - .env
-    depends_on:
-      redis:
-        condition: service_healthy
     environment:
       POWER_SYSTEMS_DATA_API_DEMONSTRATOR_HOST: 0.0.0.0
       POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE: /db_data/db.sqlite3
     volumes:
     - power_systems_data_api_demonstrator-db-data:/db_data/
-
-  redis:
-    image: bitnami/redis:6.2.5
-    hostname: "power_systems_data_api_demonstrator-redis"
-    restart: always
-    environment:
-      ALLOW_EMPTY_PASSWORD: "yes"
-    healthcheck:
-      test: redis-cli ping
-      interval: 1s
-      timeout: 3s
-      retries: 50
-
-
 
 volumes:
   power_systems_data_api_demonstrator-db-data:

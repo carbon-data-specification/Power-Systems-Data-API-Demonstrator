@@ -1,0 +1,265 @@
+period,fromba,fromba-name,toba,toba-name,value,value-units
+2021-06-01T00,CISO,California Independent System Operator,PACW,PacifiCorp West,0,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-935,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-462,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1430,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,144,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,IID,Imperial Irrigation District,-376,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-599,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,NEVP,Nevada Power Company,-933,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-616,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-20,megawatthours
+2021-06-01T00,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,544,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-647,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1460,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,138,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,IID,Imperial Irrigation District,-303,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1657,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-445,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,PACW,PacifiCorp West,0,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1143,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,543,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-33,megawatthours
+2021-06-01T01,CISO,California Independent System Operator,NEVP,Nevada Power Company,-956,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,PACW,PacifiCorp West,-4,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1412,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,515,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-218,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-718,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,NEVP,Nevada Power Company,-898,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-309,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1488,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,100,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,IID,Imperial Irrigation District,-125,megawatthours
+2021-06-01T02,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-2436,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-695,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-299,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-407,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1274,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,65,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,IID,Imperial Irrigation District,-80,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-3278,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,NEVP,Nevada Power Company,-726,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,PACW,PacifiCorp West,0,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1473,megawatthours
+2021-06-01T03,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,410,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-827,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,NEVP,Nevada Power Company,-787,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-3626,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,IID,Imperial Irrigation District,-109,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,101,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-276,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,PACW,PacifiCorp West,-1,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1723,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,375,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-388,megawatthours
+2021-06-01T04,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1296,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1297,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-455,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-912,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-455,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,339,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1950,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,PACW,PacifiCorp West,-3,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,NEVP,Nevada Power Company,-983,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-3340,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,IID,Imperial Irrigation District,-134,megawatthours
+2021-06-01T05,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,50,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1139,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,144,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,IID,Imperial Irrigation District,-173,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-2845,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,NEVP,Nevada Power Company,-999,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-578,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-2019,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,302,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-336,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-995,megawatthours
+2021-06-01T06,CISO,California Independent System Operator,PACW,PacifiCorp West,-1,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1198,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,51,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,IID,Imperial Irrigation District,-205,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-2339,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,NEVP,Nevada Power Company,-971,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,PACW,PacifiCorp West,-5,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1934,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,238,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-235,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-920,megawatthours
+2021-06-01T07,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-599,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-821,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-164,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-1013,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1245,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,31,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,IID,Imperial Irrigation District,-232,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1567,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,NEVP,Nevada Power Company,-909,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,PACW,PacifiCorp West,-3,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1763,megawatthours
+2021-06-01T08,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,168,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-878,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1239,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,49,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,IID,Imperial Irrigation District,-270,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1474,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-925,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,PACW,PacifiCorp West,-7,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1812,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,114,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-144,megawatthours
+2021-06-01T09,CISO,California Independent System Operator,NEVP,Nevada Power Company,-940,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-898,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-137,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-852,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1170,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,41,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,IID,Imperial Irrigation District,-276,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1575,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,NEVP,Nevada Power Company,-999,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,PACW,PacifiCorp West,-6,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1840,megawatthours
+2021-06-01T10,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,93,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-885,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1100,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,23,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,IID,Imperial Irrigation District,-292,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1625,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-856,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,PACW,PacifiCorp West,-5,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1817,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,85,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-129,megawatthours
+2021-06-01T11,CISO,California Independent System Operator,NEVP,Nevada Power Company,-1007,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-865,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-117,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,37,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1871,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,PACW,PacifiCorp West,-4,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,NEVP,Nevada Power Company,-1032,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1459,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,IID,Imperial Irrigation District,-300,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,-27,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1065,megawatthours
+2021-06-01T12,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-936,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,PACW,PacifiCorp West,-3,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1857,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-1077,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-1079,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,-57,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,IID,Imperial Irrigation District,-303,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1456,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,NEVP,Nevada Power Company,-1036,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-818,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-145,megawatthours
+2021-06-01T13,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,30,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-736,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-978,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,1,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,IID,Imperial Irrigation District,-373,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-1098,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-904,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,PACW,PacifiCorp West,2,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1604,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,161,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,-155,megawatthours
+2021-06-01T14,CISO,California Independent System Operator,NEVP,Nevada Power Company,-1085,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,PACW,PacifiCorp West,8,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1368,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,401,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,50,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-731,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,NEVP,Nevada Power Company,-924,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-622,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-634,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,44,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,IID,Imperial Irrigation District,-549,megawatthours
+2021-06-01T15,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-852,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-621,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,238,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-431,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-531,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,42,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,IID,Imperial Irrigation District,-601,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-533,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,NEVP,Nevada Power Company,-885,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,PACW,PacifiCorp West,9,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-1096,megawatthours
+2021-06-01T16,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,535,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-499,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,NEVP,Nevada Power Company,-824,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-271,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,IID,Imperial Irrigation District,-579,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,52,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-339,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,PACW,PacifiCorp West,10,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-884,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,564,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,360,megawatthours
+2021-06-01T17,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-558,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-655,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-354,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-500,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,337,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,571,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-889,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,PACW,PacifiCorp West,9,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,NEVP,Nevada Power Company,-778,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-248,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,IID,Imperial Irrigation District,-539,megawatthours
+2021-06-01T18,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,42,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-489,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,378,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,547,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-835,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,PACW,PacifiCorp West,8,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-441,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-104,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,IID,Imperial Irrigation District,-482,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,39,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-800,megawatthours
+2021-06-01T19,CISO,California Independent System Operator,NEVP,Nevada Power Company,-703,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-563,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,42,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,IID,Imperial Irrigation District,-424,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-160,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,NEVP,Nevada Power Company,-671,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-411,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-799,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,517,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,352,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-440,megawatthours
+2021-06-01T20,CISO,California Independent System Operator,PACW,PacifiCorp West,15,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-573,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,92,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,IID,Imperial Irrigation District,-391,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-190,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,NEVP,Nevada Power Company,-692,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,PACW,PacifiCorp West,17,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-898,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,521,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,353,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-480,megawatthours
+2021-06-01T21,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-49,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-439,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,260,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-276,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-746,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,143,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,IID,Imperial Irrigation District,-371,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-83,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,NEVP,Nevada Power Company,-717,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,PACW,PacifiCorp West,16,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-848,megawatthours
+2021-06-01T22,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,513,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,AZPS,Arizona Public Service Company,-384,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,TIDC,Turlock Irrigation District,542,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,SRP,Salt River Project Agricultural Improvement and Power District,-823,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,PACW,PacifiCorp West,12,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,NEVP,Nevada Power Company,-705,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,WALC,Western Area Power Administration - Desert Southwest Region,250,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,IID,Imperial Irrigation District,-315,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,CEN,Centro Nacional de Control de Energia,200,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,BPAT,Bonneville Power Administration,-825,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,BANC,Balancing Authority of Northern California,-246,megawatthours
+2021-06-01T23,CISO,California Independent System Operator,LDWP,Los Angeles Department of Water and Power,-562,megawatthours

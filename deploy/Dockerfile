@@ -1,4 +1,6 @@
-FROM python:3.9.6-slim-buster
+FROM python:3.10-slim-buster
+
+RUN apt-get update && apt-get install gcc  -y
 
 
 RUN pip install poetry==1.2.2

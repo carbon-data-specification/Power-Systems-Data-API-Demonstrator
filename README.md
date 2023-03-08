@@ -54,12 +54,10 @@ power_systems_data_api_demonstrator
 │   ├── api
 │   │   ├── docs
 │   │   ├── grid_node
-│   │   ├── monitoring
 │   │   └── router.py
 │   ├── application.py
 │   ├── lib
 │   │   ├── db
-│   │   └── etl
 │   └── lifetime.py
 └── tests
     ├── conftest.py
@@ -125,4 +123,27 @@ For running tests on your local machine.
 
 ```bash
 pytest -vv .
+```
+
+### Seeded Data
+
+The data has been seeded by pulling from a variety of public sources. The data was extracted using python in notebooks that can be accessed using the following command. :
+
+```
+poetry run jupyter notebook data/
+```
+
+However these scripts require API keys so you will need to set the following variables:
+
+```
+# for ELEXON
+export BMRS_API_KEY=ABC
+
+# for EIA
+export EIA_API_KEY=DEF
+```
+
+To seed this data you need to run the following command:
+```
+poetry run python load_data/seed.py
 ```

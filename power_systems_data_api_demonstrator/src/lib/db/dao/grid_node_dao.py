@@ -2,12 +2,13 @@ from typing import List
 
 from fastapi import Depends
 from sqlalchemy import select
+from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
-    GenerationModel,
     GridNodeModel,
+    GenerationModel,
 )
 
 
@@ -17,30 +18,33 @@ class GridNodeDAO:
     def __init__(self, session: AsyncSession = Depends(get_db_session)):
         self.session = session
 
-    async def create_grid_node(self, grid_node_model: GridNodeModel) -> None:
+    async def create_grid_node(
+        self, grid_node_model: GridNodeModel, overwrite_if_exists=True
+    ) -> None:
         """
         Add single grid_node to session.
-
         :param name: name of a grid_node.
         """
+        if overwrite_if_exists:
+            delete_stmt = delete(GridNodeModel).filter_by(id=grid_node_model.id)
+            await self.session.execute(delete_stmt)
         self.session.add(grid_node_model)
+        await self.session.commit()
 
     async def add_generation(
         self, generation: list[GenerationModel], /, *, grid_node_id: int
     ) -> None:
         """
         Add single grid_node to session.
-
         :param name: name of a grid_node.
         """
         for gen in generation:
             self.session.add(gen)
-        self.session.commit()
+        await self.session.commit()
 
-    async def get_all_grid_nodes(self, limit: int) -> List[GridNodeModel]:
+    async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """
         Get all grid_node models with limit/offset pagination.
-
         :param limit: limit of dummies.
         :param offset: offset of dummies.
         :return: stream of dummies.
@@ -54,10 +58,14 @@ class GridNodeDAO:
     async def get_by_id(self, id: int) -> List[GridNodeModel]:
         """
         Get specific grid_node model.
-
         :param name: name of grid_node instance.
         :return: grid_node models.
         """
         query = select(GridNodeModel).where(GridNodeModel.id == id)
         rows = await self.session.execute(query)
         return list(rows.scalars().fetchall())
+
+    async def delete_grid_node(self, id: str) -> None:
+        delete_stmt = delete(GridNodeModel).filter_by(id=id)
+        self.session.execute(delete_stmt)
+        await self.session.commit()
