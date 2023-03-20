@@ -1,7 +1,4 @@
-FROM python:3.10-slim-buster
-
-RUN apt-get update && apt-get install gcc  -y
-
+FROM python:3.10-buster
 
 RUN pip install poetry==1.2.2
 
@@ -17,6 +14,8 @@ RUN poetry install
 
 # Copying actual application
 COPY . /app/
+
+# Installing app
 RUN poetry install
 
 CMD ["/usr/local/bin/python", "-m", "power_systems_data_api_demonstrator"]
