@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+    image: power_systems_data_api_demonstrator:${POWER_SYSTEMS_DATA_API_DEMONSTRATOR_VERSION:-latest}
+    restart: always
+    ports:
+      - ${POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT:-8000}:${POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT:-8000}
+    environment:
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_HOST: 0.0.0.0
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT: ${POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT:-8000}
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_RELOAD: True
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE: db.sqlite3
+    volumes:
+      - ./power_systems_data_api_demonstrator:/power_systems_data_api_demonstrator
+      - ./:/app
