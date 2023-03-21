@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+
 import enum
 from pathlib import Path
-from tempfile import gettempdir
-from typing import Optional
 
 from pydantic import BaseSettings
 from yarl import URL

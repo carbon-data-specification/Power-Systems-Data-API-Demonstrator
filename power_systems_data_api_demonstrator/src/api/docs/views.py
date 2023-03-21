@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 from fastapi import APIRouter, Request
 from fastapi.openapi.docs import (
     get_redoc_html,
