@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 from asyncio import current_task
 from typing import Awaitable, Callable
 

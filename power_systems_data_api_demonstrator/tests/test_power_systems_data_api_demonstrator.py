@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
