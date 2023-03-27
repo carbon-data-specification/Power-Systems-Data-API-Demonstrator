@@ -1,6 +1,8 @@
-from pydantic import BaseModel
-from enum import auto
+# SPDX-License-Identifier: Apache-2.0
+
 from enum import Enum
+
+from pydantic import BaseModel
 
 
 class GridNodeType(str, Enum):

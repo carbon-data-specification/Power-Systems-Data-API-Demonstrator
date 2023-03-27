@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 from importlib import metadata
 from pathlib import Path
 
@@ -5,13 +7,10 @@ from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from power_systems_data_api_demonstrator.src.api import docs, grid_node
 from power_systems_data_api_demonstrator.src.lifetime import (
     register_shutdown_event,
     register_startup_event,
-)
-from power_systems_data_api_demonstrator.src.api import (
-    docs,
-    grid_node,
 )
 
 APP_ROOT = Path(__file__).parent.parent
