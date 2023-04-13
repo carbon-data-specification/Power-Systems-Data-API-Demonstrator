@@ -47,11 +47,13 @@ async def describe_grid_nodes(
     :return: a single grid node with the given id.
     """
     try:
+        id = int(id)
         return await grid_node_dao.get_by_id(id)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
+# TODO define generation model and return
 @router.get("/generation/{id}", response_model=GridNodeModelDTO)
 async def get_generation_grid_node(
     id: str,
@@ -65,6 +67,27 @@ async def get_generation_grid_node(
     :return: a single grid node with the given id.
     """
     try:
+        id = int(id)
+        return await grid_node_dao.get_by_id(id)
+    except GridNodeNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+
+
+# TODO define demand model and return
+@router.get("/demand/{id}", response_model=GridNodeModelDTO)
+async def get_demand_grid_node(
+    id: str,
+    grid_node_dao: GridNodeDAO = Depends(),
+) -> GridNodeModel:
+    """
+    Retrieve demand data for a single grid node.
+
+    :param id: id of a specific grid node.
+    :param dummy_dao: DAO for grid nodes.
+    :return: a single grid node with the given id.
+    """
+    try:
+        id = int(id)
         return await grid_node_dao.get_by_id(id)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
