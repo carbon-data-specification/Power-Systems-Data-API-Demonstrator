@@ -1,4 +1,4 @@
-Fuel Type,Capacity (MW),Balancing Region,datetime
+Fuel Type,Capacity (MW),Grid Node,datetime
 Biomass,0,ES,2022-01-01
 Fossil Brown coal/Lignite,0,ES,2022-01-01
 Fossil Coal-derived gas,0,ES,2022-01-01

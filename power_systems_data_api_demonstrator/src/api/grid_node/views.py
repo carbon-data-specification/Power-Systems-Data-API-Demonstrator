@@ -6,11 +6,15 @@ from fastapi import APIRouter, HTTPException
 from fastapi.param_functions import Depends
 
 from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
+    GenerationDTO,
     GridNodeModelDTO,
 )
 from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import (
     GridNodeDAO,
     GridNodeNotFoundError,
+)
+from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
+    GenerationForFuelTypeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
     GridNodeModel,
@@ -47,18 +51,17 @@ async def describe_grid_nodes(
     :return: a single grid node with the given id.
     """
     try:
-        id = int(id)
         return await grid_node_dao.get_by_id(id)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
 # TODO define generation model and return
-@router.get("/generation/{id}", response_model=GridNodeModelDTO)
+@router.get("/generation/{id}", response_model=list[GenerationDTO])
 async def get_generation_grid_node(
     id: str,
     grid_node_dao: GridNodeDAO = Depends(),
-) -> GridNodeModel:
+) -> list[GenerationForFuelTypeModel]:
     """
     Retrieve generation data for a single grid node.
 
@@ -67,8 +70,7 @@ async def get_generation_grid_node(
     :return: a single grid node with the given id.
     """
     try:
-        id = int(id)
-        return await grid_node_dao.get_by_id(id)
+        return await grid_node_dao.get_generation(id)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
@@ -87,7 +89,6 @@ async def get_demand_grid_node(
     :return: a single grid node with the given id.
     """
     try:
-        id = int(id)
         return await grid_node_dao.get_by_id(id)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None

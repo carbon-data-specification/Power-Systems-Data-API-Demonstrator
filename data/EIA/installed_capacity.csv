@@ -1,22 +1,22 @@
-datetime,Fuel Type,balancing_authority_code,Capacity (MW)
-2021-06,Agriculture Byproducts,CISO,29.1
-2021-06,Disillate Fuel Oil,CISO,212.9
-2021-06,Electricity used for energy storage,CISO,1484.8
-2021-06,Gaseous Propane,CISO,2.3000000000000003
-2021-06,Geothermal,CISO,2103.5
-2021-06,Jet Fuel,CISO,149.0
-2021-06,Landfill Gas,CISO,279.9
-2021-06,Municipal Solid Waste (All),CISO,59.6
-2021-06,Natural Gas,CISO,32881.7
-2021-06,Nuclear,CISO,2323.0
-2021-06,Other,CISO,1.0
-2021-06,Other Biomass Gases ,CISO,127.7
-2021-06,Other Gas,CISO,128.6
-2021-06,Petroleum Coke,CISO,27.3
-2021-06,Purchased Steam,CISO,8.0
-2021-06,Refined Coal,CISO,62.5
-2021-06,Solar,CISO,15020.5
-2021-06,Waste Heat,CISO,91.7
-2021-06,Water,CISO,8800.0
-2021-06,Wind,CISO,6022.5
-2021-06,Wood Waste Solids,CISO,677.5
+datetime,Fuel Type,Grid Node,Capacity (MW)
+2021-06,Agriculture Byproducts,US-CAL-ISO,29.1
+2021-06,Disillate Fuel Oil,US-CAL-ISO,212.9
+2021-06,Electricity used for energy storage,US-CAL-ISO,1484.8
+2021-06,Gaseous Propane,US-CAL-ISO,2.3000000000000003
+2021-06,Geothermal,US-CAL-ISO,2103.5
+2021-06,Jet Fuel,US-CAL-ISO,149.0
+2021-06,Landfill Gas,US-CAL-ISO,279.9
+2021-06,Municipal Solid Waste (All),US-CAL-ISO,59.6
+2021-06,Natural Gas,US-CAL-ISO,32881.7
+2021-06,Nuclear,US-CAL-ISO,2323.0
+2021-06,Other,US-CAL-ISO,1.0
+2021-06,Other Biomass Gases ,US-CAL-ISO,127.7
+2021-06,Other Gas,US-CAL-ISO,128.6
+2021-06,Petroleum Coke,US-CAL-ISO,27.3
+2021-06,Purchased Steam,US-CAL-ISO,8.0
+2021-06,Refined Coal,US-CAL-ISO,62.5
+2021-06,Solar,US-CAL-ISO,15020.5
+2021-06,Waste Heat,US-CAL-ISO,91.7
+2021-06,Water,US-CAL-ISO,8800.0
+2021-06,Wind,US-CAL-ISO,6022.5
+2021-06,Wood Waste Solids,US-CAL-ISO,677.5

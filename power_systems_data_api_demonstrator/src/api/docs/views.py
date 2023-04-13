@@ -6,9 +6,14 @@ from fastapi.openapi.docs import (
     get_swagger_ui_html,
     get_swagger_ui_oauth2_redirect_html,
 )
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 router = APIRouter()
+
+
+@router.get("/")
+async def redirect() -> RedirectResponse:
+    return RedirectResponse(url="/docs")
 
 
 @router.get("/docs", include_in_schema=False)
