@@ -1,0 +1,27 @@
+name: Test
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+    env:
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_HOST: 0.0.0.0
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT: 8000
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_RELOAD: "true"
+      POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE: db.sqlite3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag power-systems-data-api-demonstrator:${{ github.sha }}
+
+      - name: Run the tests
+        run: docker run power-systems-data-api-demonstrator:${{ github.sha }} pytest -vv .
