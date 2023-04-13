@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
     GenerationModel,
+    GenerationPerFuelModel,
     GridNodeModel,
 )
 
@@ -45,6 +46,21 @@ class GridNodeDAO:
         :param name: name of a grid_node.
         """
         for gen in generation:
+            self.session.add(gen)
+        await self.session.commit()
+
+    async def add_generation_per_fuel_type(
+        self,
+        generation_per_fuel_type: list[GenerationPerFuelModel],
+        /,
+        *,
+        grid_node_id: int,
+    ) -> None:
+        """
+        Add single grid_node to session.
+        :param name: name of a grid_node.
+        """
+        for gen in generation_per_fuel_type:
             self.session.add(gen)
         await self.session.commit()
 
