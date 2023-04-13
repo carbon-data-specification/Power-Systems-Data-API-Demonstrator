@@ -41,12 +41,13 @@ class GridNodeDAO:
 
     async def add_generation_for_fuel_type(
         self,
-        generation_for_fuel_type: GenerationForFuelTypeModel,
+        generation_for_fuel_type: list[GenerationForFuelTypeModel],
     ) -> None:
         """
         Add single generation_per_fuel_type.
         """
-        self.session.add(generation_for_fuel_type)
+        for gen in generation_for_fuel_type:
+            self.session.add(gen)
         await self.session.commit()
 
     async def get_generation(

@@ -139,5 +139,5 @@ export EIA_API_KEY=DEF
 To seed this data you need to run the following command:
 
 ```
-poetry run python load_data/seed.py
+docker-compose exec api python power_systems_data_api_demonstrator/seed/seed.py
 ```

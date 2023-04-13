@@ -74,8 +74,8 @@ async def seed_grid_nodes(
                     value_name="value",
                 ).reset_index()
 
-                for i, row in df_generation_rows.iterrows():
-                    await grid_node_service.add_generation_for_fuel_type(
+                await grid_node_service.add_generation_for_fuel_type(
+                    [
                         GenerationForFuelTypeModel(
                             datetime=pd.to_datetime(row["datetime"]),
                             value=row["value"],
@@ -83,7 +83,9 @@ async def seed_grid_nodes(
                             unit=row["unit"],
                             grid_node_id=grid_node_id,
                         )
-                    )
+                        for i, row in df_generation_rows.iterrows()
+                    ]
+                )
 
         except FileNotFoundError:
             logger.error(f"Could not find generation.csv for {source}")
