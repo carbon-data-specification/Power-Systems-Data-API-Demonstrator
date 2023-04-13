@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag power-systems-data-api-demonstrator:$(date +%s)
+        run: docker build . --file Dockerfile --tag power-systems-data-api-demonstrator:${{ github.sha }}
 
       - name: Run the tests
-        run: docker run power-systems-data-api-demonstrator:$(date +%s) pytest -vv .
+        run: docker run power-systems-data-api-demonstrator:${{ github.sha }} pytest -vv .
