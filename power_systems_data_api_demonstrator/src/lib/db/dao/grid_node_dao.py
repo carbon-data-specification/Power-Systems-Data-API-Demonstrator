@@ -1,4 +1,6 @@
-from typing import List, Optional
+# SPDX-License-Identifier: Apache-2.0
+
+from typing import List
 
 from fastapi import Depends
 from sqlalchemy import delete, select
@@ -46,9 +48,7 @@ class GridNodeDAO:
             self.session.add(gen)
         await self.session.commit()
 
-    async def get_all_grid_nodes(
-        self, limit: Optional[int] = None
-    ) -> List[GridNodeModel]:
+    async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """
         Get all grid_node models with limit/offset pagination.
         :param limit: limit of dummies.

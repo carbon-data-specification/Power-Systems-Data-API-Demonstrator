@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 import uvicorn
 
 from power_systems_data_api_demonstrator.settings import settings

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 from fastapi.routing import APIRouter
 
 from power_systems_data_api_demonstrator.src.api import docs, grid_node, monitoring

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncSession
