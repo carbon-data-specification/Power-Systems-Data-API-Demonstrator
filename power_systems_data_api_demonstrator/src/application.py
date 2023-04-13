@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from power_systems_data_api_demonstrator.src.api import docs, grid_node
+from power_systems_data_api_demonstrator.src.api.router import api_router
 from power_systems_data_api_demonstrator.src.lifetime import (
     register_shutdown_event,
     register_startup_event,
@@ -35,9 +35,8 @@ def get_app() -> FastAPI:
     register_startup_event(app)
     register_shutdown_event(app)
 
-    app.include_router(docs.router)
     # Main router for the API.
-    app.include_router(grid_node.router, tags=["gridNode"])
+    app.include_router(api_router)
     # Adds static directory.
     # This directory is used to access swagger files.
     app.mount(
