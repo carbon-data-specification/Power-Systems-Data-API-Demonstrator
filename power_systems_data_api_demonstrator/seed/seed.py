@@ -15,6 +15,9 @@ from power_systems_data_api_demonstrator.src.lib.config import GRID_NODES
 from power_systems_data_api_demonstrator.src.lib.db.base import Base
 from power_systems_data_api_demonstrator.src.lib.db.dao.fuel_type_dao import FuelTypeDAO
 from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import GridNodeDAO
+from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
+    ExchangeModel,
+)
 from power_systems_data_api_demonstrator.src.lib.db.models.fuel_types import (
     FuelTypeModel,
 )
@@ -97,6 +100,34 @@ async def seed_generation(session: AsyncSession) -> None:
     pass
 
 
+async def seed_exchanges(
+    session: AsyncSession, /, *, grid_node_sources: list[str]
+) -> None:
+    grid_node_service = GridNodeDAO(session)
+    for source in grid_node_sources:
+        try:
+            df_exchanges = pd.read_csv(
+                os.path.join(DATA_DIR, source, "imports_exports.csv")
+            )
+
+            await grid_node_service.add_exchanges(
+                [
+                    ExchangeModel(
+                        datetime=pd.to_datetime(row["datetime"]),
+                        value=row["value"],
+                        unit=row["unit"],
+                        grid_node_from_id=row["Grid Node From"],
+                        grid_node_to_id=row["Grid Node To"],
+                    )
+                    for i, row in df_exchanges.iterrows()
+                ]
+            )
+
+        except FileNotFoundError:
+            logger.error(f"Could not find imports_exports.csv for {source}")
+            continue
+
+
 def make_sync(func: Callable[P, Awaitable[T]]) -> Callable[P, T]:
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> T:
@@ -114,6 +145,7 @@ async def seed_data(
     await seed_fuel_types(session)
     await seed_grid_nodes(session, grid_node_sources=grid_node_sources)
     await seed_generation(session)
+    await seed_exchanges(session, grid_node_sources=grid_node_sources)
 
 
 @click.command
