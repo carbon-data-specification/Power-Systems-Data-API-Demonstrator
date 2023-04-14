@@ -3,6 +3,7 @@ import functools
 import logging
 import os
 from collections.abc import Awaitable, Callable
+from pathlib import Path
 from typing import Any, ParamSpec, TypeVar
 
 import click
@@ -33,7 +34,7 @@ P = ParamSpec("P")
 
 logger = logging.getLogger(__name__)
 
-DATA_DIR = "/app/data"
+DATA_DIR = Path(__file__).parent.parent.parent / "data"
 AVAILABLE_DATA_SOURCES = os.listdir(DATA_DIR)
 
 
@@ -58,7 +59,13 @@ async def seed_grid_nodes(
             df_generation = pd.read_csv(
                 os.path.join(DATA_DIR, source, "generation.csv")
             )
-            for grid_node_id in df_generation["Grid Node"].unique():
+            df_exchanges = pd.read_csv(
+                os.path.join(DATA_DIR, source, "imports_exports.csv")
+            )
+            all_grid_node_ids = set(df_exchanges["Grid Node To"].unique()).union(
+                set(df_exchanges["Grid Node From"].unique())
+            )
+            for grid_node_id in all_grid_node_ids:
                 id_ = grid_node_id.upper()
                 assert id_ in [grid_node.get("id") for grid_node in GRID_NODES]
                 g_n = get_grid_node_by_id(id_)
@@ -67,6 +74,7 @@ async def seed_grid_nodes(
                         id=g_n.get("id"), name=g_n.get("name"), type=g_n.get("type")
                     )
                 )
+            for grid_node_id in df_generation["Grid Node"].unique():
                 df_this_nodes_generation = df_generation[
                     df_generation["Grid Node"] == grid_node_id
                 ]
@@ -114,7 +122,7 @@ async def seed_exchanges(
                 [
                     ExchangeModel(
                         datetime=pd.to_datetime(row["datetime"]),
-                        value=row["value"],
+                        value=row["Value"],
                         unit=row["unit"],
                         grid_node_from_id=row["Grid Node From"],
                         grid_node_to_id=row["Grid Node To"],
@@ -140,7 +148,13 @@ async def seed_data(
     session: AsyncSession, grid_node_sources: list[str] | None = None
 ) -> None:
     grid_node_sources = grid_node_sources or sorted(
-        set([grid_node.get("source") for grid_node in GRID_NODES])
+        set(
+            [
+                grid_node.get("source")
+                for grid_node in GRID_NODES
+                if grid_node.get("source")
+            ]
+        )
     )
     await seed_fuel_types(session)
     await seed_grid_nodes(session, grid_node_sources=grid_node_sources)
