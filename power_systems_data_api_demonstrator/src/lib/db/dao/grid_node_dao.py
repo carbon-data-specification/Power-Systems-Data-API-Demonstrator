@@ -7,8 +7,10 @@ from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
+    GenerationForFuelTypeModel,
+)
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
-    GenerationModel,
     GridNodeModel,
 )
 
@@ -25,7 +27,7 @@ class GridNodeDAO:
         self.session = session
 
     async def create_grid_node(
-        self, grid_node_model: GridNodeModel, overwrite_if_exists=True
+        self, grid_node_model: GridNodeModel, overwrite_if_exists: bool = True
     ) -> None:
         """
         Add single grid_node to session.
@@ -37,16 +39,30 @@ class GridNodeDAO:
         self.session.add(grid_node_model)
         await self.session.commit()
 
-    async def add_generation(
-        self, generation: list[GenerationModel], /, *, grid_node_id: int
+    async def add_generation_for_fuel_type(
+        self,
+        generation_for_fuel_type: list[GenerationForFuelTypeModel],
     ) -> None:
         """
-        Add single grid_node to session.
-        :param name: name of a grid_node.
+        Add single generation_per_fuel_type.
         """
-        for gen in generation:
+        for gen in generation_for_fuel_type:
             self.session.add(gen)
         await self.session.commit()
+
+    async def get_generation(
+        self, grid_node_id: str
+    ) -> list[GenerationForFuelTypeModel]:
+        """
+        Add single generation_per_fuel_type.
+        """
+        raw_generation = await self.session.execute(
+            select(GenerationForFuelTypeModel).filter(
+                GenerationForFuelTypeModel.grid_node_id == grid_node_id
+            ),
+        )
+        generation_for_fuel_types = list(raw_generation.scalars().fetchall())
+        return generation_for_fuel_types
 
     async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """
@@ -55,13 +71,13 @@ class GridNodeDAO:
         :param offset: offset of dummies.
         :return: stream of dummies.
         """
-        raw_dummies = await self.session.execute(
+        raw_grid_nodes = await self.session.execute(
             select(GridNodeModel).limit(limit),
         )
 
-        return list(raw_dummies.scalars().fetchall())
+        return list(raw_grid_nodes.scalars().fetchall())
 
-    async def get_by_id(self, id: int) -> GridNodeModel:
+    async def get_by_id(self, id: str) -> GridNodeModel:
         """
         Get specific grid_node model.
         :param name: name of grid_node instance.
@@ -76,5 +92,5 @@ class GridNodeDAO:
 
     async def delete_grid_node(self, id: str) -> None:
         delete_stmt = delete(GridNodeModel).filter_by(id=id)
-        self.session.execute(delete_stmt)
+        await self.session.execute(delete_stmt)
         await self.session.commit()

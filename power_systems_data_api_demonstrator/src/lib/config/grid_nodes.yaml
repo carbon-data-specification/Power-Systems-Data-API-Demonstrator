@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+
+version: 0.0
+nodes:
+  - name: California ISO
+    id: US-CAL-ISO
+    source: EIA
+    type: SYSTEM
+  - name: Spain
+    id: ES
+    source: ENTSO-E
+    type: SYSTEM
+  - name: Great Britain
+    id: GB
+    source: ELEXON
+    type: SYSTEM
