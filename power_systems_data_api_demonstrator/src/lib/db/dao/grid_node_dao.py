@@ -7,6 +7,9 @@ from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
+    ExchangeModel,
+)
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
     GenerationForFuelTypeModel,
 )
@@ -48,6 +51,14 @@ class GridNodeDAO:
         """
         for gen in generation_for_fuel_type:
             self.session.add(gen)
+        await self.session.commit()
+
+    async def add_exchanges(self, exchanges: list[ExchangeModel]) -> None:
+        """
+        Add single generation_per_fuel_type.
+        """
+        for exchange in exchanges:
+            self.session.add(exchange)
         await self.session.commit()
 
     async def get_generation(
