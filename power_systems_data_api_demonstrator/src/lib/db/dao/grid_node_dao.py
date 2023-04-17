@@ -62,6 +62,17 @@ class GridNodeDAO:
             self.session.add(exchange)
         await self.session.commit()
 
+    async def add_capacities_for_fuel_type(
+        self,
+        capacities_for_fuel_type: list[CapacityForFuelTypeModel],
+    ) -> None:
+        """
+        Add single generation_per_fuel_type.
+        """
+        for capacity in capacities_for_fuel_type:
+            self.session.add(capacity)
+        await self.session.commit()
+
     async def get_generation(
         self, grid_node_id: str
     ) -> list[GenerationForFuelTypeModel]:
