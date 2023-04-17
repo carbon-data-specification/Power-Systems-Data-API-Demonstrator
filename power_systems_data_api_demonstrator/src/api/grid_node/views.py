@@ -1,12 +1,14 @@
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List
+from typing import List, cast
 
 from fastapi import APIRouter, HTTPException
 from fastapi.param_functions import Depends
 
 from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
+    CapacityDTO,
     ExchangeDTO,
+    FuelTypes,
     GenerationDTO,
     GridNodeModelDTO,
 )
@@ -56,6 +58,42 @@ async def describe_grid_nodes(
     """
     try:
         return await grid_node_dao.get_by_id(id)
+    except GridNodeNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+
+
+@router.get("/capacity/{id}", response_model=list[CapacityDTO])
+async def get_capacity_grid_node(
+    id: str,
+    grid_node_dao: GridNodeDAO = Depends(),
+) -> list[CapacityDTO]:
+    """
+    Retrieve generation data for a single grid node.
+
+    :param id: id of a specific grid node.
+    :param dummy_dao: DAO for grid nodes.
+    :return: a single grid node with the given id.
+    """
+    try:
+        raw_capacities = await grid_node_dao.get_capacity(id)
+        capacity = []
+        # Filter by datetime
+        dts = set([cap.datetime for cap in raw_capacities])
+        # This is error prone if we don't have all fuel types for all datetimes
+        # Or with different units
+        for dt in dts:
+            capacities = [cap for cap in raw_capacities if cap.datetime == dt]
+            capacity.append(
+                CapacityDTO(
+                    grid_node_id=id,
+                    datetime=dt,
+                    generation_capacity={
+                        cast(FuelTypes, cap.fuel_type): cap.value for cap in capacities
+                    },
+                    unit=capacities[0].unit,
+                )
+            )
+        return capacity
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
