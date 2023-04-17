@@ -1,6 +1,6 @@
-# power_systems_data_api_demonstrator
+# Power Systems Data API Demonstrator
 
-This project was generated using fastapi_template.
+This demonstrator is available [here](ttps://carbon-data-specification.onrender.com).
 
 ## Poetry
 
