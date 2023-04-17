@@ -32,7 +32,7 @@ async def test_grid_nodes(fastapi_client: AsyncClient) -> None:
     assert response.json()
 
 
-@pytest.mark.parametrize("grid_node_id", [("US-CAL-ISO"), ("GB"), ("ES")])
+@pytest.mark.parametrize("grid_node_id", [("US-WECC-CISO"), ("UK-GB"), ("ES")])
 async def test_generation(fastapi_client: AsyncClient, grid_node_id: str) -> None:
     response = await fastapi_client.get(
         url=f"/gridNode/generation/{grid_node_id}",

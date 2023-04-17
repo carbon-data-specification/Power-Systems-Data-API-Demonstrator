@@ -7,6 +7,9 @@ from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
+    ExchangeModel,
+)
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
     GenerationForFuelTypeModel,
 )
@@ -50,6 +53,14 @@ class GridNodeDAO:
             self.session.add(gen)
         await self.session.commit()
 
+    async def add_exchanges(self, exchanges: list[ExchangeModel]) -> None:
+        """
+        Add single generation_per_fuel_type.
+        """
+        for exchange in exchanges:
+            self.session.add(exchange)
+        await self.session.commit()
+
     async def get_generation(
         self, grid_node_id: str
     ) -> list[GenerationForFuelTypeModel]:
@@ -63,6 +74,62 @@ class GridNodeDAO:
         )
         generation_for_fuel_types = list(raw_generation.scalars().fetchall())
         return generation_for_fuel_types
+
+    async def get_imports(self, grid_node_id: str) -> list[ExchangeModel]:
+        """
+        Get imports to a grid node.
+        """
+        raw_imports = await self.session.execute(
+            select(ExchangeModel).filter(
+                ExchangeModel.grid_node_to_id == grid_node_id, ExchangeModel.value > 0
+            ),
+        )
+        imports = list(raw_imports.scalars().fetchall())
+        raw_exports = await self.session.execute(
+            select(ExchangeModel).filter(
+                ExchangeModel.grid_node_from_id == grid_node_id, ExchangeModel.value < 0
+            ),
+        )
+        exports = list(raw_exports.scalars().fetchall())
+        exports = [
+            ExchangeModel(
+                grid_node_from_id=exp.grid_node_to_id,
+                grid_node_to_id=exp.grid_node_from_id,
+                value=-1 * exp.value,
+                datetime=exp.datetime,
+                unit=exp.unit,
+            )
+            for exp in exports
+        ]
+        return imports + exports
+
+    async def get_exports(self, grid_node_id: str) -> list[ExchangeModel]:
+        """
+        Get exports from a grid node.
+        """
+        raw_imports = await self.session.execute(
+            select(ExchangeModel).filter(
+                ExchangeModel.grid_node_to_id == grid_node_id, ExchangeModel.value < 0
+            ),
+        )
+        imports = list(raw_imports.scalars().fetchall())
+        imports = [
+            ExchangeModel(
+                grid_node_from_id=imp.grid_node_to_id,
+                grid_node_to_id=imp.grid_node_from_id,
+                value=-1 * imp.value,
+                datetime=imp.datetime,
+                unit=imp.unit,
+            )
+            for imp in imports
+        ]
+        raw_exports = await self.session.execute(
+            select(ExchangeModel).filter(
+                ExchangeModel.grid_node_from_id == grid_node_id, ExchangeModel.value > 0
+            ),
+        )
+        exports = list(raw_exports.scalars().fetchall())
+        return imports + exports
 
     async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """

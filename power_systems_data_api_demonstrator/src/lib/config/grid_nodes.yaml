@@ -2,15 +2,83 @@
 
 version: 0.0
 nodes:
+  - name: Arizona Public Service Company
+    id: US-WECC-AZPS
+    source: EIA
+    type: SYSTEM
+  - name: Balancing Authority of Northern California
+    id: US-WECC-BANC
+    source: EIA
+    type: SYSTEM
+  - name: Belgium
+    id: BE
+    source: ENTSO-E
+    type: SYSTEM
+  - name: Bonneville Power Administration
+    id: US-WECC-BPAT
+    source: EIA
+    type: SYSTEM
   - name: California ISO
-    id: US-CAL-ISO
+    id: US-WECC-CISO
+    source: EIA
+    type: SYSTEM
+  - name: France
+    id: FR
+    source: ENTSO-E
+    type: SYSTEM
+  - name: Great Britain
+    id: UK-GB
+    source: ELEXON
+    type: SYSTEM
+  - name: Imperial Irrigation District
+    id: US-WECC-IID
+    source: EIA
+    type: SYSTEM
+  - name: Ireland
+    id: IE
+    source: null
+    type: SYSTEM
+  - name: Los Angeles Department of Water and Power
+    id: US-WECC-LDWP
+    source: EIA
+    type: SYSTEM
+  - name: Mexico
+    id: MX
+    source: null
+    type: SYSTEM
+  - name: Netherlands
+    id: NL
+    source: ENTSO-E
+    type: SYSTEM
+  - name: Nevada Power Company
+    id: US-WECC-NEVP
+    source: EIA
+    type: SYSTEM
+  - name: Northern Ireland
+    id: UK-NIR
+    source: null
+    type: SYSTEM
+  - name: Norway
+    id: "NO"
+    source: null
+    type: SYSTEM
+  - name: PacifiCorp West
+    id: US-WECC-PACW
+    source: EIA
+    type: SYSTEM
+  - name: Salt River Project Agricultural Improvement and Power District
+    id: US-WECC-SRP
     source: EIA
     type: SYSTEM
   - name: Spain
     id: ES
     source: ENTSO-E
     type: SYSTEM
-  - name: Great Britain
-    id: GB
-    source: ELEXON
+  - name: Turlock Irrigation District
+    id: US-WECC-TIDC
+    source: EIA
+    type: SYSTEM
+  - name: Western Area Power Administration - Desert Southwest Region
+    id: US-WECC-WALC
+    source: EIA
     type: SYSTEM
