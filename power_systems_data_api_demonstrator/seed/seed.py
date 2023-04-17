@@ -64,6 +64,22 @@ async def seed_grid_nodes(
                         id=g_n.get("id"), name=g_n.get("name"), type=g_n.get("type")
                     )
                 )
+
+        except FileNotFoundError:
+            logger.error(f"Could not find generation.csv for {source}")
+            continue
+
+
+async def seed_generation(
+    session: AsyncSession, /, *, grid_node_sources: list[str]
+) -> None:
+    grid_node_service = GridNodeDAO(session)
+    for source in grid_node_sources:
+        try:
+            df_generation = pd.read_csv(
+                os.path.join(DATA_DIR, source, "generation.csv")
+            )
+            for grid_node_id in df_generation["Grid Node"].unique():
                 df_this_nodes_generation = df_generation[
                     df_generation["Grid Node"] == grid_node_id
                 ]
@@ -92,11 +108,6 @@ async def seed_grid_nodes(
             continue
 
 
-async def seed_generation(session: AsyncSession) -> None:
-    # TODO
-    pass
-
-
 def make_sync(func: Callable[P, Awaitable[T]]) -> Callable[P, T]:
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> T:
@@ -113,7 +124,7 @@ async def seed_data(
     )
     await seed_fuel_types(session)
     await seed_grid_nodes(session, grid_node_sources=grid_node_sources)
-    await seed_generation(session)
+    await seed_generation(session, grid_node_sources=grid_node_sources)
 
 
 @click.command
