@@ -60,3 +60,18 @@ class ExchangeDTO(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class DayAheadPriceDTO(BaseModel):
+    """
+    DTO for day ahead price models.
+    It returned when accessing dummy models from the API.
+    """
+
+    grid_node_id: str
+    datetime: datetime
+    value: float
+    currency: str
+
+    class Config:
+        orm_mode = True

@@ -16,6 +16,9 @@ from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
     GridNodeModel,
 )
+from power_systems_data_api_demonstrator.src.lib.db.models.prices import (
+    DayAheadPriceModel,
+)
 
 
 class GridNodeNotFoundError(ValueError):
@@ -70,6 +73,18 @@ class GridNodeDAO:
         raw_generation = await self.session.execute(
             select(GenerationForFuelTypeModel).filter(
                 GenerationForFuelTypeModel.grid_node_id == grid_node_id
+            ),
+        )
+        generation_for_fuel_types = list(raw_generation.scalars().fetchall())
+        return generation_for_fuel_types
+
+    async def get_day_ahead_price(self, grid_node_id: str) -> list[DayAheadPriceModel]:
+        """
+        Add single generation_per_fuel_type.
+        """
+        raw_generation = await self.session.execute(
+            select(DayAheadPriceModel).filter(
+                DayAheadPriceModel.grid_node_id == grid_node_id
             ),
         )
         generation_for_fuel_types = list(raw_generation.scalars().fetchall())
