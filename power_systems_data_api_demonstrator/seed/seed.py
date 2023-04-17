@@ -23,6 +23,7 @@ from power_systems_data_api_demonstrator.src.lib.db.models.fuel_types import (
     FuelTypeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
+    CapacityForFuelTypeModel,
     GenerationForFuelTypeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
@@ -145,6 +146,34 @@ async def seed_exchanges(
             continue
 
 
+async def seed_capacity(
+    session: AsyncSession, /, *, grid_node_sources: list[str]
+) -> None:
+    grid_node_service = GridNodeDAO(session)
+    for source in grid_node_sources:
+        try:
+            df_capacity = pd.read_csv(
+                os.path.join(DATA_DIR, source, "installed_capacity.csv")
+            )
+
+            await grid_node_service.add_capacities_for_fuel_type(
+                [
+                    CapacityForFuelTypeModel(
+                        grid_node_id=row["Grid Node"],
+                        datetime=pd.to_datetime(row["datetime"]),
+                        value=row["Value"],
+                        unit=row["unit"],
+                        fuel_type=row["Fuel Type"],
+                    )
+                    for i, row in df_capacity.iterrows()
+                ]
+            )
+
+        except FileNotFoundError:
+            logger.error(f"Could not find imports_exports.csv for {source}")
+            continue
+
+
 def make_sync(func: Callable[P, Awaitable[T]]) -> Callable[P, T]:
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> T:
@@ -169,6 +198,7 @@ async def seed_data(
     await seed_grid_nodes(session, grid_node_sources=grid_node_sources)
     await seed_generation(session, grid_node_sources=grid_node_sources)
     await seed_exchanges(session, grid_node_sources=grid_node_sources)
+    await seed_capacity(session, grid_node_sources=grid_node_sources)
 
 
 @click.command

@@ -11,6 +11,7 @@ from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
     ExchangeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
+    CapacityForFuelTypeModel,
     GenerationForFuelTypeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
@@ -62,6 +63,17 @@ class GridNodeDAO:
         """
         for exchange in exchanges:
             self.session.add(exchange)
+        await self.session.commit()
+
+    async def add_capacities_for_fuel_type(
+        self,
+        capacities_for_fuel_type: list[CapacityForFuelTypeModel],
+    ) -> None:
+        """
+        Add single generation_per_fuel_type.
+        """
+        for capacity in capacities_for_fuel_type:
+            self.session.add(capacity)
         await self.session.commit()
 
     async def get_generation(
@@ -145,6 +157,18 @@ class GridNodeDAO:
         )
         exports = list(raw_exports.scalars().fetchall())
         return imports + exports
+
+    async def get_capacity(self, grid_node_id: str) -> list[CapacityForFuelTypeModel]:
+        """
+        Get capacity of a grid node.
+        """
+        raw_capacity = await self.session.execute(
+            select(CapacityForFuelTypeModel).filter(
+                CapacityForFuelTypeModel.grid_node_id == grid_node_id
+            ),
+        )
+        capacity = list(raw_capacity.scalars().fetchall())
+        return capacity
 
     async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """

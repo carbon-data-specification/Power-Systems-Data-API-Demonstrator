@@ -65,3 +65,21 @@ class GenerationForFuelTypeModel(Base):
     fuel_type: Mapped[str] = mapped_column(
         ForeignKey("fuel_type.name"), primary_key=True
     )
+
+
+class CapacityForFuelTypeModel(Base):
+    """Model of grid node generation for a given fuel type."""
+
+    __tablename__ = "capacity_per_fuel_type"
+
+    grid_node_id: Mapped[str] = mapped_column(
+        ForeignKey("grid_node.id"), primary_key=True
+    )
+    datetime: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), primary_key=True
+    )
+    value: Mapped[float]
+    unit: Mapped[str]
+    fuel_type: Mapped[str] = mapped_column(
+        ForeignKey("fuel_type.name"), primary_key=True
+    )

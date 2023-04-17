@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from enum import Enum
+from typing import Dict
 
 from pydantic import BaseModel
 
@@ -75,3 +76,35 @@ class DayAheadPriceDTO(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class CapacityForFuelTypeDTO(BaseModel):
+    """
+    DTO for capacity models.
+    It returned when accessing dummy models from the API.
+    """
+
+    grid_node_id: str
+    datetime: datetime
+    value: float
+    fuel_type: FuelTypes
+    unit: str
+
+    class Config:
+        orm_mode = True
+
+
+class CapacityDTO(BaseModel):
+    """
+    DTO for capacity models.
+    It returned when accessing dummy models from the API.
+    """
+
+    grid_node_id: str
+    datetime: datetime
+    generation_capacity: Dict[FuelTypes, float]
+    unit: str
+
+    @property
+    def total_generation_capacity(self) -> float:
+        return sum(self.generation_capacity.values())
