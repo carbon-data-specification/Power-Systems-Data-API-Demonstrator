@@ -39,3 +39,11 @@ async def test_generation(fastapi_client: AsyncClient, grid_node_id: str) -> Non
     )
     assert response.is_success
     assert response.json()
+
+
+@pytest.mark.parametrize("grid_node_id", [("US-WECC-CISO"), ("UK-GB"), ("ES")])
+async def test_demand(fastapi_client: AsyncClient, grid_node_id: str) -> None:
+    response = await fastapi_client.get(
+        url=f"/gridNode/demand/{grid_node_id}",
+    )
+    assert response.is_success

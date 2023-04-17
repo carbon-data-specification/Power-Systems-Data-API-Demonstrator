@@ -7,6 +7,7 @@ from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.models.demand import DemandModel
 from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
     ExchangeModel,
 )
@@ -60,6 +61,14 @@ class GridNodeDAO:
         """
         for exchange in exchanges:
             self.session.add(exchange)
+        await self.session.commit()
+
+    async def add_demand(self, demand: list[DemandModel]) -> None:
+        """
+        Add single demand.
+        """
+        for demand_entry in demand:
+            self.session.add(demand_entry)
         await self.session.commit()
 
     async def add_capacities_for_fuel_type(
@@ -154,6 +163,16 @@ class GridNodeDAO:
         )
         capacity = list(raw_capacity.scalars().fetchall())
         return capacity
+
+    async def get_demand(self, grid_node_id: str) -> list[DemandModel]:
+        """
+        Get demand of a grid node.
+        """
+        raw_demand = await self.session.execute(
+            select(DemandModel).filter(DemandModel.grid_node_id == grid_node_id),
+        )
+        demand = list(raw_demand.scalars().fetchall())
+        return demand
 
     async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """
