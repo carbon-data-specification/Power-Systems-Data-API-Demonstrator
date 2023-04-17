@@ -10,6 +10,10 @@ nodes:
     id: US-WECC-BANC
     source: EIA
     type: SYSTEM
+  - name: Belgium
+    id: BE
+    source: ENTSO-E
+    type: SYSTEM
   - name: Bonneville Power Administration
     id: US-WECC-BPAT
     source: EIA
@@ -23,12 +27,16 @@ nodes:
     source: ENTSO-E
     type: SYSTEM
   - name: Great Britain
-    id: GB
+    id: UK-GB
     source: ELEXON
     type: SYSTEM
   - name: Imperial Irrigation District
     id: US-WECC-IID
     source: EIA
+    type: SYSTEM
+  - name: Ireland
+    id: IE
+    source: null
     type: SYSTEM
   - name: Los Angeles Department of Water and Power
     id: US-WECC-LDWP
@@ -38,9 +46,21 @@ nodes:
     id: MX
     source: null
     type: SYSTEM
+  - name: Netherlands
+    id: NL
+    source: ENTSO-E
+    type: SYSTEM
   - name: Nevada Power Company
     id: US-WECC-NEVP
     source: EIA
+    type: SYSTEM
+  - name: Northern Ireland
+    id: UK-NIR
+    source: null
+    type: SYSTEM
+  - name: Norway
+    id: "NO"
+    source: null
     type: SYSTEM
   - name: PacifiCorp West
     id: US-WECC-PACW

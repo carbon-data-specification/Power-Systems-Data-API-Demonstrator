@@ -64,7 +64,9 @@ async def seed_grid_nodes(
             )
             for grid_node_id in all_grid_node_ids:
                 id_ = grid_node_id.upper()
-                assert id_ in [grid_node.get("id") for grid_node in GRID_NODES]
+                assert id_ in [
+                    grid_node.get("id") for grid_node in GRID_NODES
+                ], f"{id_} not in GRID_NODES"
                 g_n = get_grid_node_by_id(id_)
                 await grid_node_service.create_grid_node(
                     GridNodeModel(
