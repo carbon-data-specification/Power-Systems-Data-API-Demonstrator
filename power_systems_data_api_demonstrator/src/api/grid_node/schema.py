@@ -44,3 +44,19 @@ class GenerationDTO(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ExchangeDTO(BaseModel):
+    """
+    DTO for exchange models.
+    It returned when accessing dummy models from the API.
+    """
+
+    grid_node_from_id: str
+    grid_node_to_id: str
+    datetime: datetime
+    value: float
+    unit: str
+
+    class Config:
+        orm_mode = True

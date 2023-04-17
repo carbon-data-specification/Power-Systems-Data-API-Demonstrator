@@ -6,12 +6,16 @@ from fastapi import APIRouter, HTTPException
 from fastapi.param_functions import Depends
 
 from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
+    ExchangeDTO,
     GenerationDTO,
     GridNodeModelDTO,
 )
 from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import (
     GridNodeDAO,
     GridNodeNotFoundError,
+)
+from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
+    ExchangeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
     GenerationForFuelTypeModel,
@@ -90,5 +94,41 @@ async def get_demand_grid_node(
     """
     try:
         return await grid_node_dao.get_by_id(id)
+    except GridNodeNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+
+
+@router.get("/imports/{id}", response_model=list[ExchangeDTO])
+async def get_imports_grid_node(
+    id: str,
+    grid_node_dao: GridNodeDAO = Depends(),
+) -> list[ExchangeModel]:
+    """
+    Retrieve generation data for a single grid node.
+
+    :param id: id of a specific grid node.
+    :param dummy_dao: DAO for grid nodes.
+    :return: a single grid node with the given id.
+    """
+    try:
+        return await grid_node_dao.get_imports(id)
+    except GridNodeNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+
+
+@router.get("/exports/{id}", response_model=list[ExchangeDTO])
+async def get_exports_grid_node(
+    id: str,
+    grid_node_dao: GridNodeDAO = Depends(),
+) -> list[ExchangeModel]:
+    """
+    Retrieve generation data for a single grid node.
+
+    :param id: id of a specific grid node.
+    :param dummy_dao: DAO for grid nodes.
+    :return: a single grid node with the given id.
+    """
+    try:
+        return await grid_node_dao.get_exports(id)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
