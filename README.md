@@ -1,6 +1,6 @@
 # Power Systems Data API Demonstrator
 
-This demonstrator is available [here](ttps://carbon-data-specification.onrender.com).
+This demonstrator is available [here](https://carbon-data-specification.onrender.com).
 
 ## Poetry
 
