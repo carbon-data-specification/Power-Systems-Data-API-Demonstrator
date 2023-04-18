@@ -139,7 +139,7 @@ async def get_demand_grid_node(
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
-@router.get("/day_ahead_price/{id}", response_model=List[DayAheadPriceDTO])
+@router.get("/dayAheadPrice/{id}", response_model=List[DayAheadPriceDTO])
 async def get_day_ahead_price_grid_node(
     id: str,
     grid_node_dao: GridNodeDAO = Depends(),
