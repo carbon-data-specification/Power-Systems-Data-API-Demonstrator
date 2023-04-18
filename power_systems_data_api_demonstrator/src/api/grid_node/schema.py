@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import FuelTypes
 
 
-class GridNodeType(str, Enum):
+class GridTopologyLevel(str, Enum):
     GENERATION_UNIT = "GENERATION_UNIT"
     POWER_PLANT = "POWER_PLANT"
     SUBSTATION = "SUBSTATION"
@@ -25,7 +25,7 @@ class GridNodeModelDTO(BaseModel):
 
     id: str
     name: str
-    type: GridNodeType
+    type: GridTopologyLevel
 
     class Config:
         orm_mode = True
