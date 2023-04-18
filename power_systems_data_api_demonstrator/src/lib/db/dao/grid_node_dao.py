@@ -10,6 +10,7 @@ from sqlalchemy import delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
+from power_systems_data_api_demonstrator.src.lib.db.models.demand import DemandModel
 from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
     ExchangeModel,
 )
@@ -20,6 +21,9 @@ from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
     GridNodeModel,
+)
+from power_systems_data_api_demonstrator.src.lib.db.models.prices import (
+    DayAheadPriceModel,
 )
 
 
@@ -86,6 +90,14 @@ class GridNodeDAO:
             self.session.add(exchange)
         await self.session.commit()
 
+    async def add_demand(self, demand: list[DemandModel]) -> None:
+        """
+        Add single demand.
+        """
+        for demand_entry in demand:
+            self.session.add(demand_entry)
+        await self.session.commit()
+
     async def add_capacities_for_fuel_type(
         self,
         capacities_for_fuel_type: list[CapacityForFuelTypeModel],
@@ -126,6 +138,18 @@ class GridNodeDAO:
             )
         )
         return [GenerationDTO.from_orm(row) for row in raw_generation.all()]
+
+    async def get_day_ahead_price(self, grid_node_id: str) -> list[DayAheadPriceModel]:
+        """
+        Add single generation_per_fuel_type.
+        """
+        raw_generation = await self.session.execute(
+            select(DayAheadPriceModel).filter(
+                DayAheadPriceModel.grid_node_id == grid_node_id
+            ),
+        )
+        generation_for_fuel_types = list(raw_generation.scalars().fetchall())
+        return generation_for_fuel_types
 
     async def get_imports(self, grid_node_id: str) -> list[ExchangeModel]:
         """
@@ -194,6 +218,16 @@ class GridNodeDAO:
         )
         capacity = list(raw_capacity.scalars().fetchall())
         return capacity
+
+    async def get_demand(self, grid_node_id: str) -> list[DemandModel]:
+        """
+        Get demand of a grid node.
+        """
+        raw_demand = await self.session.execute(
+            select(DemandModel).filter(DemandModel.grid_node_id == grid_node_id),
+        )
+        demand = list(raw_demand.scalars().fetchall())
+        return demand
 
     async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
         """
