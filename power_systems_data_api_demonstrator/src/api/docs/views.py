@@ -13,7 +13,7 @@ from power_systems_data_api_demonstrator.static.docs.utils import get_app_title
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/", include_in_schema=False)
 async def redirect() -> RedirectResponse:
     return RedirectResponse(url="/docs")
 

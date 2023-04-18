@@ -13,7 +13,7 @@ async def test_health(fastapi_client: AsyncClient) -> None:
     :param client: clien for the app.
     """
     response = await fastapi_client.get(
-        url="/health",
+        url="/monitoring/health",
     )
     assert response.is_success
 
@@ -26,7 +26,7 @@ async def test_grid_nodes(fastapi_client: AsyncClient) -> None:
     :param client: clien for the app.
     """
     response = await fastapi_client.get(
-        url="/gridNode/list",
+        url="/api/list",
     )
     assert response.is_success
     assert response.json()
@@ -35,7 +35,7 @@ async def test_grid_nodes(fastapi_client: AsyncClient) -> None:
 @pytest.mark.parametrize("grid_node_id", [("US-WECC-CISO"), ("UK-GB"), ("ES")])
 async def test_generation(fastapi_client: AsyncClient, grid_node_id: str) -> None:
     response = await fastapi_client.get(
-        url=f"/gridNode/generation/{grid_node_id}",
+        url=f"/api/generation/{grid_node_id}",
     )
     assert response.is_success
     assert response.json()
@@ -44,6 +44,6 @@ async def test_generation(fastapi_client: AsyncClient, grid_node_id: str) -> Non
 @pytest.mark.parametrize("grid_node_id", [("US-WECC-CISO"), ("UK-GB"), ("ES")])
 async def test_demand(fastapi_client: AsyncClient, grid_node_id: str) -> None:
     response = await fastapi_client.get(
-        url=f"/gridNode/demand/{grid_node_id}",
+        url=f"/api/demand/{grid_node_id}",
     )
     assert response.is_success
