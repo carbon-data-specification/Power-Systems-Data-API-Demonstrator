@@ -2,6 +2,18 @@
 
 version: 0.0
 nodes:
+  - name: Almaraz Nuclear Power Plant
+    id: ES-ALMARAZ
+    source: ENTSO-E
+    type: POWER_PLANT
+  - name: Almaraz Nuclear Power Plant Unit 1
+    id: ES-ALMARAZ-1
+    source: ENTSO-E
+    type: GENERATION_UNIT
+  - name: Almaraz Nuclear Power Plant Unit 2
+    id: ES-ALMARAZ-2
+    source: ENTSO-E
+    type: GENERATION_UNIT
   - name: Arizona Public Service Company
     id: US-WECC-AZPS
     source: EIA
