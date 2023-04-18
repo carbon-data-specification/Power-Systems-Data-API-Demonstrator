@@ -7,25 +7,14 @@ from fastapi import APIRouter, Request
 router = APIRouter()
 
 
-@router.get("/health")
+@router.get("/health", summary="Perform a health check")
 async def perform_healthcheck() -> Dict[str, str]:
-    """
-    Perform a health check.
-
-    :return: a dictionary with the health status.
-    """
     return {"status": "ok"}
 
 
-@router.get("/echo")
-@router.post("/echo")
+@router.get("/echo", summary="Echo a message")
+@router.post("/echo", summary="Echo a message")
 async def send_echo(request: Request) -> Dict[str, str]:
-    """
-    Echo a message.
-
-    :param message: message to echo.
-    :return: a dictionary with the message.
-    """
     try:
         json_body = await request.json()
     except Exception:
