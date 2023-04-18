@@ -95,6 +95,7 @@ async def seed_grid_nodes(
                                 id=g_n.get("id"),
                                 name=g_n.get("name"),
                                 type=g_n.get("type"),
+                                parent_id=g_n.get("parent_id"),
                             )
                         )
 

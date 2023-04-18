@@ -242,6 +242,19 @@ class GridNodeDAO:
 
         return list(raw_grid_nodes.scalars().fetchall())
 
+    async def get_grid_node_with_parent_id(self, id: str) -> List[GridNodeModel]:
+        """
+        Get all grid_node models with limit/offset pagination.
+        :param limit: limit of dummies.
+        :param offset: offset of dummies.
+        :return: stream of dummies.
+        """
+        raw_grid_nodes = await self.session.execute(
+            select(GridNodeModel).filter(GridNodeModel.parent_id == id),
+        )
+
+        return list(raw_grid_nodes.scalars().fetchall())
+
     async def get_by_id(self, id: str) -> GridNodeModel:
         """
         Get specific grid_node model.

@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Dict
+from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -17,13 +17,15 @@ class GridNodeType(str, Enum):
     SYSTEM = "SYSTEM"
 
 
-class GridNodeModelDTO(BaseModel):
+class GridNodeDTO(BaseModel):
     """
     DTO for grid node models.
     It returned when accessing dummy models from the API.
     """
 
     id: str
+    parent_id: str | None
+    children_ids: List[str] | None
     name: str
     type: GridNodeType
 
