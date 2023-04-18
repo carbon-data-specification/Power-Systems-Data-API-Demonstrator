@@ -1,9 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
+import json
+from datetime import datetime
 from typing import List
 
 from fastapi import Depends
-from sqlalchemy import delete, select
+from pydantic import BaseModel, validator
+from sqlalchemy import delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from power_systems_data_api_demonstrator.src.lib.db.dependencies import get_db_session
@@ -13,6 +16,7 @@ from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
     CapacityForFuelTypeModel,
+    FuelTypes,
     GenerationForFuelTypeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
@@ -26,6 +30,26 @@ from power_systems_data_api_demonstrator.src.lib.db.models.prices import (
 class GridNodeNotFoundError(ValueError):
     def __init__(self, grid_node_id: str):
         super().__init__(f"Could not find a grid node with id: {grid_node_id}")
+
+
+class GenerationDTO(BaseModel):
+    grid_node_id: str
+    datetime: datetime
+    value: float
+    unit: str
+    generation_by_fuel_type: dict[FuelTypes, float]
+
+    @validator("generation_by_fuel_type", pre=True)
+    def convert_to_json(
+        cls: "GenerationDTO", value: str | dict[FuelTypes, float]
+    ) -> dict[FuelTypes, float]:
+        if isinstance(value, str):
+            return json.loads(value)
+        else:
+            return value
+
+    class Config:
+        orm_mode = True
 
 
 class GridNodeDAO:
@@ -85,19 +109,35 @@ class GridNodeDAO:
             self.session.add(capacity)
         await self.session.commit()
 
-    async def get_generation(
-        self, grid_node_id: str
-    ) -> list[GenerationForFuelTypeModel]:
+    async def get_generation(self, grid_node_id: str) -> list[GenerationDTO]:
         """
         Add single generation_per_fuel_type.
         """
-        raw_generation = await self.session.execute(
+        """
+        generation_for_fuel_types_sql = await self.session.execute(
             select(GenerationForFuelTypeModel).filter(
                 GenerationForFuelTypeModel.grid_node_id == grid_node_id
             ),
         )
-        generation_for_fuel_types = list(raw_generation.scalars().fetchall())
-        return generation_for_fuel_types
+        """
+        raw_generation = await self.session.execute(
+            select(
+                GenerationForFuelTypeModel.grid_node_id,
+                GenerationForFuelTypeModel.datetime,
+                func.sum(GenerationForFuelTypeModel.value).label("value"),
+                func.min(GenerationForFuelTypeModel.unit).label("unit"),
+                func.json_group_object(
+                    GenerationForFuelTypeModel.fuel_type,
+                    GenerationForFuelTypeModel.value,
+                ).label("generation_by_fuel_type"),
+            )
+            .filter(GenerationForFuelTypeModel.grid_node_id == grid_node_id)
+            .group_by(
+                GenerationForFuelTypeModel.grid_node_id,
+                GenerationForFuelTypeModel.datetime,
+            )
+        )
+        return [GenerationDTO.from_orm(row) for row in raw_generation.all()]
 
     async def get_day_ahead_price(self, grid_node_id: str) -> list[DayAheadPriceModel]:
         """

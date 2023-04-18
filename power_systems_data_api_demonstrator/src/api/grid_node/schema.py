@@ -31,22 +31,6 @@ class GridNodeModelDTO(BaseModel):
         orm_mode = True
 
 
-class GenerationDTO(BaseModel):
-    """
-    DTO for generation models.
-    It returned when accessing dummy models from the API.
-    """
-
-    grid_node_id: str
-    datetime: datetime
-    value: float
-    unit: str
-    fuel_type: FuelTypes
-
-    class Config:
-        orm_mode = True
-
-
 class ExchangeDTO(BaseModel):
     """
     DTO for exchange models.

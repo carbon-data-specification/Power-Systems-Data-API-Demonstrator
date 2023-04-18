@@ -11,19 +11,16 @@ from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
     DemandDTO,
     ExchangeDTO,
     FuelTypes,
-    GenerationDTO,
     GridNodeModelDTO,
 )
 from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import (
+    GenerationDTO,
     GridNodeDAO,
     GridNodeNotFoundError,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.demand import DemandModel
 from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
     ExchangeModel,
-)
-from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
-    GenerationForFuelTypeModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
     GridNodeModel,
@@ -109,7 +106,7 @@ async def get_capacity_grid_node(
 async def get_generation_grid_node(
     id: str,
     grid_node_dao: GridNodeDAO = Depends(),
-) -> list[GenerationForFuelTypeModel]:
+) -> list[GenerationDTO]:
     """
     Retrieve generation data for a single grid node.
 
