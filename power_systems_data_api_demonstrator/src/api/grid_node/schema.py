@@ -11,7 +11,7 @@ from power_systems_data_api_demonstrator.src.lib.db.models.generation import Fue
 
 class GridNodeType(str, Enum):
     GENERATION_UNIT = "GENERATION_UNIT"
-    PRODUCTION_UNIT = "PRODUCTION_UNIT"
+    POWER_PLANT = "POWER_PLANT"
     SUBSTATION = "SUBSTATION"
     MARKET = "MARKET"
     SYSTEM = "SYSTEM"

@@ -56,6 +56,7 @@ async def seed_grid_nodes(
 ) -> None:
     grid_node_service = GridNodeDAO(session)
     for source in grid_node_sources:
+        # From exchanges
         try:
             df_exchanges = pd.read_csv(
                 os.path.join(DATA_DIR, source, "imports_exports.csv")
@@ -74,6 +75,28 @@ async def seed_grid_nodes(
                         id=g_n.get("id"), name=g_n.get("name"), type=g_n.get("type")
                     )
                 )
+        except FileNotFoundError:
+            logger.error(f"Could not find generation.csv for {source}")
+            continue
+
+        # From unit generation
+        try:
+            for file in os.listdir(os.path.join(DATA_DIR, source)):
+                if file.startswith("generation_") and file.endswith(".csv"):
+                    df_generation = pd.read_csv(os.path.join(DATA_DIR, source, file))
+                    for grid_node_id in df_generation["Grid Node"].unique():
+                        id_ = grid_node_id.upper()
+                        assert id_ in [
+                            grid_node.get("id") for grid_node in GRID_NODES
+                        ], f"{id_} not in GRID_NODES"
+                        g_n = get_grid_node_by_id(id_)
+                        await grid_node_service.create_grid_node(
+                            GridNodeModel(
+                                id=g_n.get("id"),
+                                name=g_n.get("name"),
+                                type=g_n.get("type"),
+                            )
+                        )
 
         except FileNotFoundError:
             logger.error(f"Could not find generation.csv for {source}")
@@ -86,6 +109,7 @@ async def seed_generation(
     grid_node_service = GridNodeDAO(session)
     for source in grid_node_sources:
         try:
+            # Overall generation
             df_generation = pd.read_csv(
                 os.path.join(DATA_DIR, source, "generation.csv")
             )
@@ -112,6 +136,23 @@ async def seed_generation(
                         for i, row in df_generation_rows.iterrows()
                     ]
                 )
+            # Generation per unit
+            # Find pattern generation-*.csv
+            for file in os.listdir(os.path.join(DATA_DIR, source)):
+                if file.startswith("generation_") and file.endswith(".csv"):
+                    df_generation = pd.read_csv(os.path.join(DATA_DIR, source, file))
+                    await grid_node_service.add_generation_for_fuel_type(
+                        [
+                            GenerationForFuelTypeModel(
+                                datetime=pd.to_datetime(row["datetime"]),
+                                value=row["value"],
+                                fuel_type=row["Fuel Type"],
+                                unit=row["unit"],
+                                grid_node_id=row["Grid Node"],
+                            )
+                            for i, row in df_generation.iterrows()
+                        ]
+                    )
 
         except FileNotFoundError:
             logger.error(f"Could not find generation.csv for {source}")
