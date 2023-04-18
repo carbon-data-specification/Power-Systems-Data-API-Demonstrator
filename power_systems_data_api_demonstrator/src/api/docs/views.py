@@ -8,6 +8,8 @@ from fastapi.openapi.docs import (
 )
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from power_systems_data_api_demonstrator.static.docs.utils import get_app_title
+
 router = APIRouter()
 
 
@@ -24,10 +26,9 @@ async def swagger_ui_html(request: Request) -> HTMLResponse:
     :param request: current request.
     :return: rendered swagger UI.
     """
-    title = request.app.title
     return get_swagger_ui_html(
         openapi_url=request.app.openapi_url,
-        title=f"{title} - Swagger UI",
+        title=get_app_title(),
         oauth2_redirect_url=request.url_for("swagger_ui_redirect"),
         swagger_js_url="/static/docs/swagger-ui-bundle.js",
         swagger_css_url="/static/docs/swagger-ui.css",
@@ -52,9 +53,8 @@ async def redoc_html(request: Request) -> HTMLResponse:
     :param request: current request.
     :return: rendered redoc UI.
     """
-    title = request.app.title
     return get_redoc_html(
         openapi_url=request.app.openapi_url,
-        title=f"{title} - ReDoc",
+        title=get_app_title(),
         redoc_js_url="/static/docs/redoc.standalone.js",
     )
