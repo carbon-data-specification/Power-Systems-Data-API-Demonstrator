@@ -119,7 +119,7 @@ async def seed_generation(
                 ]
                 df_generation_rows = pd.melt(
                     df_this_nodes_generation,
-                    id_vars=["Grid Node", "datetime", "unit"],
+                    id_vars=["Grid Node", "start_datetime", "end_datetime", "unit"],
                     var_name="fuel_type",
                     value_name="value",
                 ).reset_index()
@@ -127,7 +127,8 @@ async def seed_generation(
                 await grid_node_service.add_generation_for_fuel_type(
                     [
                         GenerationForFuelTypeModel(
-                            datetime=pd.to_datetime(row["datetime"]),
+                            start_datetime=pd.to_datetime(row["start_datetime"]),
+                            end_datetime=pd.to_datetime(row["end_datetime"]),
                             value=row["value"],
                             fuel_type=row["fuel_type"],
                             unit=row["unit"],
@@ -144,7 +145,8 @@ async def seed_generation(
                     await grid_node_service.add_generation_for_fuel_type(
                         [
                             GenerationForFuelTypeModel(
-                                datetime=pd.to_datetime(row["datetime"]),
+                                start_datetime=pd.to_datetime(row["start_datetime"]),
+                                end_datetime=pd.to_datetime(row["end_datetime"]),
                                 value=row["value"],
                                 fuel_type=row["Fuel Type"],
                                 unit=row["unit"],
@@ -172,7 +174,8 @@ async def seed_exchanges(
             await grid_node_service.add_exchanges(
                 [
                     ExchangeModel(
-                        datetime=pd.to_datetime(row["datetime"]),
+                        start_datetime=pd.to_datetime(row["start_datetime"]),
+                        end_datetime=pd.to_datetime(row["end_datetime"]),
                         value=row["Value"],
                         unit=row["unit"],
                         grid_node_from_id=row["Grid Node From"],
@@ -201,7 +204,8 @@ async def seed_capacity(
                 [
                     CapacityForFuelTypeModel(
                         grid_node_id=row["Grid Node"],
-                        datetime=pd.to_datetime(row["datetime"]),
+                        start_datetime=pd.to_datetime(row["start_datetime"]),
+                        end_datetime=pd.to_datetime(row["end_datetime"]),
                         value=row["Value"],
                         unit=row["unit"],
                         fuel_type=row["Fuel Type"],
@@ -243,6 +247,7 @@ async def seed_data(
 
 
 @click.command
+@click.option("--debug-mode/--normal-mode", default=False)
 @click.option("--delete-existing/--keep-existing", default=True)
 @click.option(
     "--grid-node-source",
@@ -251,7 +256,9 @@ async def seed_data(
     type=click.Choice(AVAILABLE_DATA_SOURCES),
 )
 @make_sync
-async def main(delete_existing: bool, grid_node_sources: list[str]) -> None:
+async def main(
+    delete_existing: bool, grid_node_sources: list[str], debug_mode: bool
+) -> None:
     settings = Settings()
     engine = create_async_engine(
         str(settings.db_url),
@@ -266,12 +273,21 @@ async def main(delete_existing: bool, grid_node_sources: list[str]) -> None:
         await conn.run_sync(Base.metadata.create_all)
 
     async with async_session() as session:
-        if delete_existing:
-            for table in Base.metadata.sorted_tables:
-                await session.execute(table.delete())
-        await session.commit()
+        try:
+            if delete_existing:
+                for table in Base.metadata.sorted_tables:
+                    await session.execute(table.delete())
+            await session.commit()
 
-        await seed_data(session, grid_node_sources=grid_node_sources)
+            await seed_data(session, grid_node_sources=grid_node_sources)
+        except KeyboardInterrupt:
+            raise
+        except Exception:
+            if debug_mode:
+                import pdb
+
+                pdb.post_mortem()
+            raise
 
     # for AsyncEngine created in function scope, close and
     # clean-up pooled connections
