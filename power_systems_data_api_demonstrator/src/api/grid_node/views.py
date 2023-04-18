@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List, cast
+from datetime import datetime
+from typing import Any, List, cast
 
 from fastapi import APIRouter, HTTPException
 from fastapi.param_functions import Depends
@@ -66,13 +67,19 @@ async def describe_grid_nodes(
 )
 async def get_capacity_grid_node(
     id: str,
+    start_datetime: datetime | None = None,
+    end_datetime: datetime | None = None,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> list[CapacityDTO]:
     try:
         raw_capacities = await grid_node_dao.get_capacity(id)
         capacity = []
         # Filter by datetime
-        dts = set([cap.datetime for cap in raw_capacities])
+        dts = list(set([cap.datetime for cap in raw_capacities]))
+        if start_datetime is not None:
+            dts = [dt for dt in dts if dt >= start_datetime]
+        if end_datetime is not None:
+            dts = [dt for dt in dts if dt <= end_datetime]
         # This is error prone if we don't have all fuel types for all datetimes
         # Or with different units
         for dt in dts:
@@ -92,6 +99,19 @@ async def get_capacity_grid_node(
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
+def filter_obs_by_datetime(
+    objs: List[Any], start_datetime: datetime | None, end_datetime: datetime | None
+) -> List[Any]:
+    assert all([hasattr(obj, "datetime") for obj in objs])
+    assert all([isinstance(obj.datetime, datetime) for obj in objs])
+    dts = list(set([obj.datetime for obj in objs]))
+    if start_datetime is not None:
+        dts = [dt for dt in dts if dt >= start_datetime]
+    if end_datetime is not None:
+        dts = [dt for dt in dts if dt <= end_datetime]
+    return [obj for obj in objs if obj.datetime in dts]
+
+
 @router.get(
     "/generation/{id}",
     response_model=list[GenerationDTO],
@@ -99,10 +119,13 @@ async def get_capacity_grid_node(
 )
 async def get_generation_grid_node(
     id: str,
+    start_datetime: datetime | None = None,
+    end_datetime: datetime | None = None,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> list[GenerationDTO]:
     try:
-        return await grid_node_dao.get_generation(id)
+        generation = await grid_node_dao.get_generation(id)
+        return filter_obs_by_datetime(generation, start_datetime, end_datetime)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
@@ -112,10 +135,13 @@ async def get_generation_grid_node(
 )
 async def get_demand_grid_node(
     id: str,
+    start_datetime: datetime | None = None,
+    end_datetime: datetime | None = None,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> list[DemandModel]:
     try:
-        return await grid_node_dao.get_demand(id)
+        demand = await grid_node_dao.get_demand(id)
+        return filter_obs_by_datetime(demand, start_datetime, end_datetime)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
@@ -127,10 +153,13 @@ async def get_demand_grid_node(
 )
 async def get_day_ahead_price_grid_node(
     id: str,
+    start_datetime: datetime | None = None,
+    end_datetime: datetime | None = None,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> List[DayAheadPriceModel]:
     try:
-        return await grid_node_dao.get_day_ahead_price(id)
+        prices = await grid_node_dao.get_day_ahead_price(id)
+        return filter_obs_by_datetime(prices, start_datetime, end_datetime)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
@@ -142,10 +171,13 @@ async def get_day_ahead_price_grid_node(
 )
 async def get_imports_grid_node(
     id: str,
+    start_datetime: datetime | None = None,
+    end_datetime: datetime | None = None,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> list[ExchangeModel]:
     try:
-        return await grid_node_dao.get_imports(id)
+        imports = await grid_node_dao.get_imports(id)
+        return filter_obs_by_datetime(imports, start_datetime, end_datetime)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
@@ -157,9 +189,12 @@ async def get_imports_grid_node(
 )
 async def get_exports_grid_node(
     id: str,
+    start_datetime: datetime | None = None,
+    end_datetime: datetime | None = None,
     grid_node_dao: GridNodeDAO = Depends(),
 ) -> list[ExchangeModel]:
     try:
-        return await grid_node_dao.get_exports(id)
+        exports = await grid_node_dao.get_exports(id)
+        return filter_obs_by_datetime(exports, start_datetime, end_datetime)
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
