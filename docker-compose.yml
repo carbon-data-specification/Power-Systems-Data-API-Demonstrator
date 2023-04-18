@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  api:
+  api: &api
     build:
       context: .
     image: power_systems_data_api_demonstrator:${POWER_SYSTEMS_DATA_API_DEMONSTRATOR_VERSION:-latest}
@@ -16,3 +16,6 @@ services:
     volumes:
       - ./power_systems_data_api_demonstrator:/power_systems_data_api_demonstrator
       - ./:/app
+  seed:
+    <<: *api
+    command: python power_systems_data_api_demonstrator/seed/seed.py
