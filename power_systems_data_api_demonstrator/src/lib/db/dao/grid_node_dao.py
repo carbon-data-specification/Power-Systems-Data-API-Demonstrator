@@ -34,7 +34,8 @@ class GridNodeNotFoundError(ValueError):
 
 class GenerationDTO(BaseModel):
     grid_node_id: str
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     value: float
     unit: str
     generation_by_fuel_type: dict[FuelTypes, float]
@@ -123,7 +124,8 @@ class GridNodeDAO:
         raw_generation = await self.session.execute(
             select(
                 GenerationForFuelTypeModel.grid_node_id,
-                GenerationForFuelTypeModel.datetime,
+                GenerationForFuelTypeModel.start_datetime,
+                GenerationForFuelTypeModel.end_datetime,
                 func.sum(GenerationForFuelTypeModel.value).label("value"),
                 func.min(GenerationForFuelTypeModel.unit).label("unit"),
                 func.json_group_object(
@@ -134,7 +136,8 @@ class GridNodeDAO:
             .filter(GenerationForFuelTypeModel.grid_node_id == grid_node_id)
             .group_by(
                 GenerationForFuelTypeModel.grid_node_id,
-                GenerationForFuelTypeModel.datetime,
+                GenerationForFuelTypeModel.start_datetime,
+                GenerationForFuelTypeModel.end_datetime,
             )
         )
         return [GenerationDTO.from_orm(row) for row in raw_generation.all()]
@@ -172,7 +175,8 @@ class GridNodeDAO:
                 grid_node_from_id=exp.grid_node_to_id,
                 grid_node_to_id=exp.grid_node_from_id,
                 value=-1 * exp.value,
-                datetime=exp.datetime,
+                start_datetime=exp.start_datetime,
+                end_datetime=exp.end_datetime,
                 unit=exp.unit,
             )
             for exp in exports
@@ -194,7 +198,8 @@ class GridNodeDAO:
                 grid_node_from_id=imp.grid_node_to_id,
                 grid_node_to_id=imp.grid_node_from_id,
                 value=-1 * imp.value,
-                datetime=imp.datetime,
+                start_datetime=imp.start_datetime,
+                end_datetime=imp.end_datetime,
                 unit=imp.unit,
             )
             for imp in imports

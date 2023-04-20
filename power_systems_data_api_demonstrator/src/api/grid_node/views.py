@@ -75,19 +75,24 @@ async def get_capacity_grid_node(
         raw_capacities = await grid_node_dao.get_capacity(id)
         capacity = []
         # Filter by datetime
-        dts = list(set([cap.datetime for cap in raw_capacities]))
+        dts = list(
+            set([(cap.start_datetime, cap.end_datetime) for cap in raw_capacities])
+        )
         if start_datetime is not None:
-            dts = [dt for dt in dts if dt >= start_datetime]
+            dts = [dt for dt in dts if dt[0] >= start_datetime]
         if end_datetime is not None:
-            dts = [dt for dt in dts if dt <= end_datetime]
+            dts = [dt for dt in dts if dt[0] <= end_datetime]
         # This is error prone if we don't have all fuel types for all datetimes
         # Or with different units
-        for dt in dts:
-            capacities = [cap for cap in raw_capacities if cap.datetime == dt]
+        for start_dt, end_dt in dts:
+            capacities = [
+                cap for cap in raw_capacities if cap.start_datetime == start_dt
+            ]
             capacity.append(
                 CapacityDTO(
                     grid_node_id=id,
-                    datetime=dt,
+                    start_datetime=start_dt,
+                    end_datetime=end_dt,
                     generation_capacity={
                         cast(FuelTypes, cap.fuel_type): cap.value for cap in capacities
                     },
@@ -102,14 +107,14 @@ async def get_capacity_grid_node(
 def filter_obs_by_datetime(
     objs: List[Any], start_datetime: datetime | None, end_datetime: datetime | None
 ) -> List[Any]:
-    assert all([hasattr(obj, "datetime") for obj in objs])
-    assert all([isinstance(obj.datetime, datetime) for obj in objs])
-    dts = list(set([obj.datetime for obj in objs]))
+    assert all([hasattr(obj, "start_datetime") for obj in objs])
+    assert all([isinstance(obj.start_datetime, datetime) for obj in objs])
+    dts = list(set([obj.start_datetime for obj in objs]))
     if start_datetime is not None:
         dts = [dt for dt in dts if dt >= start_datetime]
     if end_datetime is not None:
         dts = [dt for dt in dts if dt <= end_datetime]
-    return [obj for obj in objs if obj.datetime in dts]
+    return [obj for obj in objs if obj.start_datetime in dts]
 
 
 @router.get(
