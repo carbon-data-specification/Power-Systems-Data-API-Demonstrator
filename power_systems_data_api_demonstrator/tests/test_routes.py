@@ -52,7 +52,7 @@ async def test_demand(fastapi_client: AsyncClient, grid_node_id: str) -> None:
 @pytest.mark.parametrize("grid_node_id", [("US-WECC-CISO"), ("UK-GB"), ("ES")])
 async def test_imports(fastapi_client: AsyncClient, grid_node_id: str) -> None:
     response = await fastapi_client.get(
-        url=f"/gridNode/imports/{grid_node_id}",
+        url=f"/api/imports/{grid_node_id}",
     )
     assert response.is_success
 
@@ -60,6 +60,6 @@ async def test_imports(fastapi_client: AsyncClient, grid_node_id: str) -> None:
 @pytest.mark.parametrize("grid_node_id", [("US-WECC-CISO"), ("UK-GB"), ("ES")])
 async def test_exports(fastapi_client: AsyncClient, grid_node_id: str) -> None:
     response = await fastapi_client.get(
-        url=f"/gridNode/exports/{grid_node_id}",
+        url=f"/api/exports/{grid_node_id}",
     )
     assert response.is_success
