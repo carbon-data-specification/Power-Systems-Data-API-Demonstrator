@@ -57,7 +57,10 @@ class GenerationForFuelTypeModel(Base):
     grid_node_id: Mapped[str] = mapped_column(
         ForeignKey("grid_node.id"), primary_key=True
     )
-    datetime: Mapped[datetime] = mapped_column(
+    start_datetime: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), primary_key=True
+    )
+    end_datetime: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), primary_key=True
     )
     value: Mapped[float]
@@ -75,7 +78,10 @@ class CapacityForFuelTypeModel(Base):
     grid_node_id: Mapped[str] = mapped_column(
         ForeignKey("grid_node.id"), primary_key=True
     )
-    datetime: Mapped[datetime] = mapped_column(
+    start_datetime: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), primary_key=True
+    )
+    end_datetime: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), primary_key=True
     )
     value: Mapped[float]

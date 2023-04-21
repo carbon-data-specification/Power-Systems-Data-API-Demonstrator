@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from power_systems_data_api_demonstrator.src.lib.db.models.generation import FuelTypes
 
 
-class GridNodeType(str, Enum):
+class GridTopologyLevel(str, Enum):
     GENERATION_UNIT = "GENERATION_UNIT"
     POWER_PLANT = "POWER_PLANT"
     SUBSTATION = "SUBSTATION"
@@ -27,7 +27,7 @@ class GridNodeDTO(BaseModel):
     parent_id: str | None
     children_ids: List[str] | None
     name: str
-    type: GridNodeType
+    type: GridTopologyLevel
 
     class Config:
         orm_mode = True
@@ -41,7 +41,8 @@ class ExchangeDTO(BaseModel):
 
     grid_node_from_id: str
     grid_node_to_id: str
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     value: float
     unit: str
 
@@ -56,7 +57,8 @@ class DemandDTO(BaseModel):
     """
 
     grid_node_id: str
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     value: float
     unit: str
 
@@ -71,7 +73,8 @@ class DayAheadPriceDTO(BaseModel):
     """
 
     grid_node_id: str
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     value: float
     currency: str
 
@@ -86,7 +89,8 @@ class CapacityForFuelTypeDTO(BaseModel):
     """
 
     grid_node_id: str
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     value: float
     fuel_type: FuelTypes
     unit: str
@@ -102,7 +106,8 @@ class CapacityDTO(BaseModel):
     """
 
     grid_node_id: str
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     generation_capacity: Dict[FuelTypes, float]
     unit: str
 
