@@ -12,7 +12,8 @@ from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
     DemandDTO,
     ExchangeDTO,
     FuelTypes,
-    GridNodeModelDTO,
+    GridNodeDTO,
+    GridTopologyLevel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import (
     GenerationDTO,
@@ -35,7 +36,7 @@ router = APIRouter()
 
 @router.get(
     "/list",
-    response_model=List[GridNodeModelDTO],
+    response_model=List[GridNodeDTO],
     summary="List all available grid nodes",
 )
 async def list_grid_nodes(
@@ -47,15 +48,25 @@ async def list_grid_nodes(
 
 @router.get(
     "/describe/{id}",
-    response_model=GridNodeModelDTO,
+    response_model=GridNodeDTO,
     summary="Describe a given grid node",
 )
 async def describe_grid_nodes(
     id: str,
     grid_node_dao: GridNodeDAO = Depends(),
-) -> GridNodeModel:
+) -> GridNodeDTO:
     try:
-        return await grid_node_dao.get_by_id(id)
+        grid_node = await grid_node_dao.get_by_id(id)
+        children_nodes = await grid_node_dao.get_grid_node_with_parent_id(id)
+        # cast str grid_node.type to enum member GridNodeTopologyLevel
+        return GridNodeDTO(
+            id=grid_node.id,
+            name=grid_node.name,
+            type=cast(GridTopologyLevel, grid_node.type),
+            parent_id=grid_node.parent_id,
+            children_ids=[c.id for c in children_nodes],
+        )
+
     except GridNodeNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 

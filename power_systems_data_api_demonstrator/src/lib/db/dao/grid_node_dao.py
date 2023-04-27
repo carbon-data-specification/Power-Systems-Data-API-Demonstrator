@@ -59,16 +59,16 @@ class GridNodeDAO:
     def __init__(self, session: AsyncSession = Depends(get_db_session)):
         self.session = session
 
-    async def create_grid_node(
-        self, grid_node_model: GridNodeModel, overwrite_if_exists: bool = True
-    ) -> None:
+    async def delete_all_grid_nodes(self) -> None:
+        delete_stmt = delete(GridNodeModel)
+        await self.session.execute(delete_stmt)
+        await self.session.commit()
+
+    async def create_grid_node(self, grid_node_model: GridNodeModel) -> None:
         """
         Add single grid_node to session.
         :param name: name of a grid_node.
         """
-        if overwrite_if_exists:
-            delete_stmt = delete(GridNodeModel).filter_by(id=grid_node_model.id)
-            await self.session.execute(delete_stmt)
         self.session.add(grid_node_model)
         await self.session.commit()
 
@@ -247,6 +247,19 @@ class GridNodeDAO:
 
         return list(raw_grid_nodes.scalars().fetchall())
 
+    async def get_grid_node_with_parent_id(self, id: str) -> List[GridNodeModel]:
+        """
+        Get all grid_node models with limit/offset pagination.
+        :param limit: limit of dummies.
+        :param offset: offset of dummies.
+        :return: stream of dummies.
+        """
+        raw_grid_nodes = await self.session.execute(
+            select(GridNodeModel).filter(GridNodeModel.parent_id == id),
+        )
+
+        return list(raw_grid_nodes.scalars().fetchall())
+
     async def get_by_id(self, id: str) -> GridNodeModel:
         """
         Get specific grid_node model.
@@ -259,6 +272,16 @@ class GridNodeDAO:
         if not value:
             raise GridNodeNotFoundError(id)
         return value
+
+    async def check_if_grid_node_exists(self, id: str) -> bool:
+        """
+        Get specific grid_node model.
+        :param name: name of grid_node instance.
+        :return: grid_node models.
+        """
+        query = select(GridNodeModel).where(GridNodeModel.id == id)
+        rows = await self.session.execute(query)
+        return rows.scalars().one_or_none() is not None
 
     async def delete_grid_node(self, id: str) -> None:
         delete_stmt = delete(GridNodeModel).filter_by(id=id)
