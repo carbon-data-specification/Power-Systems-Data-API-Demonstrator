@@ -37,7 +37,7 @@ router = APIRouter()
 @router.get(
     "/list",
     response_model=List[PowerSystemResourceDTO],
-    summary="List all available grid nodes",
+    summary="List all available power system resources",
 )
 async def list_grid_nodes(
     limit: int = 10,
@@ -49,7 +49,7 @@ async def list_grid_nodes(
 @router.get(
     "/describe/{id}",
     response_model=PowerSystemResourceDTO,
-    summary="Describe a given grid node",
+    summary="Describe a given power system resource",
 )
 async def describe_grid_nodes(
     id: str,
@@ -74,7 +74,7 @@ async def describe_grid_nodes(
 @router.get(
     "/capacity/{id}",
     response_model=list[CapacityDTO],
-    summary="Get installed generation capacity for a grid node",
+    summary="Get installed generation capacity for a power system resource",
 )
 async def get_capacity_grid_node(
     id: str,
@@ -131,7 +131,7 @@ def filter_obs_by_datetime(
 @router.get(
     "/generation/{id}",
     response_model=list[GenerationDTO],
-    summary="Get generation for a grid node",
+    summary="Get generation for a power system resource",
 )
 async def get_generation_grid_node(
     id: str,
@@ -147,7 +147,9 @@ async def get_generation_grid_node(
 
 
 @router.get(
-    "/demand/{id}", response_model=list[DemandDTO], summary="Get demand for a grid node"
+    "/demand/{id}",
+    response_model=list[DemandDTO],
+    summary="Get demand for a power system resource",
 )
 async def get_demand_grid_node(
     id: str,
@@ -165,7 +167,7 @@ async def get_demand_grid_node(
 @router.get(
     "/dayAheadPrice/{id}",
     response_model=List[DayAheadPriceDTO],
-    summary="Get day ahead price for a grid node",
+    summary="Get day ahead price for a power system resource",
 )
 async def get_day_ahead_price_grid_node(
     id: str,
@@ -183,7 +185,7 @@ async def get_day_ahead_price_grid_node(
 @router.get(
     "/imports/{id}",
     response_model=list[ExchangeDTO],
-    summary="Get imports for a grid node",
+    summary="Get imports for a power system resource",
 )
 async def get_imports_grid_node(
     id: str,
@@ -201,7 +203,7 @@ async def get_imports_grid_node(
 @router.get(
     "/exports/{id}",
     response_model=list[ExchangeDTO],
-    summary="Get exports for a grid node",
+    summary="Get exports for a power system resource",
 )
 async def get_exports_grid_node(
     id: str,
