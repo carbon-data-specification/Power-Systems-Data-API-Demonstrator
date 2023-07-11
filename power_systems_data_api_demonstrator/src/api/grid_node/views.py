@@ -12,8 +12,8 @@ from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
     DemandDTO,
     ExchangeDTO,
     FuelTypes,
-    GridNodeDTO,
     GridTopologyLevel,
+    PowerSystemResourceDTO,
 )
 from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import (
     GenerationDTO,
@@ -36,7 +36,7 @@ router = APIRouter()
 
 @router.get(
     "/list",
-    response_model=List[GridNodeDTO],
+    response_model=List[PowerSystemResourceDTO],
     summary="List all available grid nodes",
 )
 async def list_grid_nodes(
@@ -48,18 +48,18 @@ async def list_grid_nodes(
 
 @router.get(
     "/describe/{id}",
-    response_model=GridNodeDTO,
+    response_model=PowerSystemResourceDTO,
     summary="Describe a given grid node",
 )
 async def describe_grid_nodes(
     id: str,
     grid_node_dao: GridNodeDAO = Depends(),
-) -> GridNodeDTO:
+) -> PowerSystemResourceDTO:
     try:
         grid_node = await grid_node_dao.get_by_id(id)
         children_nodes = await grid_node_dao.get_grid_node_with_parent_id(id)
         # cast str grid_node.type to enum member GridNodeTopologyLevel
-        return GridNodeDTO(
+        return PowerSystemResourceDTO(
             id=grid_node.id,
             name=grid_node.name,
             type=cast(GridTopologyLevel, grid_node.type),
@@ -101,7 +101,7 @@ async def get_capacity_grid_node(
             ]
             capacity.append(
                 CapacityDTO(
-                    grid_node_id=id,
+                    power_system_resource_id=id,
                     start_datetime=start_dt,
                     end_datetime=end_dt,
                     generation_capacity={
