@@ -33,7 +33,7 @@ class GridNodeNotFoundError(ValueError):
 
 
 class GenerationDTO(BaseModel):
-    grid_node_id: str
+    power_system_resource_id: str
     start_datetime: datetime
     end_datetime: datetime
     value: float
