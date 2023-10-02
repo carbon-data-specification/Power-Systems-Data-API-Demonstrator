@@ -17,7 +17,7 @@ class GridTopologyLevel(str, Enum):
     SYSTEM = "SYSTEM"
 
 
-class GridNodeDTO(BaseModel):
+class PowerSystemResourceDTO(BaseModel):
     """
     DTO for grid node models.
     It returned when accessing dummy models from the API.
@@ -39,8 +39,8 @@ class ExchangeDTO(BaseModel):
     It returned when accessing dummy models from the API.
     """
 
-    grid_node_from_id: str
-    grid_node_to_id: str
+    power_system_resource_from_id: str
+    power_system_resource_to_id: str
     start_datetime: datetime
     end_datetime: datetime
     value: float
@@ -56,7 +56,7 @@ class DemandDTO(BaseModel):
     It returned when accessing dummy models from the API.
     """
 
-    grid_node_id: str
+    power_system_resource_id: str
     start_datetime: datetime
     end_datetime: datetime
     value: float
@@ -72,7 +72,7 @@ class DayAheadPriceDTO(BaseModel):
     It returned when accessing dummy models from the API.
     """
 
-    grid_node_id: str
+    power_system_resource_id: str
     start_datetime: datetime
     end_datetime: datetime
     value: float
@@ -88,7 +88,7 @@ class CapacityForFuelTypeDTO(BaseModel):
     It returned when accessing dummy models from the API.
     """
 
-    grid_node_id: str
+    power_system_resource_id: str
     start_datetime: datetime
     end_datetime: datetime
     value: float
@@ -105,7 +105,7 @@ class CapacityDTO(BaseModel):
     It returned when accessing dummy models from the API.
     """
 
-    grid_node_id: str
+    power_system_resource_id: str
     start_datetime: datetime
     end_datetime: datetime
     generation_capacity: Dict[FuelTypes, float]

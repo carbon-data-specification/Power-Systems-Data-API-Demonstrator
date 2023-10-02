@@ -20,15 +20,15 @@ This page provides an overview of all the routes available in the API. For each 
 
 An interactive environment, together with the real world seeded data allows to explore the API and its capabilities.
 
-### Investigate Grid Nodes
+### Investigate Power System Resources
 
-Most routes are dependent on the entity `GridNode`, which describes the geographical entity for which we want to explore power data.
+Most routes are dependent on the entity `PowerSystemResource`, which describes the geographical entity for which we want to explore power data.
 
-The list of grid nodes available in the demonstrator is available at [/gridNode/list](https://carbon-data-specification.onrender.com/gridNode/list). Further information about a specific grid node can be found at [/gridNode/describe/{id}](https://carbon-data-specification.onrender.com/gridNode/UK-GB).
+The list of power system resources available in the demonstrator is available at [/PowerSystemResource/list](https://carbon-data-specification.onrender.com/gridNode/list). Further information about a specific power system resource can be found at [/PowerSystemResource/describe/{id}](https://carbon-data-specification.onrender.com/gridNode/UK-GB).
 
 ### Explore power data
 
-With a grid node selected, you can explore the power data available for that grid node. Follow the routes below to explore the power data available for a specific grid node.
+With a power system resource selected, you can explore the power data available for that power system resource. Follow the routes below to explore the power data available for a specific power system resource.
 
 _Disclaimer_: Some of the data for some of the endpoints might not have been seeded just yet.
 
