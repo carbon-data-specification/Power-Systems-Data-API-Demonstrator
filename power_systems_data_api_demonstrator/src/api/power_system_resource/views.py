@@ -6,7 +6,7 @@ from typing import Any, List, cast
 from fastapi import APIRouter, HTTPException
 from fastapi.param_functions import Depends
 
-from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
+from power_systems_data_api_demonstrator.src.api.power_system_resource.schema import (
     CapacityDTO,
     DayAheadPriceDTO,
     DemandDTO,
@@ -15,17 +15,17 @@ from power_systems_data_api_demonstrator.src.api.grid_node.schema import (
     GridTopologyLevel,
     PowerSystemResourceDTO,
 )
-from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import (
+from power_systems_data_api_demonstrator.src.lib.db.dao.power_system_resource_dao import (
     GenerationDTO,
-    GridNodeDAO,
-    GridNodeNotFoundError,
+    PsrDAO,
+    PsrNotFoundError,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.demand import DemandModel
 from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
     ExchangeModel,
 )
-from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
-    GridNodeModel,
+from power_systems_data_api_demonstrator.src.lib.db.models.power_system_resource_model import (
+    PsrModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.prices import (
     DayAheadPriceModel,
@@ -39,11 +39,11 @@ router = APIRouter()
     response_model=List[PowerSystemResourceDTO],
     summary="List all available power system resources",
 )
-async def list_grid_nodes(
+async def list_power_system_resources(
     limit: int = 10,
-    grid_node_dao: GridNodeDAO = Depends(),
-) -> List[GridNodeModel]:
-    return await grid_node_dao.get_all_grid_nodes(limit=limit)
+    power_system_resource_dao: PsrDAO = Depends(),
+) -> List[PsrModel]:
+    return await power_system_resource_dao.get_all_power_system_resources(limit=limit)
 
 
 @router.get(
@@ -51,23 +51,25 @@ async def list_grid_nodes(
     response_model=PowerSystemResourceDTO,
     summary="Describe a given power system resource",
 )
-async def describe_grid_nodes(
+async def describe_power_system_resources(
     id: str,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> PowerSystemResourceDTO:
     try:
-        grid_node = await grid_node_dao.get_by_id(id)
-        children_nodes = await grid_node_dao.get_grid_node_with_parent_id(id)
-        # cast str grid_node.type to enum member GridNodeTopologyLevel
+        power_system_resource = await power_system_resource_dao.get_by_id(id)
+        children_nodes = (
+            await power_system_resource_dao.get_power_system_resource_with_parent_id(id)
+        )
+        # cast str power_system_resource.type to enum member PsrTopologyLevel
         return PowerSystemResourceDTO(
-            id=grid_node.id,
-            name=grid_node.name,
-            type=cast(GridTopologyLevel, grid_node.type),
-            parent_id=grid_node.parent_id,
+            id=power_system_resource.id,
+            name=power_system_resource.name,
+            type=cast(GridTopologyLevel, power_system_resource.type),
+            parent_id=power_system_resource.parent_id,
             children_ids=[c.id for c in children_nodes],
         )
 
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
@@ -76,14 +78,14 @@ async def describe_grid_nodes(
     response_model=list[CapacityDTO],
     summary="Get installed generation capacity for a power system resource",
 )
-async def get_capacity_grid_node(
+async def get_capacity_power_system_resource(
     id: str,
     start_datetime: datetime | None = None,
     end_datetime: datetime | None = None,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> list[CapacityDTO]:
     try:
-        raw_capacities = await grid_node_dao.get_capacity(id)
+        raw_capacities = await power_system_resource_dao.get_capacity(id)
         capacity = []
         # Filter by datetime
         dts = list(
@@ -111,7 +113,7 @@ async def get_capacity_grid_node(
                 )
             )
         return capacity
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
@@ -133,16 +135,16 @@ def filter_obs_by_datetime(
     response_model=list[GenerationDTO],
     summary="Get generation for a power system resource",
 )
-async def get_generation_grid_node(
+async def get_generation_power_system_resource(
     id: str,
     start_datetime: datetime | None = None,
     end_datetime: datetime | None = None,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> list[GenerationDTO]:
     try:
-        generation = await grid_node_dao.get_generation(id)
+        generation = await power_system_resource_dao.get_generation(id)
         return filter_obs_by_datetime(generation, start_datetime, end_datetime)
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
@@ -151,16 +153,16 @@ async def get_generation_grid_node(
     response_model=list[DemandDTO],
     summary="Get demand for a power system resource",
 )
-async def get_demand_grid_node(
+async def get_demand_power_system_resource(
     id: str,
     start_datetime: datetime | None = None,
     end_datetime: datetime | None = None,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> list[DemandModel]:
     try:
-        demand = await grid_node_dao.get_demand(id)
+        demand = await power_system_resource_dao.get_demand(id)
         return filter_obs_by_datetime(demand, start_datetime, end_datetime)
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
@@ -169,16 +171,16 @@ async def get_demand_grid_node(
     response_model=List[DayAheadPriceDTO],
     summary="Get day ahead price for a power system resource",
 )
-async def get_day_ahead_price_grid_node(
+async def get_day_ahead_price_power_system_resource(
     id: str,
     start_datetime: datetime | None = None,
     end_datetime: datetime | None = None,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> List[DayAheadPriceModel]:
     try:
-        prices = await grid_node_dao.get_day_ahead_price(id)
+        prices = await power_system_resource_dao.get_day_ahead_price(id)
         return filter_obs_by_datetime(prices, start_datetime, end_datetime)
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
@@ -187,16 +189,16 @@ async def get_day_ahead_price_grid_node(
     response_model=list[ExchangeDTO],
     summary="Get imports for a power system resource",
 )
-async def get_imports_grid_node(
+async def get_imports_power_system_resource(
     id: str,
     start_datetime: datetime | None = None,
     end_datetime: datetime | None = None,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> list[ExchangeModel]:
     try:
-        imports = await grid_node_dao.get_imports(id)
+        imports = await power_system_resource_dao.get_imports(id)
         return filter_obs_by_datetime(imports, start_datetime, end_datetime)
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None
 
 
@@ -205,14 +207,14 @@ async def get_imports_grid_node(
     response_model=list[ExchangeDTO],
     summary="Get exports for a power system resource",
 )
-async def get_exports_grid_node(
+async def get_exports_power_system_resource(
     id: str,
     start_datetime: datetime | None = None,
     end_datetime: datetime | None = None,
-    grid_node_dao: GridNodeDAO = Depends(),
+    power_system_resource_dao: PsrDAO = Depends(),
 ) -> list[ExchangeModel]:
     try:
-        exports = await grid_node_dao.get_exports(id)
+        exports = await power_system_resource_dao.get_exports(id)
         return filter_obs_by_datetime(exports, start_datetime, end_datetime)
-    except GridNodeNotFoundError as exc:
+    except PsrNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from None

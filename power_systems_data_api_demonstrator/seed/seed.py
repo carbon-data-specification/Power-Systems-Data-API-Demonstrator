@@ -11,11 +11,15 @@ import pandas as pd
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from power_systems_data_api_demonstrator.settings import Settings
-from power_systems_data_api_demonstrator.src.api.grid_node.schema import FuelTypes
+from power_systems_data_api_demonstrator.src.api.power_system_resource.schema import (
+    FuelTypes,
+)
 from power_systems_data_api_demonstrator.src.lib.config import GRID_NODES
 from power_systems_data_api_demonstrator.src.lib.db.base import Base
 from power_systems_data_api_demonstrator.src.lib.db.dao.fuel_type_dao import FuelTypeDAO
-from power_systems_data_api_demonstrator.src.lib.db.dao.grid_node_dao import GridNodeDAO
+from power_systems_data_api_demonstrator.src.lib.db.dao.power_system_resource_dao import (
+    PsrDAO,
+)
 from power_systems_data_api_demonstrator.src.lib.db.models.exchanges import (
     ExchangeModel,
 )
@@ -26,8 +30,8 @@ from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
     CapacityForFuelTypeModel,
     GenerationForFuelTypeModel,
 )
-from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
-    GridNodeModel,
+from power_systems_data_api_demonstrator.src.lib.db.models.power_system_resource_model import (
+    PsrModel,
 )
 
 T = TypeVar("T")
@@ -39,9 +43,11 @@ DATA_DIR = Path(__file__).parent.parent.parent / "data"
 AVAILABLE_DATA_SOURCES = os.listdir(DATA_DIR)
 
 
-def get_grid_node_by_id(grid_node_id: str) -> dict[str, Any]:
+def get_power_system_resource_by_id(power_system_resource_id: str) -> dict[str, Any]:
     return next(
-        grid_node for grid_node in GRID_NODES if grid_node.get("id") == grid_node_id
+        power_system_resource
+        for power_system_resource in GRID_NODES
+        if power_system_resource.get("id") == power_system_resource_id
     )
 
 
@@ -51,32 +57,33 @@ async def seed_fuel_types(session: AsyncSession) -> None:
         await fuel_type_service.create_fuel_type(FuelTypeModel(name=fuel_type))
 
 
-async def seed_grid_nodes(
-    session: AsyncSession, /, *, grid_node_sources: list[str]
+async def seed_power_system_resources(
+    session: AsyncSession, /, *, power_system_resource_sources: list[str]
 ) -> None:
-    grid_node_service = GridNodeDAO(session)
-    await grid_node_service.delete_all_grid_nodes()
-    for grid_source in grid_node_sources:
+    power_system_resource_service = PsrDAO(session)
+    await power_system_resource_service.delete_all_power_system_resources()
+    for grid_source in power_system_resource_sources:
         # From exchanges
         try:
             df_exchanges = pd.read_csv(
                 os.path.join(DATA_DIR, grid_source, "imports_exports.csv")
             )
-            grid_node_ids_from_exchange = set(
+            power_system_resource_ids_from_exchange = set(
                 df_exchanges["Grid Node To"].unique()
             ).union(set(df_exchanges["Grid Node From"].unique()))
-            for grid_node_id in grid_node_ids_from_exchange:
-                id_ = grid_node_id.upper()
+            for power_system_resource_id in power_system_resource_ids_from_exchange:
+                id_ = power_system_resource_id.upper()
                 assert id_ in [
-                    grid_node.get("id") for grid_node in GRID_NODES
+                    power_system_resource.get("id")
+                    for power_system_resource in GRID_NODES
                 ], f"{id_} not in {GRID_NODES}"
-                g_n = get_grid_node_by_id(id_)
-                exists_already = await grid_node_service.check_if_grid_node_exists(
+                g_n = get_power_system_resource_by_id(id_)
+                exists_already = await power_system_resource_service.check_if_power_system_resource_exists(
                     g_n["id"]
                 )
                 if not exists_already:
-                    await grid_node_service.create_grid_node(
-                        GridNodeModel(
+                    await power_system_resource_service.create_power_system_resource(
+                        PsrModel(
                             id=g_n.get("id"), name=g_n.get("name"), type=g_n.get("type")
                         )
                     )
@@ -93,15 +100,20 @@ async def seed_grid_nodes(
                     df_generation = pd.read_csv(
                         os.path.join(DATA_DIR, grid_source, file)
                     )
-                    grid_node_ids_from_generation = df_generation["Grid Node"].unique()
-                    for grid_node_id in grid_node_ids_from_generation:
-                        id_ = grid_node_id.upper()
+                    power_system_resource_ids_from_generation = df_generation[
+                        "Grid Node"
+                    ].unique()
+                    for (
+                        power_system_resource_id
+                    ) in power_system_resource_ids_from_generation:
+                        id_ = power_system_resource_id.upper()
                         assert id_ in [
-                            grid_node.get("id") for grid_node in GRID_NODES
+                            power_system_resource.get("id")
+                            for power_system_resource in GRID_NODES
                         ], f"{id_} not in {GRID_NODES}"
-                        g_n = get_grid_node_by_id(id_)
-                        await grid_node_service.create_grid_node(
-                            GridNodeModel(
+                        g_n = get_power_system_resource_by_id(id_)
+                        await power_system_resource_service.create_power_system_resource(
+                            PsrModel(
                                 id=g_n.get("id"),
                                 name=g_n.get("name"),
                                 type=g_n.get("type"),
@@ -115,18 +127,18 @@ async def seed_grid_nodes(
 
 
 async def seed_generation(
-    session: AsyncSession, /, *, grid_node_sources: list[str]
+    session: AsyncSession, /, *, power_system_resource_sources: list[str]
 ) -> None:
-    grid_node_service = GridNodeDAO(session)
-    for grid_source in grid_node_sources:
+    power_system_resource_service = PsrDAO(session)
+    for grid_source in power_system_resource_sources:
         try:
             # Overall generation
             df_generation = pd.read_csv(
                 os.path.join(DATA_DIR, grid_source, "generation.csv")
             )
-            for grid_node_id in df_generation["Grid Node"].unique():
+            for power_system_resource_id in df_generation["Grid Node"].unique():
                 df_this_nodes_generation = df_generation[
-                    df_generation["Grid Node"] == grid_node_id
+                    df_generation["Grid Node"] == power_system_resource_id
                 ]
                 df_generation_rows = pd.melt(
                     df_this_nodes_generation,
@@ -135,7 +147,7 @@ async def seed_generation(
                     value_name="value",
                 ).reset_index()
 
-                await grid_node_service.add_generation_for_fuel_type(
+                await power_system_resource_service.add_generation_for_fuel_type(
                     [
                         GenerationForFuelTypeModel(
                             start_datetime=pd.to_datetime(row["start_datetime"]),
@@ -143,7 +155,7 @@ async def seed_generation(
                             value=row["value"],
                             fuel_type=row["fuel_type"],
                             unit=row["unit"],
-                            grid_node_id=grid_node_id,
+                            power_system_resource_id=power_system_resource_id,
                         )
                         for i, row in df_generation_rows.iterrows()
                     ]
@@ -155,7 +167,7 @@ async def seed_generation(
                     df_generation = pd.read_csv(
                         os.path.join(DATA_DIR, grid_source, file)
                     )
-                    await grid_node_service.add_generation_for_fuel_type(
+                    await power_system_resource_service.add_generation_for_fuel_type(
                         [
                             GenerationForFuelTypeModel(
                                 start_datetime=pd.to_datetime(row["start_datetime"]),
@@ -163,7 +175,7 @@ async def seed_generation(
                                 value=row["value"],
                                 fuel_type=row["Fuel Type"],
                                 unit=row["unit"],
-                                grid_node_id=row["Grid Node"],
+                                power_system_resource_id=row["Grid Node"],
                             )
                             for i, row in df_generation.iterrows()
                         ]
@@ -175,24 +187,24 @@ async def seed_generation(
 
 
 async def seed_exchanges(
-    session: AsyncSession, /, *, grid_node_sources: list[str]
+    session: AsyncSession, /, *, power_system_resource_sources: list[str]
 ) -> None:
-    grid_node_service = GridNodeDAO(session)
-    for grid_source in grid_node_sources:
+    power_system_resource_service = PsrDAO(session)
+    for grid_source in power_system_resource_sources:
         try:
             df_exchanges = pd.read_csv(
                 os.path.join(DATA_DIR, grid_source, "imports_exports.csv")
             )
 
-            await grid_node_service.add_exchanges(
+            await power_system_resource_service.add_exchanges(
                 [
                     ExchangeModel(
                         start_datetime=pd.to_datetime(row["start_datetime"]),
                         end_datetime=pd.to_datetime(row["end_datetime"]),
                         value=row["Value"],
                         unit=row["unit"],
-                        grid_node_from_id=row["Grid Node From"],
-                        grid_node_to_id=row["Grid Node To"],
+                        power_system_resource_from_id=row["Grid Node From"],
+                        power_system_resource_to_id=row["Grid Node To"],
                     )
                     for i, row in df_exchanges.iterrows()
                 ]
@@ -204,19 +216,19 @@ async def seed_exchanges(
 
 
 async def seed_capacity(
-    session: AsyncSession, /, *, grid_node_sources: list[str]
+    session: AsyncSession, /, *, power_system_resource_sources: list[str]
 ) -> None:
-    grid_node_service = GridNodeDAO(session)
-    for grid_source in grid_node_sources:
+    power_system_resource_service = PsrDAO(session)
+    for grid_source in power_system_resource_sources:
         try:
             df_capacity = pd.read_csv(
                 os.path.join(DATA_DIR, grid_source, "installed_capacity.csv")
             )
 
-            await grid_node_service.add_capacities_for_fuel_type(
+            await power_system_resource_service.add_capacities_for_fuel_type(
                 [
                     CapacityForFuelTypeModel(
-                        grid_node_id=row["Grid Node"],
+                        power_system_resource_id=row["Grid Node"],
                         start_datetime=pd.to_datetime(row["start_datetime"]),
                         end_datetime=pd.to_datetime(row["end_datetime"]),
                         value=row["Value"],
@@ -241,22 +253,30 @@ def make_sync(func: Callable[P, Awaitable[T]]) -> Callable[P, T]:
 
 
 async def seed_data(
-    session: AsyncSession, grid_node_sources: list[str] | None = None
+    session: AsyncSession, power_system_resource_sources: list[str] | None = None
 ) -> None:
-    grid_node_sources = grid_node_sources or sorted(
+    power_system_resource_sources = power_system_resource_sources or sorted(
         set(
             [
-                grid_node.get("source")
-                for grid_node in GRID_NODES
-                if grid_node.get("source")
+                power_system_resource.get("source")
+                for power_system_resource in GRID_NODES
+                if power_system_resource.get("source")
             ]
         )
     )
     await seed_fuel_types(session)
-    await seed_grid_nodes(session, grid_node_sources=grid_node_sources)
-    await seed_generation(session, grid_node_sources=grid_node_sources)
-    await seed_exchanges(session, grid_node_sources=grid_node_sources)
-    await seed_capacity(session, grid_node_sources=grid_node_sources)
+    await seed_power_system_resources(
+        session, power_system_resource_sources=power_system_resource_sources
+    )
+    await seed_generation(
+        session, power_system_resource_sources=power_system_resource_sources
+    )
+    await seed_exchanges(
+        session, power_system_resource_sources=power_system_resource_sources
+    )
+    await seed_capacity(
+        session, power_system_resource_sources=power_system_resource_sources
+    )
 
 
 @click.command
@@ -264,13 +284,13 @@ async def seed_data(
 @click.option("--delete-existing/--keep-existing", default=True)
 @click.option(
     "--grid-node-source",
-    "grid_node_sources",
+    "power_system_resource_sources",
     multiple=True,
     type=click.Choice(AVAILABLE_DATA_SOURCES),
 )
 @make_sync
 async def main(
-    delete_existing: bool, grid_node_sources: list[str], debug_mode: bool
+    delete_existing: bool, power_system_resource_sources: list[str], debug_mode: bool
 ) -> None:
     settings = Settings()
     engine = create_async_engine(
@@ -292,7 +312,9 @@ async def main(
                     await session.execute(table.delete())
             await session.commit()
 
-            await seed_data(session, grid_node_sources=grid_node_sources)
+            await seed_data(
+                session, power_system_resource_sources=power_system_resource_sources
+            )
         except KeyboardInterrupt:
             raise
         except Exception:

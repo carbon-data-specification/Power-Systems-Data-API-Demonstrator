@@ -12,8 +12,8 @@ class DemandModel(Base):
 
     __tablename__ = "demand"
 
-    grid_node_id: Mapped[str] = mapped_column(
-        ForeignKey("grid_node.id"), primary_key=True
+    power_system_resource_id: Mapped[str] = mapped_column(
+        ForeignKey("power_system_resource.id"), primary_key=True
     )
     start_datetime: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), primary_key=True

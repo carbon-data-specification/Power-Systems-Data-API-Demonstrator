@@ -19,17 +19,19 @@ from power_systems_data_api_demonstrator.src.lib.db.models.generation import (
     FuelTypes,
     GenerationForFuelTypeModel,
 )
-from power_systems_data_api_demonstrator.src.lib.db.models.grid_node_model import (
-    GridNodeModel,
+from power_systems_data_api_demonstrator.src.lib.db.models.power_system_resource_model import (
+    PsrModel,
 )
 from power_systems_data_api_demonstrator.src.lib.db.models.prices import (
     DayAheadPriceModel,
 )
 
 
-class GridNodeNotFoundError(ValueError):
-    def __init__(self, grid_node_id: str):
-        super().__init__(f"Could not find a grid node with id: {grid_node_id}")
+class PsrNotFoundError(ValueError):
+    def __init__(self, power_system_resource_id: str):
+        super().__init__(
+            f"Could not find a grid node with id: {power_system_resource_id}"
+        )
 
 
 class GenerationDTO(BaseModel):
@@ -53,23 +55,25 @@ class GenerationDTO(BaseModel):
         orm_mode = True
 
 
-class GridNodeDAO:
-    """Class for accessing grid_node table."""
+class PsrDAO:
+    """Class for accessing power_system_resource table."""
 
     def __init__(self, session: AsyncSession = Depends(get_db_session)):
         self.session = session
 
-    async def delete_all_grid_nodes(self) -> None:
-        delete_stmt = delete(GridNodeModel)
+    async def delete_all_power_system_resources(self) -> None:
+        delete_stmt = delete(PsrModel)
         await self.session.execute(delete_stmt)
         await self.session.commit()
 
-    async def create_grid_node(self, grid_node_model: GridNodeModel) -> None:
+    async def create_power_system_resource(
+        self, power_system_resource_model: PsrModel
+    ) -> None:
         """
-        Add single grid_node to session.
-        :param name: name of a grid_node.
+        Add single power_system_resource to session.
+        :param name: name of a power_system_resource.
         """
-        self.session.add(grid_node_model)
+        self.session.add(power_system_resource_model)
         await self.session.commit()
 
     async def add_generation_for_fuel_type(
@@ -110,20 +114,22 @@ class GridNodeDAO:
             self.session.add(capacity)
         await self.session.commit()
 
-    async def get_generation(self, grid_node_id: str) -> list[GenerationDTO]:
+    async def get_generation(
+        self, power_system_resource_id: str
+    ) -> list[GenerationDTO]:
         """
         Add single generation_per_fuel_type.
         """
         """
         generation_for_fuel_types_sql = await self.session.execute(
             select(GenerationForFuelTypeModel).filter(
-                GenerationForFuelTypeModel.grid_node_id == grid_node_id
+                GenerationForFuelTypeModel.power_system_resource_id == power_system_resource_id
             ),
         )
         """
         raw_generation = await self.session.execute(
             select(
-                GenerationForFuelTypeModel.grid_node_id,
+                GenerationForFuelTypeModel.power_system_resource_id,
                 GenerationForFuelTypeModel.start_datetime,
                 GenerationForFuelTypeModel.end_datetime,
                 func.sum(GenerationForFuelTypeModel.value).label("value"),
@@ -133,47 +139,54 @@ class GridNodeDAO:
                     GenerationForFuelTypeModel.value,
                 ).label("generation_by_fuel_type"),
             )
-            .filter(GenerationForFuelTypeModel.grid_node_id == grid_node_id)
+            .filter(
+                GenerationForFuelTypeModel.power_system_resource_id
+                == power_system_resource_id
+            )
             .group_by(
-                GenerationForFuelTypeModel.grid_node_id,
+                GenerationForFuelTypeModel.power_system_resource_id,
                 GenerationForFuelTypeModel.start_datetime,
                 GenerationForFuelTypeModel.end_datetime,
             )
         )
         return [GenerationDTO.from_orm(row) for row in raw_generation.all()]
 
-    async def get_day_ahead_price(self, grid_node_id: str) -> list[DayAheadPriceModel]:
+    async def get_day_ahead_price(
+        self, power_system_resource_id: str
+    ) -> list[DayAheadPriceModel]:
         """
         Add single generation_per_fuel_type.
         """
         raw_generation = await self.session.execute(
             select(DayAheadPriceModel).filter(
-                DayAheadPriceModel.grid_node_id == grid_node_id
+                DayAheadPriceModel.power_system_resource_id == power_system_resource_id
             ),
         )
         generation_for_fuel_types = list(raw_generation.scalars().fetchall())
         return generation_for_fuel_types
 
-    async def get_imports(self, grid_node_id: str) -> list[ExchangeModel]:
+    async def get_imports(self, power_system_resource_id: str) -> list[ExchangeModel]:
         """
         Get imports to a grid node.
         """
         raw_imports = await self.session.execute(
             select(ExchangeModel).filter(
-                ExchangeModel.grid_node_to_id == grid_node_id, ExchangeModel.value > 0
+                ExchangeModel.power_system_resource_to_id == power_system_resource_id,
+                ExchangeModel.value > 0,
             ),
         )
         imports = list(raw_imports.scalars().fetchall())
         raw_exports = await self.session.execute(
             select(ExchangeModel).filter(
-                ExchangeModel.grid_node_from_id == grid_node_id, ExchangeModel.value < 0
+                ExchangeModel.power_system_resource_from_id == power_system_resource_id,
+                ExchangeModel.value < 0,
             ),
         )
         exports = list(raw_exports.scalars().fetchall())
         exports = [
             ExchangeModel(
-                grid_node_from_id=exp.grid_node_to_id,
-                grid_node_to_id=exp.grid_node_from_id,
+                power_system_resource_from_id=exp.power_system_resource_to_id,
+                power_system_resource_to_id=exp.power_system_resource_from_id,
                 value=-1 * exp.value,
                 start_datetime=exp.start_datetime,
                 end_datetime=exp.end_datetime,
@@ -183,20 +196,21 @@ class GridNodeDAO:
         ]
         return imports + exports
 
-    async def get_exports(self, grid_node_id: str) -> list[ExchangeModel]:
+    async def get_exports(self, power_system_resource_id: str) -> list[ExchangeModel]:
         """
         Get exports from a grid node.
         """
         raw_imports = await self.session.execute(
             select(ExchangeModel).filter(
-                ExchangeModel.grid_node_to_id == grid_node_id, ExchangeModel.value < 0
+                ExchangeModel.power_system_resource_to_id == power_system_resource_id,
+                ExchangeModel.value < 0,
             ),
         )
         imports = list(raw_imports.scalars().fetchall())
         imports = [
             ExchangeModel(
-                grid_node_from_id=imp.grid_node_to_id,
-                grid_node_to_id=imp.grid_node_from_id,
+                power_system_resource_from_id=imp.power_system_resource_to_id,
+                power_system_resource_to_id=imp.power_system_resource_from_id,
                 value=-1 * imp.value,
                 start_datetime=imp.start_datetime,
                 end_datetime=imp.end_datetime,
@@ -206,84 +220,92 @@ class GridNodeDAO:
         ]
         raw_exports = await self.session.execute(
             select(ExchangeModel).filter(
-                ExchangeModel.grid_node_from_id == grid_node_id, ExchangeModel.value > 0
+                ExchangeModel.power_system_resource_from_id == power_system_resource_id,
+                ExchangeModel.value > 0,
             ),
         )
         exports = list(raw_exports.scalars().fetchall())
         return imports + exports
 
-    async def get_capacity(self, grid_node_id: str) -> list[CapacityForFuelTypeModel]:
+    async def get_capacity(
+        self, power_system_resource_id: str
+    ) -> list[CapacityForFuelTypeModel]:
         """
         Get capacity of a grid node.
         """
         raw_capacity = await self.session.execute(
             select(CapacityForFuelTypeModel).filter(
-                CapacityForFuelTypeModel.grid_node_id == grid_node_id
+                CapacityForFuelTypeModel.power_system_resource_id
+                == power_system_resource_id
             ),
         )
         capacity = list(raw_capacity.scalars().fetchall())
         return capacity
 
-    async def get_demand(self, grid_node_id: str) -> list[DemandModel]:
+    async def get_demand(self, power_system_resource_id: str) -> list[DemandModel]:
         """
         Get demand of a grid node.
         """
         raw_demand = await self.session.execute(
-            select(DemandModel).filter(DemandModel.grid_node_id == grid_node_id),
+            select(DemandModel).filter(
+                DemandModel.power_system_resource_id == power_system_resource_id
+            ),
         )
         demand = list(raw_demand.scalars().fetchall())
         return demand
 
-    async def get_all_grid_nodes(self, limit: int | None = None) -> List[GridNodeModel]:
+    async def get_all_power_system_resources(
+        self, limit: int | None = None
+    ) -> List[PsrModel]:
         """
-        Get all grid_node models with limit/offset pagination.
+        Get all power_system_resource models with limit/offset pagination.
         :param limit: limit of dummies.
         :param offset: offset of dummies.
         :return: stream of dummies.
         """
-        raw_grid_nodes = await self.session.execute(
-            select(GridNodeModel).limit(limit),
+        raw_power_system_resources = await self.session.execute(
+            select(PsrModel).limit(limit),
         )
 
-        return list(raw_grid_nodes.scalars().fetchall())
+        return list(raw_power_system_resources.scalars().fetchall())
 
-    async def get_grid_node_with_parent_id(self, id: str) -> List[GridNodeModel]:
+    async def get_power_system_resource_with_parent_id(self, id: str) -> List[PsrModel]:
         """
-        Get all grid_node models with limit/offset pagination.
+        Get all power_system_resource models with limit/offset pagination.
         :param limit: limit of dummies.
         :param offset: offset of dummies.
         :return: stream of dummies.
         """
-        raw_grid_nodes = await self.session.execute(
-            select(GridNodeModel).filter(GridNodeModel.parent_id == id),
+        raw_power_system_resources = await self.session.execute(
+            select(PsrModel).filter(PsrModel.parent_id == id),
         )
 
-        return list(raw_grid_nodes.scalars().fetchall())
+        return list(raw_power_system_resources.scalars().fetchall())
 
-    async def get_by_id(self, id: str) -> GridNodeModel:
+    async def get_by_id(self, id: str) -> PsrModel:
         """
-        Get specific grid_node model.
-        :param name: name of grid_node instance.
-        :return: grid_node models.
+        Get specific power_system_resource model.
+        :param name: name of power_system_resource instance.
+        :return: power_system_resource models.
         """
-        query = select(GridNodeModel).where(GridNodeModel.id == id)
+        query = select(PsrModel).where(PsrModel.id == id)
         rows = await self.session.execute(query)
         value = rows.scalars().one_or_none()
         if not value:
-            raise GridNodeNotFoundError(id)
+            raise PsrNotFoundError(id)
         return value
 
-    async def check_if_grid_node_exists(self, id: str) -> bool:
+    async def check_if_power_system_resource_exists(self, id: str) -> bool:
         """
-        Get specific grid_node model.
-        :param name: name of grid_node instance.
-        :return: grid_node models.
+        Get specific power_system_resource model.
+        :param name: name of power_system_resource instance.
+        :return: power_system_resource models.
         """
-        query = select(GridNodeModel).where(GridNodeModel.id == id)
+        query = select(PsrModel).where(PsrModel.id == id)
         rows = await self.session.execute(query)
         return rows.scalars().one_or_none() is not None
 
-    async def delete_grid_node(self, id: str) -> None:
-        delete_stmt = delete(GridNodeModel).filter_by(id=id)
+    async def delete_power_system_resource(self, id: str) -> None:
+        delete_stmt = delete(PsrModel).filter_by(id=id)
         await self.session.execute(delete_stmt)
         await self.session.commit()
