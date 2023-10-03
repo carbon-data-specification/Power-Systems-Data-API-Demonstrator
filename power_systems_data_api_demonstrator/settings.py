@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import enum
-from pathlib import Path
 
 from pydantic import BaseSettings
 from yarl import URL
@@ -28,8 +27,8 @@ class Settings(BaseSettings):
     with environment variables.
     """
 
-    host: str = "127.0.0.1"
-    port: int = 8000
+    host: str = "0.0.0.0"
+    port: int = 10000
     # quantity of workers for uvicorn
     workers_count: int = 1
     # Enable uvicorn reloading
@@ -41,7 +40,7 @@ class Settings(BaseSettings):
     log_level: LogLevel = LogLevel.INFO
 
     # Variables for the database
-    db_file: Path = f"{DB_PATH}/db.sqlite3"
+    db_file: str = f"{DB_PATH}/db.sqlite3"
     db_echo: bool = False
 
     @property
