@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import enum
+from pathlib import Path
 
 from pydantic import BaseSettings
 from yarl import URL
@@ -40,7 +41,7 @@ class Settings(BaseSettings):
     log_level: LogLevel = LogLevel.INFO
 
     # Variables for the database
-    db_file: str = f"{DB_PATH}/db.sqlite3"
+    db_file: Path = Path(f"{DB_PATH}/db.sqlite3")
     db_echo: bool = False
 
     @property
