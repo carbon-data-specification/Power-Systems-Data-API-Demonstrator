@@ -26,7 +26,6 @@ def get_app() -> FastAPI:
     """
     app = FastAPI(
         title="power_systems_data_api_demonstrator",
-        version=metadata.version("power_systems_data_api_demonstrator"),
         openapi_url="/openapi.json",
         default_response_class=UJSONResponse,
     )
