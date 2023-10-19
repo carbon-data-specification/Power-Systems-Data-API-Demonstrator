@@ -27,8 +27,6 @@ def get_app() -> FastAPI:
     app = FastAPI(
         title="power_systems_data_api_demonstrator",
         version=metadata.version("power_systems_data_api_demonstrator"),
-        docs_url=None,
-        redoc_url=None,
         openapi_url="/openapi.json",
         default_response_class=UJSONResponse,
     )
@@ -42,19 +40,5 @@ def get_app() -> FastAPI:
         StaticFiles(directory=APP_ROOT / "static"),
         name="static",
     )
-
-    def custom_openapi() -> Dict[str, Any]:
-        if app.openapi_schema:
-            return app.openapi_schema
-        openapi_schema = get_openapi(
-            title=get_app_title(),
-            version=metadata.version("power_systems_data_api_demonstrator"),
-            description=get_app_description(),
-            routes=app.routes,
-        )
-        app.openapi_schema = openapi_schema
-        return app.openapi_schema
-
-    app.openapi = custom_openapi  # type: ignore
 
     return app
