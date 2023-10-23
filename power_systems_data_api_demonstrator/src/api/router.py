@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-
+from fastapi.param_functions import Depends
 from fastapi.routing import APIRouter
+from sqlmodel import Session
 
+from power_systems_data_api_demonstrator.src.api.db import get_session
 from power_systems_data_api_demonstrator.src.api import docs
-from power_systems_data_api_demonstrator.src.api.db import init_db
 from power_systems_data_api_demonstrator.src.api.metadata.views import (
     router as metadata_router,
 )

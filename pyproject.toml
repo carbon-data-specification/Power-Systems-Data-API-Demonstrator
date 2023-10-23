@@ -72,9 +72,6 @@ filterwarnings = [
     "ignore::DeprecationWarning",
     "ignore:.*unclosed.*:ResourceWarning",
 ]
-env = [
-    "POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE=test_db.sqlite3",
-]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

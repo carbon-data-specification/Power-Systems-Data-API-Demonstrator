@@ -52,7 +52,7 @@ class Settings(BaseSettings):
         :return: database URL.
         """
         return URL.build(
-            scheme="sqlite+aiosqlite",
+            scheme="sqlite",
             path=f"///{self.db_file}",
         )
 
