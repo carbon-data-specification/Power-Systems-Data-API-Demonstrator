@@ -1,6 +1,8 @@
 # Power Systems Data API Demonstrator
 
-This demonstrator is available [here](https://carbon-data-specification.onrender.com).
+The demonstrator is available [here](https://cdsc-power-systems-api-bizu.onrender.com).
+
+The old demonstrator is available [here](https://carbon-data-specification.onrender.com).
 
 ## Poetry
 
