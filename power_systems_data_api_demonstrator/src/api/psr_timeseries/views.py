@@ -89,16 +89,23 @@ class GenerationRequest(SQLModel):
     summary="generation",
 )
 async def get_generation(
-    id: Annotated[str, Path(description="PSR id (try EIA-US-WECC-CISO)")],
+    id: Annotated[str, Path(description="PSR id (try US-WECC-CISO)")],
     start_datetime: Annotated[
         datetime, Query(alias="startDatetime", description="Start datetime")
-    ] = datetime(2023, 1, 1, tzinfo=ZoneInfo("UTC")),
+    ] = datetime(2021, 6, 1, tzinfo=ZoneInfo("UTC")),
     end_datetime: Annotated[
         datetime, Query(alias="endDatetime", description="End datetime")
-    ] = datetime(2023, 2, 1, tzinfo=ZoneInfo("UTC")),
+    ] = datetime(2021, 6, 2, tzinfo=ZoneInfo("UTC")),
     session: Session = Depends(get_session),
 ) -> GenerationResponse:
-    result = session.execute(select(GenerationByFuelSourceTable).filter_by(id=id))
+    result = session.execute(
+        select(GenerationByFuelSourceTable)
+        .filter_by(id=id)
+        .filter(
+            GenerationByFuelSourceTable.start_datetime >= start_datetime,
+            GenerationByFuelSourceTable.end_datetime <= end_datetime,
+        )
+    )
     generation = result.scalars().all()
     if not generation:
         return GenerationResponse.empty(id=id)

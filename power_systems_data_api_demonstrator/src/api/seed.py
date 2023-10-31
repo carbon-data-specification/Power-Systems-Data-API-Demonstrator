@@ -32,31 +32,31 @@ def seed_generation(session: Session) -> None:
     # Overall generation
     fuel_types = []
     fuel_technologies = []
-    generation_by_fuel_source = []
+    generation_interconnection_by_fuel_source = []
+    generation_balancing_area_by_fuel_source = []
 
     for grid_source in ["EIA", "ELEXON"]:
         df_generation = pd.read_csv(
             os.path.join(DATA_DIR, grid_source, "generation.csv")
         )
-        for power_system_resource_id in df_generation["Grid Node"].unique():
-            df_this_nodes_generation = df_generation[
-                df_generation["Grid Node"] == power_system_resource_id
-            ]
+
+        # Topology Level: Parent Node
+        df_by_interconnection = (
+            df_generation.groupby(
+                ["Parent Node", "start_datetime", "end_datetime", "unit"]
+            )
+            .sum(numeric_only=True)
+            .reset_index()
+        )
+        for power_system_resource_id in df_by_interconnection["Parent Node"].unique():
             df_generation_rows = pd.melt(
-                df_this_nodes_generation,
-                id_vars=["Grid Node", "start_datetime", "end_datetime", "unit"],
+                df_by_interconnection,
+                id_vars=["Parent Node", "start_datetime", "end_datetime", "unit"],
                 var_name="fuel_type",
                 value_name="value",
             ).reset_index()
 
-            fuel_types.extend(
-                [
-                    FuelType(name=fuel_type, id=fuel_type)
-                    for fuel_type in df_generation_rows["fuel_type"].unique().tolist()
-                ]
-            )
-
-            generation_by_fuel_source.extend(
+            generation_interconnection_by_fuel_source.extend(
                 [
                     GenerationByFuelSourceTable(
                         start_datetime=row["start_datetime"],
@@ -65,7 +65,48 @@ def seed_generation(session: Session) -> None:
                         technology=None,
                         unit=row["unit"],
                         value=row["value"],
-                        id=f"{grid_source}-{power_system_resource_id}",
+                        id=power_system_resource_id,
+                    )
+                    for _, row in df_generation_rows.iterrows()
+                ]
+            )
+
+            # Also add the fuel types
+            fuel_types.extend(
+                [
+                    FuelType(name=fuel_type, id=fuel_type)
+                    for fuel_type in df_generation_rows["fuel_type"].unique().tolist()
+                ]
+            )
+
+        for power_system_resource_id in df_generation["Grid Node"].unique():
+            print(power_system_resource_id)
+            df_this_nodes_generation = df_generation[
+                df_generation["Grid Node"] == power_system_resource_id
+            ]
+            df_generation_rows = pd.melt(
+                df_this_nodes_generation,
+                id_vars=[
+                    "Grid Node",
+                    "Parent Node",
+                    "start_datetime",
+                    "end_datetime",
+                    "unit",
+                ],
+                var_name="fuel_type",
+                value_name="value",
+            ).reset_index()
+
+            generation_balancing_area_by_fuel_source.extend(
+                [
+                    GenerationByFuelSourceTable(
+                        start_datetime=row["start_datetime"],
+                        end_datetime=row["end_datetime"],
+                        type=row["fuel_type"],
+                        technology=None,
+                        unit=row["unit"],
+                        value=row["value"],
+                        id=power_system_resource_id,
                     )
                     for _, row in df_generation_rows.iterrows()
                 ]
@@ -81,5 +122,6 @@ def seed_generation(session: Session) -> None:
         """
 
     session.add_all(list(set(fuel_types)))
-    session.add_all(generation_by_fuel_source)
+    session.add_all(generation_interconnection_by_fuel_source)
+    session.add_all(generation_balancing_area_by_fuel_source)
     session.commit()
