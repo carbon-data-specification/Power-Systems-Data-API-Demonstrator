@@ -3,7 +3,7 @@
 import enum
 from pathlib import Path
 
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from yarl import URL
 
 DB_PATH = "."
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
         :return: database URL.
         """
         return URL.build(
-            scheme="sqlite+aiosqlite",
+            scheme="sqlite",
             path=f"///{self.db_file}",
         )
 

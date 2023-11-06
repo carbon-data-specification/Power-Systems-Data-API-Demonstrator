@@ -11,18 +11,14 @@ maintainers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.89.1"
 uvicorn = { version = "^0.20.0", extras = ["standard"] }
-pydantic = {version = "^1.10.4", extras = ["dotenv"]}
-yarl = "^1.8.2"
-ujson = "^5.7.0"
-SQLAlchemy = {version = "^2.0.0", extras = ["asyncio"]}
-aiosqlite = "^0.18.0"
-redis = {version = "^4.4.2", extras = ["hiredis"]}
-aiofiles = "^22.1.0"
-httptools = "^0.5.0"
-greenlet = "^2.0.2"
 pyyaml = "^6.0"
+sqlmodel = { git = "https://github.com/AntonDeMeester/sqlmodel.git", rev="main" }
+fastapi = "^0.103.2"
+pydantic-settings = "^2.0.3"
+yarl = "^1.9.2"
+aiosqlite = "^0.19.0"
+ujson = "^5.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.2.1"
@@ -75,9 +71,6 @@ filterwarnings = [
     "error",
     "ignore::DeprecationWarning",
     "ignore:.*unclosed.*:ResourceWarning",
-]
-env = [
-    "POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE=test_db.sqlite3",
 ]
 
 [build-system]

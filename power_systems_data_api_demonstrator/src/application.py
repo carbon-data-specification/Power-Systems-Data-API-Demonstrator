@@ -10,10 +10,6 @@ from fastapi.responses import UJSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from power_systems_data_api_demonstrator.src.api.router import api_router
-from power_systems_data_api_demonstrator.src.lifetime import (
-    register_shutdown_event,
-    register_startup_event,
-)
 from power_systems_data_api_demonstrator.static.docs.utils import (
     get_app_description,
     get_app_title,
@@ -30,16 +26,9 @@ def get_app() -> FastAPI:
     """
     app = FastAPI(
         title="power_systems_data_api_demonstrator",
-        version=metadata.version("power_systems_data_api_demonstrator"),
-        docs_url=None,
-        redoc_url=None,
         openapi_url="/openapi.json",
         default_response_class=UJSONResponse,
     )
-
-    # Adds startup and shutdown events.
-    register_startup_event(app)
-    register_shutdown_event(app)
 
     # Main router for the API.
     app.include_router(api_router)
@@ -50,19 +39,5 @@ def get_app() -> FastAPI:
         StaticFiles(directory=APP_ROOT / "static"),
         name="static",
     )
-
-    def custom_openapi() -> Dict[str, Any]:
-        if app.openapi_schema:
-            return app.openapi_schema
-        openapi_schema = get_openapi(
-            title=get_app_title(),
-            version=metadata.version("power_systems_data_api_demonstrator"),
-            description=get_app_description(),
-            routes=app.routes,
-        )
-        app.openapi_schema = openapi_schema
-        return app.openapi_schema
-
-    app.openapi = custom_openapi  # type: ignore
 
     return app

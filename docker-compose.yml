@@ -12,7 +12,7 @@ services:
       - POWER_SYSTEMS_DATA_API_DEMONSTRATOR_HOST=0.0.0.0
       - POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT=${POWER_SYSTEMS_DATA_API_DEMONSTRATOR_PORT:-8000}
       - POWER_SYSTEMS_DATA_API_DEMONSTRATOR_RELOAD=true
-      - POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE=db.sqlite3
+      - POWER_SYSTEMS_DATA_API_DEMONSTRATOR_DB_FILE=/tmp/db.sqlite3
     volumes:
       - ./power_systems_data_api_demonstrator:/power_systems_data_api_demonstrator
       - ./:/app
