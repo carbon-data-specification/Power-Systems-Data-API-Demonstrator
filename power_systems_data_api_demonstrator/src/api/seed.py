@@ -1,16 +1,19 @@
-from datetime import datetime
 import os
+
 import pandas as pd
 from sqlmodel import Session
-from sqlmodel import SQLModel
-from power_systems_data_api_demonstrator.src.api.metadata.views import TopologyLevel
-from power_systems_data_api_demonstrator.src.api.psr_timeseries.views import (
-    GenerationByFuelSourceTable,
-    FuelType,
-    FuelTechnology,
-)
-from power_systems_data_api_demonstrator.src.api.db import init_db
+
 import power_systems_data_api_demonstrator.data
+from power_systems_data_api_demonstrator.src.api.db import init_db
+from power_systems_data_api_demonstrator.src.api.metadata.views import (
+    FuelSourceMetadata,
+    FuelSourceType,
+    TopologyLevel,
+)
+from power_systems_data_api_demonstrator.src.api.psr_timeseries.views import (
+    FuelType,
+    GenerationByFuelSourceTable,
+)
 
 DATA_DIR = os.path.dirname(power_systems_data_api_demonstrator.data.__file__)
 
@@ -18,20 +21,47 @@ DATA_DIR = os.path.dirname(power_systems_data_api_demonstrator.data.__file__)
 def seed() -> None:
     engine = init_db()
     topology_levels = [
-        TopologyLevel(id="Level 1", level=1),
-        TopologyLevel(id="Level 2", level=2),
+        TopologyLevel(id="Interconnection", level=0),
+        TopologyLevel(id="Balancing Area", level=1),
+        TopologyLevel(id="Generating Plant", level=2),
     ]
 
     with Session(engine) as session:
         seed_generation(session)
         session.add_all(topology_levels)
+        seed_fuelsource(session)
         session.commit()
+
+
+def seed_fuelsource(session: Session) -> None:
+    fuelsource_types = [
+        FuelSourceType(
+            name="Solar - Photovoltaic - Unspecified",
+            external_id="T010100",
+        ),
+        FuelSourceType(
+            name="Fossil - Solid - Hard Coal - Unspecified",
+            external_id="F02010100",
+        ),
+    ]
+
+    fuelsource_metadata = [
+        FuelSourceMetadata(
+            external_reference="""EECS Rules Fact Sheet 5 TYPES OF ENERGY INPUTS AND
+            TECHNOLOGIES""",
+            external_reference_url="https://shorturl.at/pDFG2",
+        )
+    ]
+
+    session.add_all(fuelsource_types)
+    session.add_all(fuelsource_metadata)
+    session.commit()
 
 
 def seed_generation(session: Session) -> None:
     # Overall generation
     fuel_types = []
-    fuel_technologies = []
+    # fuel_technologies = []
     generation_interconnection_by_fuel_source = []
     generation_balancing_area_by_fuel_source = []
 
