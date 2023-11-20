@@ -6,10 +6,11 @@ from sqlmodel import Session
 import power_systems_data_api_demonstrator.data
 from power_systems_data_api_demonstrator.src.api.db import init_db
 from power_systems_data_api_demonstrator.src.api.metadata.views import (
-    FuelSourceMetadata,
+    FuelSourceTechnologyReferenceTable,
     FuelSourceType,
     TopologyLevel,
 )
+from power_systems_data_api_demonstrator.src.api.psr_metadata.views import PSRList
 from power_systems_data_api_demonstrator.src.api.psr_timeseries.views import (
     FuelType,
     GenerationByFuelSourceTable,
@@ -20,41 +21,75 @@ DATA_DIR = os.path.dirname(power_systems_data_api_demonstrator.data.__file__)
 
 def seed() -> None:
     engine = init_db()
-    topology_levels = [
-        TopologyLevel(id="Interconnection", level=0),
-        TopologyLevel(id="Balancing Area", level=1),
-        TopologyLevel(id="Generating Plant", level=2),
-    ]
+
+    topology_levels = []
+
+    for grid_source in ["example"]:
+        df = pd.read_csv(os.path.join(DATA_DIR, grid_source, "topology_metadata.csv"))
+
+    levels = df
+
+    for index, row in levels.iterrows():
+        topology_levels.extend([TopologyLevel(id=row["id"], level=row["level"])])
 
     with Session(engine) as session:
         seed_generation(session)
         session.add_all(topology_levels)
         seed_fuelsource(session)
+        seed_psr(session)
         session.commit()
 
 
 def seed_fuelsource(session: Session) -> None:
-    fuelsource_types = [
-        FuelSourceType(
-            name="Solar - Photovoltaic - Unspecified",
-            external_id="T010100",
-        ),
-        FuelSourceType(
-            name="Fossil - Solid - Hard Coal - Unspecified",
-            external_id="F02010100",
-        ),
-    ]
-
-    fuelsource_metadata = [
-        FuelSourceMetadata(
-            external_reference="""EECS Rules Fact Sheet 5 TYPES OF ENERGY INPUTS AND
-            TECHNOLOGIES""",
-            external_reference_url="https://shorturl.at/pDFG2",
+    for grid_source in ["example"]:
+        df = pd.read_csv(
+            os.path.join(DATA_DIR, grid_source, "fuel_source_metadata.csv")
         )
-    ]
 
-    session.add_all(fuelsource_types)
-    session.add_all(fuelsource_metadata)
+    fuel_source_types = []
+    fuel_source_technologies = []
+
+    types = df[df["external_id"].str.contains("F")].reset_index()
+    technologies = df[~df["external_id"].str.contains("F")].reset_index()
+    for index, row in types.iterrows():
+        fuel_source_types.extend(
+            [
+                FuelSourceType(
+                    name=row["name"],
+                    external_id=row["external_id"],
+                    external_reference=row["external_reference"],
+                )
+            ]
+        )
+
+    for index, row in technologies.iterrows():
+        fuel_source_technologies.extend(
+            [
+                FuelSourceTechnologyReferenceTable(
+                    name=row["name"],
+                    aibCode=row["external_id"],
+                    source_document=row["external_reference"],
+                )
+            ]
+        )
+
+    # session.add_all(fuelsource_types)
+    # session.add_all(fuelsource_technologies)
+    session.add_all(fuel_source_types)
+    session.add_all(fuel_source_technologies)
+    session.commit()
+
+
+def seed_psr(session: Session) -> None:
+    for grid_source in ["example"]:
+        df = pd.read_csv(os.path.join(DATA_DIR, grid_source, "psr_metadata.csv"))
+    psr_data = []
+    psr_list = df.groupby(["Grid Node"]).first().reset_index()
+
+    for index, row in psr_list.iterrows():
+        psr_data.extend([PSRList(id=row["Grid Node"], level=row["Topology Level"])])
+
+    session.add_all(psr_data)
     session.commit()
 
 
