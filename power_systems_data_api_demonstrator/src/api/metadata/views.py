@@ -1,5 +1,6 @@
-from typing import Sequence
+from typing import Optional, Sequence
 
+import pandas as pd
 from fastapi import APIRouter
 from fastapi.param_functions import Depends
 from pydantic import BaseModel
@@ -38,38 +39,67 @@ async def get_topology_levels(
 
 class FuelSourceType(SQLModel, table=True):
     name: str = Field(primary_key=True)
-    external_id: str
-
-
-class FuelSourceMetadata(SQLModel, table=True):
-    external_reference: str = Field(primary_key=True)
-    external_reference_url: str
+    external_reference: Optional[str]
+    external_id: Optional[str]
 
 
 class FuelSourceTypesResponse(SQLModel):
-    external_reference: str | None
-    external_reference_url: str | None
     types: list[FuelSourceType]
 
 
 @router.get(
-    "/fuel-source-types",
+    "/fuel-source/types",
     summary="FUEL SOURCE TYPES",
 )
 async def get_fuel_source_types(
     session: Session = Depends(get_session),
 ) -> FuelSourceTypesResponse:
-    fuel_types = session.execute(select(FuelSourceType))
-    fuel_metadata = session.execute(select(FuelSourceMetadata))
-    types = fuel_types.scalars().all()
-    metadata = fuel_metadata.scalars().all()
-    external_reference = metadata[0].external_reference
-    external_reference_url = metadata[0].external_reference_url
-    return FuelSourceTypesResponse(
-        types=types,
-        external_reference=external_reference,
-        external_reference_url=external_reference_url,
-    )
+    result = session.execute(select(FuelSourceType))
+    types = result.scalars().all()
+    return FuelSourceTypesResponse(types=types)
+
+
+class FuelSourceTechnologyReference(SQLModel):
+    aibCode: str
+    source_document: str
+
+
+class FuelSourceTechnologyReferenceTable(FuelSourceTechnologyReference, table=True):
+    name: str = Field(primary_key=True)
+
+
+class FuelSourceTechnology(SQLModel):
+    name: str
+    externalReference: FuelSourceTechnologyReference
+
+
+class FuelSourceTechnologyResponse(SQLModel):
+    technologies: Sequence[FuelSourceTechnology]
+
+
+@router.get(
+    "/fuel-source/technologies",
+    summary="FUEL SOURCE TECHNOLOGIES",
+)
+async def get_fuel_source_technologies(
+    session: Session = Depends(get_session),
+) -> FuelSourceTechnologyResponse:
+    result = session.execute(select(FuelSourceTechnologyReferenceTable))
+    technologies = result.scalars().all()
+    df = pd.DataFrame(g.dict() for g in technologies)
+    technologies = []
+    for index, row in df.iterrows():
+        technologies.append(
+            FuelSourceTechnologyReferenceTable(
+                # FuelSourceTechnology(
+                name=row["name"],
+                externalReference=FuelSourceTechnologyReference(
+                    aibCode=row["aibCode"],
+                    source_document=row["source_document"],
+                ),
+            )
+        )
+    return FuelSourceTechnologyResponse(technologies=technologies)
 
 
 # class FuelTypeDescription(BaseModel):
