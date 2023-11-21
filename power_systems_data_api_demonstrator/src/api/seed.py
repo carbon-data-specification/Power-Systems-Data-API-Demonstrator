@@ -10,7 +10,10 @@ from power_systems_data_api_demonstrator.src.api.metadata.views import (
     FuelSourceType,
     TopologyLevel,
 )
-from power_systems_data_api_demonstrator.src.api.psr_metadata.views import PSRList
+from power_systems_data_api_demonstrator.src.api.psr_metadata.views import (
+    PSRInterconnectionTable,
+    PSRList,
+)
 from power_systems_data_api_demonstrator.src.api.psr_timeseries.views import (
     FuelType,
     GenerationByFuelSourceTable,
@@ -89,7 +92,21 @@ def seed_psr(session: Session) -> None:
     for index, row in psr_list.iterrows():
         psr_data.extend([PSRList(id=row["Grid Node"], level=row["Topology Level"])])
 
+    transmission_capacity = []
+    for index, row in df.iterrows():
+        transmission_capacity.extend(
+            [
+                PSRInterconnectionTable(
+                    id=row["Grid Node"],
+                    connectedPSR=row["Connected Node"],
+                    unit=row["Unit"],
+                    value=row["Capacity"],
+                )
+            ]
+        )
+
     session.add_all(psr_data)
+    session.add_all(transmission_capacity)
     session.commit()
 
 
