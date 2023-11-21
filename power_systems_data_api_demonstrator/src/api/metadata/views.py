@@ -90,8 +90,8 @@ async def get_fuel_source_technologies(
     technologies = []
     for index, row in df.iterrows():
         technologies.append(
-            FuelSourceTechnologyReferenceTable(
-                # FuelSourceTechnology(
+            # FuelSourceTechnologyReferenceTable(
+            FuelSourceTechnology(
                 name=row["name"],
                 externalReference=FuelSourceTechnologyReference(
                     aibCode=row["aibCode"],
