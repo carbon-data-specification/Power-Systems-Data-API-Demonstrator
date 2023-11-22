@@ -17,7 +17,7 @@
         "capacity": [
           {
             "value": 500,
-            "startDatetime": "10/10/2017"
+            "startDatetime": "2017-10-10"
           }
         ]
       },
@@ -28,7 +28,7 @@
         "capacity": [
           {
             "value": 500,
-            "startDatetime": "28/02/2016"
+            "startDatetime": "2016-02-28"
           }
         ]
       }
@@ -52,7 +52,7 @@
         "capacity": [
           {
             "value": 1000,
-            "startDatetime": "1/1/2017"
+            "startDatetime": "2017-01-01"
           }
         ]
       },
@@ -63,8 +63,8 @@
         "capacity": [
           {
             "value": 800,
-            "startDatetime": "10/15/1975",
-            "endDatetime": "31/12/2016"
+            "startDatetime": "1975-10-15",
+            "endDatetime": "2016-12-31"
           }
         ]
       }
@@ -93,7 +93,7 @@
         "capacity": [
           {
             "value": 500,
-            "startDatetime": "10/15/2020"
+            "startDatetime": "2020-10-15"
           }
         ]
       },
@@ -104,12 +104,12 @@
         "capacity": [
           {
             "value": 1000,
-            "startDatetime": "13/12/1999"
+            "startDatetime": "1999-12-13"
           },
           {
             "value": 500,
-            "startDatetime": "15/10/1980",
-            "endDatetime": "12/12/1999"
+            "startDatetime": "1980-10-15",
+            "endDatetime": "1999-12-12"
           }
         ]
       }
@@ -127,7 +127,7 @@
         "capacity": [
           {
             "value": 500,
-            "startDatetime": "10/15/2020"
+            "startDatetime": "2020-10-15"
           }
         ]
       }
@@ -145,12 +145,12 @@
         "capacity": [
           {
             "value": 1000,
-            "startDatetime": "13/12/1999"
+            "startDatetime": "1999-12-13"
           },
           {
             "value": 500,
-            "startDatetime": "15/10/1980",
-            "endDatetime": "12/12/1999"
+            "startDatetime": "1980-10-15",
+            "endDatetime": "1999-12-12"
           }
         ]
       }
