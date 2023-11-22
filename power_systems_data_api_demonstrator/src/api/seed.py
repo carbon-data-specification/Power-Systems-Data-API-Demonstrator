@@ -11,6 +11,7 @@ from power_systems_data_api_demonstrator.src.api.metadata.views import (
     TopologyLevel,
 )
 from power_systems_data_api_demonstrator.src.api.psr_metadata.views import (
+    CapacityTable,
     PSRInterconnectionTable,
     PSRList,
 )
@@ -83,48 +84,88 @@ def seed_fuelsource(session: Session) -> None:
     session.commit()
 
 
+def extract_info(df: pd.DataFrame, column_name: str):
+    """
+    Extracts the information from a column with a list of dicts and
+     adds them as columns to the dataframe.
+
+    Input:
+    ----------
+    df : pd.DataFrame
+    column_name : str
+
+    Returns
+    -------
+    df : pd.DataFrame
+    """
+    df = df.explode(column_name).reset_index(drop=True)
+    extracted_info = df[column_name].apply(pd.Series).reset_index(drop=True)
+    df = df.join(extracted_info)
+    df = df.drop(column_name, axis=1)
+
+    return df
+
+
 def seed_psr(session: Session) -> None:
+    psr_data = []
+    generation_capacity = []
+    transmission_capacity = []
+
     for grid_source in ["example"]:
         df = pd.read_json(os.path.join(DATA_DIR, grid_source, "psr_metadata.json"))
+        # PSR List
+        psr_data = []
 
-    psr_data = []
+        for index, row in df.iterrows():
+            psr_data.extend([PSRList(id=row["id"], level=row["topology_level"])])
 
-    for index, row in df.iterrows():
-        psr_data.extend([PSRList(id=row["id"], level=row["topology_level"])])
+        # PSR GENERATION CAPACITY
 
-    # extract transmission data from the dataframe dict
-    transmission_capacity = []
-    # select only the rows with transmission capacity data
-    df_transmission = df.dropna(subset=["transmission_capacity"]).copy()
-    df_transmission = df_transmission[["id", "transmission_capacity"]]
-    # explode the transmission capacity list
-    df_transmission = df_transmission.explode("transmission_capacity")
-    # convert the dict to columns
-    transmission_data = (
-        df_transmission["transmission_capacity"].apply(pd.Series).reset_index(drop=True)
-    )
-    # remove the transmission_capacity column
-    df_transmission = df_transmission.drop("transmission_capacity", axis=1)
-    df_transmission = df_transmission.reset_index(drop=True)
-    # join the two dataframes
-    df_transmission = df_transmission.join(transmission_data)
-    print(df_transmission)
+        generation_capacity = []
+        # select only the rows with generation capacity data
+        df_generation = df.dropna(subset=["fuelSource_capacity"]).copy()
+        df_generation = df_generation[["id", "fuelSource_capacity"]]
+        # extract fuelSource_capacity info
+        df_generation = extract_info(df_generation, "fuelSource_capacity")
+        df_generation = extract_info(df_generation, "capacity")
 
-    for index, row in df_transmission.iterrows():
-        print(row)
-        print(row["value"])
-        print(type(row["value"]))
-        transmission_capacity.extend(
-            [
-                PSRInterconnectionTable(
-                    id=row["id"],
-                    unit=row["unit"],
-                    connectedPSR=row["connectedPSR"],
-                    value=row["value"],
-                )
-            ]
-        )
+        for index, row in df_generation.iterrows():
+            print("datetime")
+            print(pd.to_datetime(row["startDatetime"]))
+            capacity_table = CapacityTable(
+                id=row["id"],
+                unit=row["unit"],
+                type=row["type"],
+                technology=row["technology"],
+                value=row["value"],
+                startDatetime=row["startDatetime"],
+            )
 
+            if not pd.isna(row["endDatetime"]):
+                capacity_table.endDatetime = row["endDatetime"]
+
+            generation_capacity.extend([capacity_table])
+
+        # PSR TRANSMISSION CAPACITY
+        transmission_capacity = []
+        # select only the rows with transmission capacity data
+        df_transmission = df.dropna(subset=["transmission_capacity"]).copy()
+        # extract transmission_capacity info
+        df_transmission = extract_info(df_transmission, "transmission_capacity")
+
+        for index, row in df_transmission.iterrows():
+            transmission_capacity.extend(
+                [
+                    PSRInterconnectionTable(
+                        id=row["id"],
+                        unit=row["unit"],
+                        connectedPSR=row["connectedPSR"],
+                        value=row["value"],
+                    )
+                ]
+            )
+
+    session.add_all(generation_capacity)
     session.add_all(psr_data)
     session.add_all(transmission_capacity)
     session.commit()
