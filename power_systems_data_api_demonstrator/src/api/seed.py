@@ -85,22 +85,42 @@ def seed_fuelsource(session: Session) -> None:
 
 def seed_psr(session: Session) -> None:
     for grid_source in ["example"]:
-        df = pd.read_csv(os.path.join(DATA_DIR, grid_source, "psr_metadata.csv"))
+        df = pd.read_json(os.path.join(DATA_DIR, grid_source, "psr_metadata.json"))
+
     psr_data = []
-    psr_list = df.groupby(["Grid Node"]).first().reset_index()
 
-    for index, row in psr_list.iterrows():
-        psr_data.extend([PSRList(id=row["Grid Node"], level=row["Topology Level"])])
-
-    transmission_capacity = []
     for index, row in df.iterrows():
+        psr_data.extend([PSRList(id=row["id"], level=row["topology_level"])])
+
+    # extract transmission data from the dataframe dict
+    transmission_capacity = []
+    # select only the rows with transmission capacity data
+    df_transmission = df.dropna(subset=["transmission_capacity"]).copy()
+    df_transmission = df_transmission[["id", "transmission_capacity"]]
+    # explode the transmission capacity list
+    df_transmission = df_transmission.explode("transmission_capacity")
+    # convert the dict to columns
+    transmission_data = (
+        df_transmission["transmission_capacity"].apply(pd.Series).reset_index(drop=True)
+    )
+    # remove the transmission_capacity column
+    df_transmission = df_transmission.drop("transmission_capacity", axis=1)
+    df_transmission = df_transmission.reset_index(drop=True)
+    # join the two dataframes
+    df_transmission = df_transmission.join(transmission_data)
+    print(df_transmission)
+
+    for index, row in df_transmission.iterrows():
+        print(row)
+        print(row["value"])
+        print(type(row["value"]))
         transmission_capacity.extend(
             [
                 PSRInterconnectionTable(
-                    id=row["Grid Node"],
-                    connectedPSR=row["Connected Node"],
-                    unit=row["Unit"],
-                    value=row["Capacity"],
+                    id=row["id"],
+                    unit=row["unit"],
+                    connectedPSR=row["connectedPSR"],
+                    value=row["value"],
                 )
             ]
         )
