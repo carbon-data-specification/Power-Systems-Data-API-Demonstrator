@@ -1,0 +1,159 @@
+[
+  {
+    "id": "US-WECC-BANC",
+    "topology_level": 1,
+    "transmission_capacity": [
+      {
+        "connectedPSR": "US-WECC-CISO",
+        "unit": "MW",
+        "value": 700
+      }
+    ],
+    "fuelSource_capacity": [
+      {
+        "type": "Renewable-Heat-Solar-Unespecified",
+        "technology": "Solar-Photovoltaic-Classic silicon",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 500,
+            "startDatetime": "2017-10-10"
+          }
+        ]
+      },
+      {
+        "type": "Renewable-Mechanical source or other-Wind-Unespecified",
+        "technology": "Wind-Offshore-Unespecified",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 500,
+            "startDatetime": "2016-02-28"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "US-WECC-PACW",
+    "topology_level": 1,
+    "transmission_capacity": [
+      {
+        "connectedPSR": "US-WECC-CISO",
+        "unit": "MW",
+        "value": 1000
+      }
+    ],
+    "fuelSource_capacity": [
+      {
+        "type": "Renewable-Mechanical source or other-Wind-Unespecified",
+        "technology": "Wind-Onshore-Unespecified",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 1000,
+            "startDatetime": "2017-01-01"
+          }
+        ]
+      },
+      {
+        "type": "Nuclear-Solid-Radiactive fuel-UOX",
+        "technology": "Thermal-Steam Turbine with condensation turbine-Unespecified",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 800,
+            "startDatetime": "1975-10-15",
+            "endDatetime": "2016-12-31"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "US-WECC-CISO",
+    "topology_level": 1,
+    "transmission_capacity": [
+      {
+        "connectedPSR": "US-WECC-BANC",
+        "unit": "MW",
+        "value": 700
+      },
+      {
+        "connectedPSR": "US-WECC-PACW",
+        "unit": "MW",
+        "value": 1000
+      }
+    ],
+    "fuelSource_capacity": [
+      {
+        "type": "Renewable-Heat-Solar-Unespecified",
+        "technology": "Solar-Photovoltaic-Classic silicon",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 500,
+            "startDatetime": "2020-10-15"
+          }
+        ]
+      },
+      {
+        "type": "Fossil-Solid-Hard Coal-Antracite",
+        "technology": "Thermal-Steam Turbine with condensation turbine-Unespecified",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 1000,
+            "startDatetime": "1999-12-13"
+          },
+          {
+            "value": 500,
+            "startDatetime": "1980-10-15",
+            "endDatetime": "1999-12-12"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "US-WECC-AZPS",
+    "topology_level": 2,
+    "parent": "US-WECC-CISO",
+    "fuelSource_capacity": [
+      {
+        "type": "Renewable-Heat-Solar-Unespecified",
+        "technology": "Solar-Photovoltaic-Classic silicon",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 500,
+            "startDatetime": "2020-10-15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "US-WECC-CEN",
+    "topology_level": 2,
+    "parent": "US-WECC-CISO",
+    "fuelSource_capacity": [
+      {
+        "type": "Fossil-Solid-Hard Coal-Antracite",
+        "technology": "Thermal-Steam Turbine with condensation turbine-Unespecified",
+        "unit": "MW",
+        "capacity": [
+          {
+            "value": 1000,
+            "startDatetime": "1999-12-13"
+          },
+          {
+            "value": 500,
+            "startDatetime": "1980-10-15",
+            "endDatetime": "1999-12-12"
+          }
+        ]
+      }
+    ]
+  }
+]
